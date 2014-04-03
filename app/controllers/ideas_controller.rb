@@ -8,16 +8,16 @@ class IdeasController < ApplicationController
   end
 
   def new
-  	@idea = Idea.new(idea_params)
+  	@idea = Idea.new
   end
 
   def create
-  	@idea = Idea.new(idea_params)
+  	@idea = Idea.create(idea_params)
 
   	if @idea.save
   		redirect_to ideas_path, :notice =>"The idea was saved!"
   	else
-  		redirect_to new_idea, :notice =>"Sorry, but it could not be saved!"
+  		redirect_to new_idea_path, :notice =>"Sorry, but it could not be saved!"
   	end
   end
 
@@ -44,7 +44,7 @@ class IdeasController < ApplicationController
   private
 
   def idea_params
-  	params.require(:idea).permit(:name, :description, :type)
+  	params.require(:idea).permit(:name, :description, :ideatype)
   end
 
 end

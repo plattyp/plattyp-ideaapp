@@ -32,13 +32,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-#Security
-gem 'devise'
-gem 'bcrypt'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -47,3 +40,7 @@ gem 'bcrypt'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# New model gem for increased security
+gem 'devise', '3.0.0.rc'
+gem 'bcrypt'

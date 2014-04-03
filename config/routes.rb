@@ -1,5 +1,6 @@
 Ideaapp::Application.routes.draw do
 
+  devise_for :users
   resources :ideas
   root to: "ideas#index"
   # The priority is based upon order of creation: first created -> highest priority.
