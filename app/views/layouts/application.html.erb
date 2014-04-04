@@ -20,12 +20,6 @@
 <% flash.each do |key, value| %>
 	<p> <%= value %> </p>
 <% end %>
-<% if notice %>
-	<p class="alert alert-success"><%= notice %></p>
-<% end %>ssssss
-<% if alert %>
-	<p class="alert alert-danger"><%= alert %></p>
-<% end %>
 
 <%= yield %>
 
