@@ -42,5 +42,8 @@ end
 # gem 'debugger', group: [:development, :test]
 
 # New model gem for increased security
-gem 'devise', '3.0.0.rc'
+gem 'devise'
 gem 'bcrypt'
+
+#Adding activeadmin so that it can be used as a backend
+gem 'activeadmin', github: 'gregbell/active_admin'
