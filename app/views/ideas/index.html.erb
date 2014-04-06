@@ -15,7 +15,7 @@
 		<td><%= idea.ideatype.name if idea.ideatype %></td>
 		<td><%= link_to "Show", idea %></td>
 		<td><%= link_to "Edit", edit_idea_path(idea) %></td>
-		<td><%= link_to "Delete", idea, :confirm => "Are you sure you would like to delete this reminder?", :method => :delete %></td>
+		<td><%= link_to "Delete", idea, data: { :confirm => "Are you sure you would like to delete this reminder?" }, :method => :delete %></td>
 	</tr>
 	<% end %>
 </table><br />
