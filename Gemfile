@@ -41,6 +41,10 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development do
+	gem 'rails_layout'
+end
+
 # New model gem for increased security
 gem 'devise'
 gem 'bcrypt'

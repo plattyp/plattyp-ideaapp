@@ -5,4 +5,7 @@ class Idea < ActiveRecord::Base
 	def name=(s)
 		write_attribute(:name, s.to_s.titleize)
 	end
+
+	#Basic validation
+	validates :name, :description, :ideatype, presence: true
 end
