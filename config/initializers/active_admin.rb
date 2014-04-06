@@ -240,4 +240,10 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
+
+  #These are the custom configurations made by me!
+
+  #This allows admin to skip authentication requests for user if going directly to admin page
+  config.skip_before_filter :authenticate_user!
+
 end
