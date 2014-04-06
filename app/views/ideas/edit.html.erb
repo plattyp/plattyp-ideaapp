@@ -18,7 +18,7 @@
 	</p>
 	<p>
 		<%= idea.label :ideatype %><br />
-		<%= idea.text_field :ideatype %>
+		<%= idea.select(:ideatype, @ideatype_options) %>
 	</p>
 	<p>
 		<%= idea.submit "Update Reminder" %>

@@ -9,6 +9,7 @@ class IdeasController < ApplicationController
 
   def new
   	@idea = Idea.new
+    @ideatype_options = Ideatype.where('active = true').all.map {|i| [i.name, i.id]}
   end
 
   def create
@@ -23,6 +24,7 @@ class IdeasController < ApplicationController
 
   def edit
   	@idea = Idea.find(params[:id])
+    @ideatype_options = Ideatype.all.map{|i| [i.name, i.id]}
   end
 
   def update
@@ -44,7 +46,7 @@ class IdeasController < ApplicationController
   private
 
   def idea_params
-  	params.require(:idea).permit(:name, :description, :ideatype)
+  	params.require(:idea).permit(:name, :description, :ideatype_id)
   end
 
 end
