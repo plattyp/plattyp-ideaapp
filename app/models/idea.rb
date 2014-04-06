@@ -1,5 +1,6 @@
 class Idea < ActiveRecord::Base
 	belongs_to :ideatype
+	belongs_to :user
 
 	#Going to be used to capitalize the idea before saving
 	def name=(s)
@@ -7,5 +8,5 @@ class Idea < ActiveRecord::Base
 	end
 
 	#Basic validation
-	validates :name, :description, :ideatype, presence: true
+	validates :name, :description, :ideatype, :user_id, presence: true
 end

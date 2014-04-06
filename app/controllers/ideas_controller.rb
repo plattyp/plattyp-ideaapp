@@ -1,7 +1,11 @@
 class IdeasController < ApplicationController
+
   def index
-  	@ideas = Idea.all
+    #So that a user can only see his own records
+
+    @ideas = Idea.all
   end
+
 
   def show
   	@idea = Idea.find(params[:id])
@@ -14,6 +18,7 @@ class IdeasController < ApplicationController
 
   def create
   	@idea = Idea.create(idea_params)
+    @idea.user = current_user
 
   	if @idea.save
   		redirect_to ideas_path, :notice =>"The idea was saved!"
