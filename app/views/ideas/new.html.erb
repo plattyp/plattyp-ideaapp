@@ -1,13 +1,6 @@
 <h1>Create Idea</h1>
 
 <%= form_for @idea do |idea| %>
-	<% if @idea.errors.any? %>
-		<ul>
-			<% @idea.errors.full_messages.each do |errormessage| %>
-				<li><%= errormessage %></li>
-			<% end %>	
-		</ul>
-	<% end %>
 	<p>
 		<%= idea.label :name %><br />
 		<%= idea.text_field :name %>
@@ -18,7 +11,7 @@
 	</p>
 	<p>
 		<%= idea.label :ideatype %><br />
-		<%= idea.select(:ideatype_id, @ideatype_options) %>
+		<%= idea.select :ideatype_id, @ideatype_options %>
 	</p><br />
 	<p>
 		<%= idea.submit "Add Idea" %>

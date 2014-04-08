@@ -29,7 +29,7 @@ class IdeasController < ApplicationController
 
   def edit
   	@idea = Idea.find(params[:id])
-    @ideatype_options = Ideatype.all.map{|i| [i.name, i.id]}
+    @ideatype_options = Ideatype.where('active = true').all.map {|i| [i.name, i.id]}
   end
 
   def update
@@ -38,7 +38,7 @@ class IdeasController < ApplicationController
   	if @idea.update_attributes(idea_params)
   		redirect_to ideas_path, :notice =>"The idea is updated!"
   	else
-  		render "edit", :notice => "Your idea could not be udpated!"
+      render :edit
   	end
   end
 

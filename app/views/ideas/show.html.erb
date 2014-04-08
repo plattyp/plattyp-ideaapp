@@ -2,3 +2,19 @@
 <h3>Name: </h3><p><%= @idea.name %></p>
 <h3>Description: </h3><p><%= @idea.description %></p>
 <h3>Type </h3><p><%= @idea.ideatype.name if @idea.ideatype%></p>
+
+<br />
+
+<h2>Features</h2>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+	</tr>
+	<% @idea.features.each do |feature| %>
+	<tr>
+		<td><%= feature.name %></td>
+		<td><%= feature.description %></td>
+	</tr>
+	<% end %>
+</table>

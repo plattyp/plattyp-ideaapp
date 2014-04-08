@@ -3,8 +3,20 @@ Ideaapp::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
   ActiveAdmin.routes(self)
-  resources :ideas
+  
+
+  #Set relationship between ideas and features
+  resources :ideas do
+    resource :features
+  end
+  
+
+  #Set homepage
   root to: "ideas#index"
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

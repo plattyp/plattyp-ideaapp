@@ -3,9 +3,9 @@
 <%= form_for @idea do |idea| %>
 	<% if @idea.errors.any? %>
 		<ul>
-			<% @idea.errors.full_messages.each do |message| %>
-				<li><%= message %></li>
-			<% end %>
+		<% @idea.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
 		</ul>
 	<% end %>
 	<p>
@@ -18,9 +18,31 @@
 	</p>
 	<p>
 		<%= idea.label :ideatype %><br />
-		<%= idea.select(:ideatype, @ideatype_options) %>
+		<%= idea.select :ideatype_id, @ideatype_options %>
 	</p><br />
 	<p>
 		<%= idea.submit "Update Idea" %>
 	</p>
 <% end %>
+
+<br />
+
+<h2>Current Features</h2>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @idea.features.each do |feature| %>
+	<tr>
+		<td><%= feature.name %></td>
+		<td><%= feature.description %></td>
+		<td><%= link_to "Edit", edit_idea_features_path(@idea, feature) %></td>
+		<td>"Delete"</td>
+	</tr>
+	<% end %>
+</table>
+
+<p><%= link_to "Add a Feature", new_idea_features_path(@idea) %></p>
