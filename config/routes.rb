@@ -7,7 +7,7 @@ Ideaapp::Application.routes.draw do
 
   #Set relationship between ideas and features
   resources :ideas do
-    resource :features
+    resources :features
   end
   
 

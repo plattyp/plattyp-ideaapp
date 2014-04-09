@@ -34,15 +34,17 @@
 		<th>Description</th>
 		<th></th>
 		<th></th>
+		<th></th>
 	</tr>
 	<% @idea.features.each do |feature| %>
 	<tr>
 		<td><%= feature.name %></td>
 		<td><%= feature.description %></td>
-		<td><%= link_to "Edit", edit_idea_features_path(@idea, feature) %></td>
-		<td>"Delete"</td>
+		<td>"show"</td>
+		<td><%= link_to "Edit", edit_idea_feature_path(@idea, feature) %></td>
+		<td>"delete"</td>
 	</tr>
 	<% end %>
 </table>
 
-<p><%= link_to "Add a Feature", new_idea_features_path(@idea) %></p>
+<p><%= link_to "Add a Feature", new_idea_feature_path(@idea) %></p>
