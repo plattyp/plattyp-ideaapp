@@ -1,14 +1,15 @@
 <ul class="nav">
-  <li><%= link_to 'Home', root_path %></li>
-  <%= render 'layouts/navigation_links' %>
-  <li>
+  <li><%= link_to "Ideaapp", root_path, :class => 'idea' %></li>
   <% if user_signed_in? %>
-    Logged in as <strong><%= current_user.email %></strong>.
-    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
   <% else %>
-    <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-    <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+    <li><%= link_to 'Login', new_user_session_path %></li>
   <% end %>
-  </li>
+  <% if user_signed_in? %>
+    <li><%= link_to 'Edit account', edit_user_registration_path %></li>
+  <% else %>
+    <li><%= link_to 'Sign up', new_user_registration_path %></li>
+  <% end %>
+  <li>Sign in with Twitter</li>
+  <li>Sign in with Facebook</li>
 </ul>
