@@ -12,5 +12,5 @@ class Idea < ActiveRecord::Base
 
 	belongs_to :ideatype
 	belongs_to :user
-	has_many :features
+	has_many :features, dependent: :destroy
 end

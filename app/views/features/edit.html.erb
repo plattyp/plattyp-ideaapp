@@ -1,15 +1,7 @@
 <h1>Edit Feature</h1>
 
-<%= form_for [@idea,@feature] do |feature| %>
-	<p>
-		<%= feature.label :name %><br />
-		<%= feature.text_field :name %>
-	</p>
-	<p>
-		<%= feature.label :description %><br />
-		<%= feature.text_area :description %>
-	</p>
-	<p>
-		<%= feature.submit "Update Feature" %>
-	</p>
+<%= simple_form_for [@idea,@feature] do |feature| %>
+	<%= feature.input :name %>
+	<%= feature.input :description %>
+	<%= feature.button :submit %>
 <% end %>

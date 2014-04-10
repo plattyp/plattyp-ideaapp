@@ -3,12 +3,18 @@ class IdeasController < ApplicationController
   before_action :get_user
 
   def index
-    @ideas = Idea.all
+    @ideas = @user.ideas.all
+    #@ideas = Idea.all
   end
 
 
   def show
-  	@idea = Idea.find(params[:id])
+    #Looks to see if the user has access to an idea & redirects if they dont
+    if @user.ideas.find_by_id(params[:id])
+      @idea = @user.ideas.find(params[:id])
+    else
+      redirect_to ideas_path, :notice => "That idea doesn't exist!"
+    end
   end
 
   def new
@@ -28,8 +34,13 @@ class IdeasController < ApplicationController
   end
 
   def edit
-  	@idea = Idea.find(params[:id])
-    @ideatype_options = Ideatype.where('active = true').all.map {|i| [i.name, i.id]}
+    #Looks to see if teh uesr has access to an idea & redirects if they don't
+    if @user.ideas.find_by_id(params[:id])
+      @idea = Idea.find(params[:id])
+      @ideatype_options = Ideatype.where('active = true').all.map {|i| [i.name, i.id]}
+    else
+      redirect_to ideas_path, :notice => "That idea doesn't exist!"
+    end
   end
 
   def update
