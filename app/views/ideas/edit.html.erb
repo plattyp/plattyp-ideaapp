@@ -34,15 +34,13 @@
 		<th>Description</th>
 		<th></th>
 		<th></th>
-		<th></th>
 	</tr>
 	<% @idea.features.each do |feature| %>
 	<tr>
 		<td><%= feature.name %></td>
 		<td><%= feature.description %></td>
-		<td>"show"</td>
 		<td><%= link_to "Edit", edit_idea_feature_path(@idea, feature) %></td>
-		<td>"delete"</td>
+		<td><%= link_to "Delete",([@idea, feature]), data: { :confirm => "Are you sure you would like to delete this feature?" }, :method => :delete %></td>
 	</tr>
 	<% end %>
 </table>
