@@ -1,8 +1,7 @@
 class IdeasController < ApplicationController
+  before_action :get_user
 
   def index
-    #So that a user can only see his own records
-
     @ideas = Idea.all
   end
 
@@ -54,4 +53,7 @@ class IdeasController < ApplicationController
     params.require(:idea).permit(:name, :description, :ideatype_id)
   end
 
+  def get_user
+    @user = current_user
+  end
 end

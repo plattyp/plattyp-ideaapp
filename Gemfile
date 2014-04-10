@@ -51,3 +51,6 @@ gem 'bcrypt'
 
 #Adding activeadmin so that it can be used as a backend
 gem 'activeadmin', github: 'gregbell/active_admin'
+
+#Better forming
+gem 'simple_form'

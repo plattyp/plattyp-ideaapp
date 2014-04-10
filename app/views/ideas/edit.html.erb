@@ -1,28 +1,10 @@
 <h1>Edit Idea</h1>
 
-<%= form_for @idea do |idea| %>
-	<% if @idea.errors.any? %>
-		<ul>
-		<% @idea.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-		<% end %>
-		</ul>
-	<% end %>
-	<p>
-		<%= idea.label :name %><br />
-		<%= idea.text_field :name %>
-	</p>
-	<p>
-		<%= idea.label :description %><br />
-		<%= idea.text_area :description %>
-	</p>
-	<p>
-		<%= idea.label :ideatype %><br />
-		<%= idea.select :ideatype_id, @ideatype_options %>
-	</p><br />
-	<p>
-		<%= idea.submit "Update Idea" %>
-	</p>
+<%= simple_form_for @idea do |idea| %>
+	<%= idea.input :name %>
+	<%= idea.input :description %>
+	<%= idea.select :ideatype_id, @ideatype_options %>
+	<%= idea.button :submit %>
 <% end %>
 
 <br />
@@ -46,3 +28,4 @@
 </table>
 
 <p><%= link_to "Add a Feature", new_idea_feature_path(@idea) %></p>
+
