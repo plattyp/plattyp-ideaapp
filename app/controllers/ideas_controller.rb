@@ -1,4 +1,5 @@
 class IdeasController < ApplicationController
+  respond_to :html, :xml, :json
   before_action :get_user
 
   def index
@@ -37,7 +38,7 @@ class IdeasController < ApplicationController
   	if @idea.update_attributes(idea_params)
   		redirect_to ideas_path, :notice =>"The idea is updated!"
   	else
-      render :edit
+      render :action => "edit"
   	end
   end
 
