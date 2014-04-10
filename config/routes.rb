@@ -6,10 +6,13 @@ Ideaapp::Application.routes.draw do
   
 
   #Set relationship between ideas and features
+  resources :users do
+    resources :ideas
+  end
+
   resources :ideas do
     resources :features
   end
-  
 
   #Set homepage
   root to: "ideas#index"
