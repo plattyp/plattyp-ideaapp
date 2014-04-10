@@ -1,0 +1,15 @@
+<h1>Add a feature</h1>
+
+<%= form_for [@idea,@feature] do |feature| %>
+	<p>
+		<%= feature.label :name %><br />
+		<%= feature.text_field :name %>
+	</p>
+	<p>
+		<%= feature.label :description %><br />
+		<%= feature.text_area :description %>
+	</p>
+	<p>
+		<%= feature.submit "Add Feature" %>
+	</p>
+<% end %>
