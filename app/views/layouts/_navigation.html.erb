@@ -1,15 +1,8 @@
-<ul class="nav">
-  <li><%= link_to "Ideaapp", root_path, :class => 'idea' %></li>
+<ul class="nav nav-pills pull-right">
   <% if user_signed_in? %>
-    <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+    <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
   <% else %>
-    <li><%= link_to 'Login', new_user_session_path %></li>
+    <li><%= link_to "Sign in", new_user_session_path %></li>
+    <li><%= link_to "Sign up", new_user_registration_path %></li>
   <% end %>
-  <% if user_signed_in? %>
-    <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-  <% else %>
-    <li><%= link_to 'Sign up', new_user_registration_path %></li>
-  <% end %>
-  <li>Sign in with Twitter</li>
-  <li>Sign in with Facebook</li>
 </ul>
