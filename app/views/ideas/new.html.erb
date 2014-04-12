@@ -5,7 +5,7 @@
 		<%= simple_form_for (@idea) do |idea| %>
 			<%= idea.input :name %>
 			<%= idea.input :description %>
-			<%= idea.select :ideatype_id, @ideatype_options %>
+			<%= idea.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type", include_blank: false  %>
 			<%= idea.button :submit, :class => 'btn-primary'%>
 		<% end %>
 	</div>

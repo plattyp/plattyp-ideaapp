@@ -1,31 +1,34 @@
-<h1>Edit Idea</h1>
+<div class="row">
+	<div class="col-md-6">
+		<h2>Edit Idea</h2>
+		<%= simple_form_for(@idea) do |idea| %>
+			<%= idea.input :name %>
+			<%= idea.input :description %>
+			<%= idea.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type",include_blank: false, selected: @idea.ideatype_id  %>
+			<%= idea.button :submit, :class => 'btn-primary' %>
+		<% end %>
+	</div>
 
-<%= simple_form_for(@idea, :html => { :class => 'form-horizontal' }) do |idea| %>
-	<%= idea.input :name %>
-	<%= idea.input :description %>
-	<%= idea.select :ideatype_id, @ideatype_options %>
-	<%= idea.button :submit, :class => 'btn-primary' %>
-<% end %>
+	<div class="col-md-6">
+		<h2>Current Features</h2>
+		<table class="table table-hover">
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<% @idea.features.each do |feature| %>
+			<tr>
+				<td><%= feature.name %></td>
+				<td><%= feature.description %></td>
+				<td><%= link_to "Edit", edit_idea_feature_path(@idea, feature) %></td>
+				<td><%= link_to "Delete",([@idea, feature]), data: { :confirm => "Are you sure you would like to delete this feature?" }, :method => :delete %></td>
+			</tr>
+			<% end %>
+		</table>
 
-<br />
-
-<h2>Current Features</h2>
-<table class="table table-hover">
-	<tr>
-		<th>Name</th>
-		<th>Description</th>
-		<th></th>
-		<th></th>
-	</tr>
-	<% @idea.features.each do |feature| %>
-	<tr>
-		<td><%= feature.name %></td>
-		<td><%= feature.description %></td>
-		<td><%= link_to "Edit", edit_idea_feature_path(@idea, feature) %></td>
-		<td><%= link_to "Delete",([@idea, feature]), data: { :confirm => "Are you sure you would like to delete this feature?" }, :method => :delete %></td>
-	</tr>
-	<% end %>
-</table>
-
-<p><%= link_to "Add a Feature", new_idea_feature_path(@idea) %></p>
+		<p><%= link_to "Add a Feature", new_idea_feature_path(@idea) %></p>
+	</div>
+</div>
 
