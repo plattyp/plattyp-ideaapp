@@ -52,8 +52,11 @@ end
 gem 'devise'
 gem 'bcrypt'
 
-#Adding activeadmin so that it can be used as a backend
-gem 'activeadmin', github: 'gregbell/active_admin'
-
 #Better forming
 gem 'simple_form'
+
+#Fix to Active-Admin
+gem "formtastic", github: "justinfrench/formtastic"
+
+#Adding activeadmin so that it can be used as a backend
+gem 'activeadmin', github: 'gregbell/active_admin'
