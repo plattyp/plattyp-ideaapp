@@ -1,16 +1,16 @@
 <h1>Edit Idea</h1>
 
-<%= simple_form_for @idea do |idea| %>
+<%= simple_form_for(@idea, :html => { :class => 'form-horizontal' }) do |idea| %>
 	<%= idea.input :name %>
 	<%= idea.input :description %>
 	<%= idea.select :ideatype_id, @ideatype_options %>
-	<%= idea.button :submit %>
+	<%= idea.button :submit, :class => 'btn-primary' %>
 <% end %>
 
 <br />
 
 <h2>Current Features</h2>
-<table>
+<table class="table table-hover">
 	<tr>
 		<th>Name</th>
 		<th>Description</th>
