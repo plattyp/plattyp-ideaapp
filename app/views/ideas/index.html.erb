@@ -7,7 +7,6 @@
 				<th>Name</th>
 				<th>Description</th>
 				<th>Type</th>
-				<th>User</th>
 				<th></th>
 				<th></th>
 				<th></th>
@@ -17,7 +16,6 @@
 				<td><%= idea.name %></td>
 				<td><%= idea.description %></td>
 				<td><%= idea.ideatype.name if idea.ideatype %></td>
-				<td><%= idea.user.email if idea.user %></td>
 				<td><%= link_to "Show", idea %></td>
 				<td><%= link_to "Edit", edit_idea_path(idea) %></td>
 				<td><%= link_to "Delete", idea, data: { :confirm => "Are you sure you would like to delete this idea?" }, :method => :delete %></td>

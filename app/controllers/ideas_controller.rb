@@ -29,7 +29,7 @@ class IdeasController < ApplicationController
   	if @idea.save
   		redirect_to ideas_path, :notice =>"The idea was saved!"
   	else
-  		redirect_to new_idea_path, :notice =>"Sorry, but it could not be saved!"
+      render :action => "new"
   	end
   end
 
