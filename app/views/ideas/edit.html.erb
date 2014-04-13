@@ -31,4 +31,20 @@
 		<p><%= link_to "Add a Feature", new_idea_feature_path(@idea) %></p>
 	</div>
 </div>
+<div class="row">
+	<div class="col-md-6">
+		<h2>Messages</h2>
+			<table class"table table-hover">
+				<tr>
+					<th>Message</th>
+				</tr>
+				<% @idea.idea_messages.each do |message| %>
+				<tr>
+					<td><%=message.message %></td>
+				</tr>
+				<% end %>
+			</table>
+		<p><%= link_to "Add a Message", new_idea_ideamessage_path(@idea) %></p>
+	</div>
+</div>
 

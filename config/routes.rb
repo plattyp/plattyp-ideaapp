@@ -14,6 +14,10 @@ Ideaapp::Application.routes.draw do
     resources :features
   end
 
+  resources :ideas do
+    resources :ideamessages
+  end
+
   #Set homepage
   root to: "ideas#index"
 
