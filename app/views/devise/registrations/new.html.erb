@@ -10,6 +10,8 @@
 		    <%= f.input :email, required: true, autofocus: true %>
 		    <%= f.input :password, required: true %>
 		    <%= f.input :password_confirmation, required: true %>
+	        <%= f.input :username %>
+	        <%= f.input :group_id, :label => "Organization", hint: "If you are not joining an Organization account, just leave his blank" %>
 		  </div>
 
 		  <div class="form-actions">

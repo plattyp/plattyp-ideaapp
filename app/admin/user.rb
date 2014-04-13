@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
 
-  permit_params :email, :group_id
+  permit_params :email, :username, :group_id
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
