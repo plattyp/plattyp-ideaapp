@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :ideas
-  has_many :idea_messages
+  has_many :ideamessages
   belongs_to :group
 end

@@ -15,7 +15,7 @@ Ideaapp::Application.routes.draw do
   end
 
   resources :ideas do
-    resources :idea_messages, :controller => 'idea_messages'
+    resources :ideamessages, :controller => 'ideamessages'
   end
 
   #Set homepage

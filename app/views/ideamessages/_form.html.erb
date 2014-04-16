@@ -1,6 +1,4 @@
-<h2>Add Message</h2>
-
-<%= simple_form_for [@idea,@message] do |message| %>
+<%= simple_form_for [@idea, Ideamessage.new] do |message| %>
 	<%= message.input :message %>
 	<%= message.button :submit, 'Submit', :class => 'btn-primary' %>
 <% end %>

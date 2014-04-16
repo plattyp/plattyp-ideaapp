@@ -1,22 +1,22 @@
-class IdeaMessagesController < ApplicationController
+class IdeamessagesController < ApplicationController
 	respond_to :html, :xml, :json
 	before_action :get_idea, :get_user
 
 	def index
-		@messages = @idea.idea_messages.all
+		@messages = @idea.ideamessages.all
 	end
 
 	def show
 	end
 
 	def new
-		@message = @idea.idea_messages.build
+		@message = @idea.ideamessages.build
 		@message.user_id = @user.id
 		respond_with(@message)
 	end
 
 	def create
-		@message = @idea.idea_messages.build(message_params)
+		@message = @idea.ideamessages.build(message_params)
 		@message.user_id = @user.id
 		if @message.save
 			redirect_to edit_idea_path(@idea), :notice => "Your message was sent!"
@@ -28,7 +28,7 @@ class IdeaMessagesController < ApplicationController
 	private
 
 	def message_params
-		params.require(:idea_message).permit(:idea_id, :user_id, :message)
+		params.require(:ideamessage).permit(:idea_id, :user_id, :message)
 	end
 
 	def get_idea

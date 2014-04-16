@@ -34,23 +34,19 @@
 <div class="row">
 	<div class="col-md-6">
 		<h2>Messages</h2>
+		<%= render :partial => '/ideamessages/form', :log_entry => @idea.ideamessages.build %>
 			<table class="table table-hover">
 				<tr>
 					<th>Message</th>
 					<th>User</th>
 				</tr>
-				<% @idea.idea_messages.each do |message| %>
+				<% @idea.ideamessages.each do |message| %>
 				<tr>
 					<td><%=message.message %></td>
 					<td><%=message.user.username if message.user %></td>
 				</tr>
 				<% end %>
 			</table>
-		<%= simple_form_for [@idea,@message], :url => url_for(:action => 'create', :controller => 'idea_messages'), :method => 'post' do |message| %>
-			<%= message.input :message %>
-			<%= message.button :submit, 'Submit', :class => 'btn-primary' %>
-		<% end %>
-		<p><%= link_to "Add a Message", new_idea_idea_message_path(@idea) %></p>
 	</div>
 </div>
 

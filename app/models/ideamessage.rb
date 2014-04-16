@@ -1,4 +1,4 @@
-class IdeaMessage < ActiveRecord::Base
+class Ideamessage < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :idea
 end
