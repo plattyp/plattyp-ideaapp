@@ -85,4 +85,5 @@ class IdeasController < ApplicationController
   def get_group
     @group = @user.group
   end
+
 end
