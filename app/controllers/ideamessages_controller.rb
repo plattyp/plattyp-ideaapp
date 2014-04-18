@@ -19,7 +19,7 @@ class IdeamessagesController < ApplicationController
 		@message = @idea.ideamessages.build(message_params)
 		@message.user_id = @user.id
 		if @message.save
-			redirect_to edit_idea_path(@idea), :notice => "Your message was sent!"
+			redirect_to edit_idea_path(@idea, :anchor => 'messages'), :notice => "Your message was sent!"
 		else
 			redirect_to new_idea_ideamessage_path(@idea), :notice => "Sorry, but your message could not be sent"
 		end

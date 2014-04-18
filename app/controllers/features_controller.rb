@@ -18,7 +18,7 @@ class FeaturesController < ApplicationController
 	def create
 		@feature = @idea.features.build(feature_params)
 		if @feature.save
-			redirect_to edit_idea_path(@idea), :notice => "The feature was added!"
+			redirect_to edit_idea_path(@idea, :anchor => 'features'), :notice => "The feature was added!"
 		else
 			redirect_to new_idea_features_path(@idea), :notice => "Sorry, but the feature could not be added!"
 		end
