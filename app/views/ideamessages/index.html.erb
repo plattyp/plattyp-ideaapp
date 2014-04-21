@@ -1,0 +1,13 @@
+<h2>Messages</h2>
+<table class="table table-hover">
+	<tr>
+		<th>Message</th>
+		<th>User</th>
+	</tr>
+	<% @messages.each do |message| %>
+	<tr>
+		<td><%=message.message %></td>
+		<td><%=message.user.username if message.user %></td>
+	</tr>
+	<% end %>
+</table>

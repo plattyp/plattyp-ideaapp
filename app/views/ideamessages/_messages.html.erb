@@ -1,0 +1,14 @@
+<table class="table table-striped">
+	<tr>
+		<th>Message</th>
+		<th>User</th>
+	</tr>
+	<% @ideas.each do |idea| %>
+		<% @messages.each do |message| %>
+		<tr>
+			<td><%=message.message %></td>
+			<td><%=message.user.username if message.user %></td>
+		</tr>
+		<% end %>
+	<% end %>
+</table>
