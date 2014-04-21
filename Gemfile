@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Be sure to include rake in your gemfile
+gem 'rake'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
 
@@ -60,3 +63,16 @@ gem "formtastic", github: "justinfrench/formtastic"
 
 #Adding activeadmin so that it can be used as a backend
 gem 'activeadmin', github: 'gregbell/active_admin'
+
+
+# For Deployment
+gem 'capistrano', '~> 3.1.0', require: false, group: :development
+gem 'capistrano-rvm'
+
+group :development do
+gem 'capistrano-rails',   '~> 1.1', require: false
+gem 'capistrano-bundler', '~> 1.1', require: false
+end
+
+# Use the Unicorn app server
+gem 'unicorn'

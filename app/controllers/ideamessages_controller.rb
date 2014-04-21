@@ -21,7 +21,7 @@ class IdeamessagesController < ApplicationController
 		if @message.save
 			redirect_to edit_idea_path(@idea, :anchor => 'messages'), :notice => "Your message was sent!"
 		else
-			redirect_to new_idea_ideamessage_path(@idea), :notice => "Sorry, but your message could not be sent"
+			redirect_to edit_idea_path(@idea, :anchor => 'messages'), :notice => "Sorry, but your message could not be sent"
 		end
 	end
 

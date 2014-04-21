@@ -35,5 +35,5 @@ production:
   database: ideaapp_production
   pool: 5
   username: root
-  password: password
+  password: 1aAhZzfRKw
   socket: /var/run/mysqld/mysqld.sock
