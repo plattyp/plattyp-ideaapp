@@ -7,7 +7,10 @@ gem 'rake'
 gem 'rails', '4.0.4'
 
 # Use mysql as the database for Active Record
-gem 'mysql2'
+#gem 'mysql2'
+
+# Use Postgre for the DB
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
@@ -67,7 +70,7 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 
 # For Deployment
 gem 'capistrano', '~> 3.1.0', require: false, group: :development
-gem 'capistrano-rvm'
+gem 'rvm1-capistrano3', require: false
 
 group :development do
 gem 'capistrano-rails',   '~> 1.1', require: false

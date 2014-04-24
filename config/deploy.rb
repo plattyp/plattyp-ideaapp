@@ -1,3 +1,5 @@
+set :rvm1_ruby_version, "ruby-2.0.0-p353"
+
 # Ensure that bundle is used for rake tasks
 SSHKit.config.command_map[:rake] = "bundle exec rake"
 
@@ -15,7 +17,7 @@ set :stages, ["production"]
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/home/ideaapp'
+set :deploy_to, '/var/www/ideaapp'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -34,6 +36,9 @@ set :deploy_to, '/home/ideaapp'
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+linked_dirs = Set.new(fetch(:linked_dirs, [])) # https://github.com/capistrano/rails/issues/52
+linked_dirs.merge(%w{bin log tmp/pids tmp/cache tmp/sockets public/system})
+set :linked_dirs, linked_dirs.to_a
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
