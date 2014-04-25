@@ -1,5 +1,5 @@
 class MembershipsController < Devise::RegistrationsController
-	before_action: get_groups
+	before_action :get_groups
 
 	private
 
