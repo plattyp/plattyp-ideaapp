@@ -21,5 +21,6 @@ module Ideaapp
     # config.i18n.default_locale = :de
 
     # A devise setting to prevent Heroku from accessing the DB or load models when precompiling the assets.
+    config.assets.initialize_on_precompile = false
   end
 end
