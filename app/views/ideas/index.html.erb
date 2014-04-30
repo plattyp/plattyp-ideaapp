@@ -16,9 +16,7 @@
 				<td><%= idea.name %></td>
 				<td><%= idea.description %></td>
 				<td><%= idea.ideatype.name if idea.ideatype %></td>
-				<% idea.users.each do |user| %>
-					<td><%= user.username %></td>
-				<% end %>
+				<td><%= idea.createdbyuser.username %></td>
 				<td><%= link_to "Edit", edit_idea_path(idea) %></td>
 				<td><%= link_to "Delete", idea, data: { :confirm => "Are you sure you would like to delete this idea?" }, :method => :delete %></td>
 			</tr>

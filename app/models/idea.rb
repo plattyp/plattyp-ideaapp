@@ -14,4 +14,10 @@ class Idea < ActiveRecord::Base
 	has_many :ideamessages
 	has_many :ideausers
 	has_many :users, :through => :ideausers
+
+	#Methods for custom retrieval of data
+	
+	def createdbyuser
+		User.first
+	end
 end

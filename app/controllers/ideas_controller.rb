@@ -13,7 +13,7 @@ class IdeasController < ApplicationController
     if @user.ideas.find_by_id(params[:id])
       @idea = @user.ideas.find(params[:id])
     else
-      redirect_to ideas_path, :notice => "That idea doesn't exist!"
+      redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
     end
   end
 
@@ -73,7 +73,7 @@ class IdeasController < ApplicationController
   private
 
   def idea_params
-    params.require(:idea).permit(:name, :description, :ideatype_id, :ideausers_attributes => [:is_admin])
+    params.require(:idea).permit(:name, :description, :ideatype_id)
   end
 
   def get_user
