@@ -3,7 +3,6 @@ class Idea < ActiveRecord::Base
 	validates :name, :presence => true
 	validates :description, :presence => true
 	validates :ideatype_id, :presence => true
-	validates :user_id, :presence => true
 
 	#Going to be used to capitalize the idea before saving
 	def name=(s)
@@ -11,7 +10,8 @@ class Idea < ActiveRecord::Base
 	end
 
 	belongs_to :ideatype
-	belongs_to :user
 	has_many :features, dependent: :destroy
 	has_many :ideamessages
+	has_many :ideausers
+	has_many :users, :through => :ideausers
 end

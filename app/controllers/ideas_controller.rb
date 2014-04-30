@@ -3,16 +3,15 @@ class IdeasController < ApplicationController
   before_action :get_user, :get_group
 
   def index
-    # Looks at the user's group id and shows all ideas that belong to that group
-    @ideas = @group.ideas.all
-    #@ideas = @user.ideas.all
+    # Looks at the user's id and shows all ideas that belong to that user
+    @ideas = @user.ideas.all
   end
 
 
   def show
     #Looks to see if the user's group has access to an idea & redirects if they dont
-    if @group.ideas.find_by_id(params[:id])
-      @idea = @group.ideas.find(params[:id])
+    if @user.ideas.find_by_id(params[:id])
+      @idea = @user.ideas.find(params[:id])
     else
       redirect_to ideas_path, :notice => "That idea doesn't exist!"
     end
@@ -24,11 +23,10 @@ class IdeasController < ApplicationController
   end
 
   def create
-  	@idea = Idea.create(idea_params)
-    @idea.user = current_user
-
+    @idea = @user.ideas.build(idea_params)
+    @idea.ideausers.build(:user => @user, :is_admin => true)
   	if @idea.save
-  		redirect_to ideas_path, :notice =>"The idea was saved!"
+        redirect_to ideas_path, :notice =>"The idea was saved!"
   	else
       render :action => "new"
   	end
@@ -36,8 +34,8 @@ class IdeasController < ApplicationController
 
   def edit
     #Looks to see if the user's group has access to an idea & redirects if they don't
-    if @group.ideas.find_by_id(params[:id])
-      @idea = Idea.find(params[:id])
+    if @user.ideas.find_by_id(params[:id])
+      @idea = @user.ideas.find(params[:id])
       @ideatype_options = Ideatype.where('active = true').all.map {|i| [i.name, i.id]}
     else
       redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
@@ -46,8 +44,8 @@ class IdeasController < ApplicationController
 
   def update
     #Looks to see if the user's group has access to an idea & redirects if they don't
-    if @group.ideas.find_by_id(params[:id])
-      @idea = Idea.find(params[:id])
+    if @user.ideas.find_by_id(params[:id])
+      @idea = @user.ideas.find(params[:id])
     else
       redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
     end
@@ -62,8 +60,8 @@ class IdeasController < ApplicationController
 
   def destroy
     #Looks to see if the user's group has access to an idea & redirects if they don't
-    if @group.ideas.find_by_id(params[:id])
-      @idea = Idea.find(params[:id])
+    if @user.ideas.find_by_id(params[:id])
+      @idea = @user.ideas.find(params[:id])
     else
       redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
     end
@@ -75,7 +73,7 @@ class IdeasController < ApplicationController
   private
 
   def idea_params
-    params.require(:idea).permit(:name, :description, :ideatype_id)
+    params.require(:idea).permit(:name, :description, :ideatype_id, :ideausers_attributes => [:is_admin])
   end
 
   def get_user
