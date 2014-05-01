@@ -17,4 +17,5 @@
 
 // Loads all Bootstrap javascripts
 //= require bootstrap
+//= require bootstrap/modal
 

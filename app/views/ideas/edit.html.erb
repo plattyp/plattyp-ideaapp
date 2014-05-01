@@ -63,7 +63,16 @@
 					<li><%= user.username %></li>
 				<% end %>
 			</ul>
-			<p>Invite User</p>
+			<p><%= link_to 'Invite User', invite_user_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %></p>
+            <!-- Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <%= render partial: 'invite_user'%>
+                        </div>
+                    </div>
+                </div>
+            <!-- End of Modal -->
 	</div>
 </div>
 

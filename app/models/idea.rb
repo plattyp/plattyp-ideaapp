@@ -15,6 +15,13 @@ class Idea < ActiveRecord::Base
 	has_many :ideausers
 	has_many :users, :through => :ideausers
 
+	#For creating Ideauser association records from Idea
+	accepts_nested_attributes_for :ideausers, :allow_destroy => true
+
+	def add_users_form
+		collection = ideausers.build
+	end
+
 	#Methods for custom retrieval of data
 	
 	def createdbyuser

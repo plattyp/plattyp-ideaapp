@@ -7,7 +7,6 @@ class IdeasController < ApplicationController
     @ideas = @user.ideas.all
   end
 
-
   def show
     #Looks to see if the user's group has access to an idea & redirects if they dont
     if @user.ideas.find_by_id(params[:id])
@@ -70,10 +69,18 @@ class IdeasController < ApplicationController
   	redirect_to ideas_path, :notice => "Your idea was deleted!"
   end
 
+  #This is used as a request to open a modal to invite users to an idea
+  def invite_user
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   private
 
   def idea_params
-    params.require(:idea).permit(:name, :description, :ideatype_id)
+    params.require(:idea).permit(:name, :description, :ideatype_id, ideausers_attributes: [:idea_id, :user_id])
   end
 
   def get_user

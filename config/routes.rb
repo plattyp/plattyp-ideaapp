@@ -18,6 +18,9 @@ Ideaapp::Application.routes.draw do
     resources :ideamessages, :controller => 'ideamessages'
   end
 
+  #Modal for Adding Users to an Idea
+  get "ideas/invite_user" => 'ideas#invite_user', :as => :invite_user
+
   #Set homepage
   root to: "ideas#index"
 
