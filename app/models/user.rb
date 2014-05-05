@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   has_many :ideas, :through => :ideausers
   has_many :ideamessages
   belongs_to :group
+
+  def group_usernames
+  	users = User.all.map {|i| [i.username, i.id]}
+  end
 end

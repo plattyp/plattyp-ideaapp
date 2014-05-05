@@ -11,7 +11,10 @@
 		    <%= f.input :password, required: true %>
 		    <%= f.input :password_confirmation, required: true %>
 	        <%= f.input :username %>
-	        <%= f.input :group_id, :label => "Organization", hint: "If you are not joining an Organization account, just leave his blank" %>
+	        <%= f.input :join_group_checkbox, :label => "Joining a Group?", :as => :boolean, :input_html => { :checked => "unchecked" } %>
+	        <div id="join_organization" style="display:none;">
+	        	<%= f.input :group_id, :label => "Organization" %>
+	        </div>
 		  </div>
 
 		  <div class="form-actions">

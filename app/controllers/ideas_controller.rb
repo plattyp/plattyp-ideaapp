@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   respond_to :html, :xml, :json
-  before_action :get_user, :get_group
+  before_action :get_user, :get_group, :group_users
 
   def index
     # Looks at the user's id and shows all ideas that belong to that user
@@ -89,6 +89,10 @@ class IdeasController < ApplicationController
 
   def get_group
     @group = @user.group
+  end
+
+  def group_users
+    @users = User.all.map {|i| [i.username, i.id]}
   end
 
 end
