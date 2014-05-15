@@ -50,7 +50,7 @@ class IdeasController < ApplicationController
     end
 
   	if @idea.update_attributes(idea_params)
-  		redirect_to edit_idea_path(@idea, :anchor => 'idea'), :notice =>"The idea is updated!"
+  		  redirect_to edit_idea_path(@idea, :anchor => 'idea'), :notice =>"The idea is updated!"
   	else
       render :action => "edit"
   	end

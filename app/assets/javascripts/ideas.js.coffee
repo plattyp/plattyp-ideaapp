@@ -12,5 +12,3 @@ $(document).ready ->
     $('a[data-toggle="tab"]').on 'shown', (e) ->
         location.hash = $(e.target).attr('href').substr(1)
 
-
-

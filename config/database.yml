@@ -12,6 +12,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: ideaapp_development
+  template: template0
   pool: 5
   username: superuser
   password: bluejasmine
@@ -25,6 +26,7 @@ test:
   adapter: postgresql
   encoding: unicode
   database: ideaapp_test
+  template: template0
   pool: 5
   username: superuser
   password: bluejasmine
@@ -35,6 +37,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: ideaapp_production
+  template: template0
   pool: 5
   username: superuser
   password: bluejasmine
