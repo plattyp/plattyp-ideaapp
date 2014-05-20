@@ -15,6 +15,10 @@ Ideaapp::Application.routes.draw do
   end
 
   resources :ideas do
+    resources :domains
+  end
+
+  resources :ideas do
     resources :ideamessages, :controller => 'ideamessages'
   end
 

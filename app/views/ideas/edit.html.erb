@@ -3,6 +3,7 @@
 		<li class="active"><a href="#idea" data-toggle="pill">Idea</a></li>
 		<li><a href="#features" data-toggle="pill">Features</a></li>
 		<li><a href="#messages" data-toggle="pill">Messages</a></li>
+		<li><a href="#domains" data-toggle="pill">Domains</a></li>
 		<li><a href="#ideausers" data-toggle="pill">Manage Users</a></li>
 	</ul>
 	<div class="tab-content col-md-10">
@@ -55,6 +56,11 @@
 						<% end %>
 					</table>
 				</div>
+		</div>
+
+		<div class="tab-pane" id="domains">
+			<h2>Domain Options</h2>
+			<%= render :partial => '/domains/searchform' %>
 		</div>
 
 		<div class="tab-pane" id="ideausers">
