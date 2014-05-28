@@ -1,13 +1,8 @@
-<h2>Messages</h2>
-<table class="table table-hover">
-	<tr>
-		<th>Message</th>
-		<th>User</th>
-	</tr>
-	<% @messages.each do |message| %>
-	<tr>
-		<td><%=message.message %></td>
-		<td><%=message.user.username if message.user %></td>
-	</tr>
-	<% end %>
-</table>
+<div class="row">
+	<%= render :partial => '/ideas/navigation' %>
+	<div class="col-md-10">
+		<h2>Messages</h2>
+		<%= render :partial => 'form' %>
+		<%= render :partial => 'thread' %>
+	</div>
+</div>

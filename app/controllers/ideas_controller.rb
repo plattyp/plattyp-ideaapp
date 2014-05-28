@@ -69,14 +69,6 @@ class IdeasController < ApplicationController
   	redirect_to ideas_path, :notice => "Your idea was deleted!"
   end
 
-  #This is used as a request to open a modal to invite users to an idea
-  def invite_user
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
   private
 
   def idea_params

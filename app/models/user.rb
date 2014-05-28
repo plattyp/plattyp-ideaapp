@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :ideausers
   has_many :ideas, :through => :ideausers
+  has_many :features, :through => :ideas
+  has_many :subfeatures, :through => :features
   has_many :ideamessages
   belongs_to :group
 

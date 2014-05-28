@@ -11,10 +11,12 @@ class Idea < ActiveRecord::Base
 
 	belongs_to :ideatype
 	has_many :features, dependent: :destroy
+	has_many :subfeatures, :through => :features
 	has_many :ideamessages
 	has_many :ideausers
 	has_many :users, :through => :ideausers
 	has_many :domains, :through => :ideadomains
+	has_many :ideadomains
 
 	#For creating Ideauser association records from Idea
 	accepts_nested_attributes_for :ideausers, :allow_destroy => true

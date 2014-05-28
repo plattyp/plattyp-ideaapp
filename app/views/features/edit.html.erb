@@ -1,7 +1,8 @@
-<h1>Edit Feature</h1>
-
-<%= simple_form_for [@idea,@feature] do |feature| %>
-	<%= feature.input :name %>
-	<%= feature.input :description %>
-	<%= feature.button :submit %>
-<% end %>
+<div class="row">
+	<%= render :partial => '/ideas/navigation' %>
+	<div class="col-md-10">
+		<h2>Features</h2>
+		<%= render :partial => 'featurenav' %>
+		<%= render :partial => 'editfeature' %>
+	</div>
+</div>

@@ -18,6 +18,7 @@ gem 'sass-rails', '~> 4.0.2'
 # Add Bootstrap, this relies on sass-rails
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'twitter-typeahead-rails'
+gem 'bootstrap-datepicker-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -61,6 +62,9 @@ gem 'simple_form'
 
 #Fix to Active-Admin
 gem "formtastic", github: "justinfrench/formtastic"
+
+#For whois searching
+gem 'whois'
 
 #Adding activeadmin so that it can be used as a backend
 gem 'activeadmin', github: 'gregbell/active_admin'

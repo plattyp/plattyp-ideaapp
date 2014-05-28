@@ -1,6 +1,6 @@
 class FeaturesController < ApplicationController
 	respond_to :html, :xml, :json
-	before_action :get_idea
+	before_action :get_idea, :get_user
 
 	def index
 		@features = @idea.features.all
@@ -17,8 +17,9 @@ class FeaturesController < ApplicationController
 
 	def create
 		@feature = @idea.features.build(feature_params)
+		@feature.user_id = @user.id
 		if @feature.save
-			redirect_to edit_idea_path(@idea, :anchor => 'features'), :notice => "The feature was added!"
+			redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The feature was added!"
 		else
 			redirect_to new_idea_features_path(@idea), :notice => "Sorry, but the feature could not be added!"
 		end
@@ -41,7 +42,7 @@ class FeaturesController < ApplicationController
 	def destroy
 		@feature = @idea.features.find(params[:id])
 		@feature.destroy
-		redirect_to edit_idea_path(@idea), :notice =>"The feature was deleted!"
+		redirect_to idea_features_path(@idea), :notice =>"The feature was deleted!"
 	end
 
 	private
@@ -52,6 +53,10 @@ class FeaturesController < ApplicationController
 
 	def get_idea
 		@idea = Idea.find(params[:idea_id])
+	end
+
+	def get_user
+		@user = current_user
 	end
 
 end

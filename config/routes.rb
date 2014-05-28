@@ -1,5 +1,11 @@
 Ideaapp::Application.routes.draw do
 
+  get "subfeatures/index"
+  get "subfeatures/new"
+  get "subfeatures/create"
+  get "subfeatures/edit"
+  get "subfeatures/update"
+  get "subfeatures/destroy"
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
   ActiveAdmin.routes(self)
@@ -11,11 +17,15 @@ Ideaapp::Application.routes.draw do
   end
 
   resources :ideas do
+    resources :ideausers
+  end
+
+  resources :ideas do
     resources :features
   end
 
   resources :ideas do
-    resources :domains
+    resources :domains, :controller => 'domains'
   end
 
   resources :ideas do
@@ -23,7 +33,7 @@ Ideaapp::Application.routes.draw do
   end
 
   #Modal for Adding Users to an Idea
-  get "ideas/invite_user" => 'ideas#invite_user', :as => :invite_user
+  get "ideausers/invite_user" => 'ideas#invite_user', :as => :invite_user
 
   #Set homepage
   root to: "ideas#index"
