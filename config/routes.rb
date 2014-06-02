@@ -1,11 +1,4 @@
 Ideaapp::Application.routes.draw do
-
-  get "subfeatures/index"
-  get "subfeatures/new"
-  get "subfeatures/create"
-  get "subfeatures/edit"
-  get "subfeatures/update"
-  get "subfeatures/destroy"
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
   ActiveAdmin.routes(self)
@@ -21,7 +14,9 @@ Ideaapp::Application.routes.draw do
   end
 
   resources :ideas do
-    resources :features
+    resources :features do
+      resources :subfeatures
+    end
   end
 
   resources :ideas do

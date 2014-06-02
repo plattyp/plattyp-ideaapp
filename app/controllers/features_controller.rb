@@ -27,6 +27,8 @@ class FeaturesController < ApplicationController
 
 	def edit
 		@feature = @idea.features.find(params[:id])
+		@uniquecategories = Subfeature.unique_categories(params[:id])
+		@subfeaturecount = Subfeature.subfeature_count(params[:id])
 	end
 
 	def update
@@ -35,7 +37,7 @@ class FeaturesController < ApplicationController
 	  	if @feature.update_attributes(feature_params)
 	  		redirect_to edit_idea_path(@idea), :notice =>"The feature is updated!"
 	  	else
-	      	redirect_to new_idea_features_path(@idea), :notice => "Sorry, but the feature could not be added!"
+	      	redirect_to edit_idea_path(@idea), :notice => "Sorry, but the feature could not be updated!"
 	  	end
 	end
 
