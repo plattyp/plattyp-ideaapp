@@ -28,7 +28,12 @@ class FeaturesController < ApplicationController
 	def edit
 		@feature = @idea.features.find(params[:id])
 		@uniquecategories = Subfeature.unique_categories(params[:id])
-		@subfeaturecount = Subfeature.subfeature_count(params[:id])
+
+		@subfeaturesdistinct = Hash.new
+		@uniquecategories.each do |category|
+			subfeaturecount = Subfeature.subfeature_count(params[:id],category)
+			@subfeaturesdistinct.store(category,subfeaturecount)
+		end
 	end
 
 	def update
