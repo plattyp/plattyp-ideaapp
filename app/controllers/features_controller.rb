@@ -27,8 +27,8 @@ class FeaturesController < ApplicationController
 
 	def edit
 		@feature = @idea.features.find(params[:id])
-		@subfeatures = @feature.subfeatures.all
-		
+		@subfeatures = Subfeature.select_where(params[:id],params[:category])
+
 		#Gets a list of subfeatures' categories for a given feature
 		@uniquecategories = Subfeature.unique_categories(params[:id])
 
