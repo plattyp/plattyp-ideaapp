@@ -1,0 +1,2 @@
+class IdeadomainsController < ApplicationController
+end

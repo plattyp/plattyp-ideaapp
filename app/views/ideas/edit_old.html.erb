@@ -1,0 +1,92 @@
+<div class="row">
+	<ul class="nav nav-pills nav-stacked col-md-2">
+		<li class="active"><a href="#idea" data-toggle="pill">Idea</a></li>
+		<li><a href="#features" data-toggle="pill">Features</a></li>
+		<li><a href="#messages" data-toggle="pill">Messages</a></li>
+		<li><a href="#domains" data-toggle="pill">Domains</a></li>
+		<li><a href="#ideausers" data-toggle="pill">Manage Users</a></li>
+	</ul>
+	<div class="tab-content col-md-10">
+		<div class="tab-pane active" id="idea">
+			<h2>Edit Idea</h2>
+			<%= simple_form_for(@idea) do |idea| %>
+				<%= idea.input :name %>
+				<%= idea.input :description %>
+				<%= idea.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type",include_blank: false, selected: @idea.ideatype_id  %>
+				<%= idea.button :submit, :class => 'btn-primary' %>
+			<% end %>
+		</div>
+
+		<div class="tab-pane" id="features">
+			<h2>Current Features</h2>
+			<ul class="nav nav-tabs">
+				<% @idea.features.each do |feature| %>
+					<li><%= link_to feature.name, edit_idea_feature_path(@idea, feature) %></li>
+				<% end %>
+					<li><%= link_to "+", new_idea_feature_path(@idea) %></li>
+			</ul>
+			</br>
+			<table class="table table-hover">
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<% @idea.features.each do |feature| %>
+				<tr>
+					<td><%= feature.name %></td>
+					<td><%= feature.description %></td>
+					<td><%= link_to "Edit", edit_idea_feature_path(@idea, feature) %></td>
+					<td><%= link_to "Delete",([@idea, feature]), data: { :confirm => "Are you sure you would like to delete this feature?" }, :method => :delete %></td>
+				</tr>
+				<% end %>
+			</table>
+
+			<p><%= link_to "Add a Feature", new_idea_feature_path(@idea) %></p>
+		</div>
+
+		<div class="tab-pane" id="messages">
+			<h2>Messages</h2>
+			<%= render :partial => '/ideamessages/form' %>
+				<div class="messages-container">
+					<table class="table table-striped">
+						<tr>
+							<th>Message</th>
+							<th>User</th>
+						</tr>
+						<% @idea.ideamessages.each do |message| %>
+						<tr>
+							<td><%=message.message %></td>
+							<td><%=message.user.username if message.user %></td>
+						</tr>
+						<% end %>
+					</table>
+				</div>
+		</div>
+
+		<div class="tab-pane" id="domains">
+			<h2>Domain Options</h2>
+			<%= render :partial => '/domains/searchform' %>
+		</div>
+
+		<div class="tab-pane" id="ideausers">
+			<h4>Current Users</h4>
+				<ul>
+					<% @idea.users.each do |user| %>
+						<li><%= user.username %></li>
+					<% end %>
+				</ul>
+				<p><%= link_to 'Invite User', invite_user_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %></p>
+	            <!-- Modal -->
+	                <div class="modal fade" id="myModal">
+	                    <div class="modal-dialog">
+	                        <div class="modal-content">
+	                            <%= render partial: 'invite_user'%>
+	                        </div>
+	                    </div>
+	                </div>
+	            <!-- End of Modal -->
+	</div>
+</div>
+

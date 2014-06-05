@@ -1,0 +1,6 @@
+<%= simple_form_for [@idea, @feature, Subfeature.new] do |s| %>
+	<%= s.input :name %>
+	<%= s.input :description %>
+	<%= s.input :category %>
+	<%= s.button :submit %>
+<% end %>

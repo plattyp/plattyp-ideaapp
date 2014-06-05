@@ -1,0 +1,6 @@
+<%= simple_form_for [@idea,@feature] do |feature| %>
+	<%= feature.input :name %>
+	<%= feature.input :description %>
+	<%= feature.button :submit %>
+<% end %>
+<p><%= link_to 'Delete this feature', [@idea, @feature], confirm: 'Are you sure you would like to delete this feature?', method: :delete %>

@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs">
+	<% @idea.features.each do |feature| %>
+		<li class="<%= 'active' if current_page?(edit_idea_feature_path(@idea, feature)) %>"><%= link_to feature.name, edit_idea_feature_path(@idea, feature) %></li>
+	<% end %>
+		<li><%= link_to "+", new_idea_feature_path(@idea) %></li>
+</ul>
