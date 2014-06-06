@@ -40,6 +40,9 @@ class SubfeaturesController < ApplicationController
   end
 
   def destroy
+    @subfeature = @feature.subfeatures.find(params[:id])
+    @subfeature.destroy
+    redirect_to edit_idea_feature_path(@idea, @feature), :notice =>"The subfeature was deleted!"
   end
 
   private

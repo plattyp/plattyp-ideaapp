@@ -13,7 +13,7 @@
                 <li><a href="#">Passed</a></li>
                 <li role="presentation" class="divider"></li>
                 <li role="presentation" class="dropdown-header">Other Options</li>
-                <li><a href="#">Delete</a></li>
+                <li><%= link_to "Delete", idea_feature_subfeature_path(:feature_id => s.feature_id, :id => s.id) , :method => :delete %></li>
             </ul>
         </div>
 	  </div>
