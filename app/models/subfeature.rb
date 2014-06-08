@@ -3,6 +3,11 @@ class Subfeature < ActiveRecord::Base
 	belongs_to :idea
 	belongs_to :user
 
+
+	def self.subfeaturestatuslist
+		return ["Proposed","Considering","Validated","Approved","Obsolete"]
+	end
+
 	def self.unique_categories(feature)
 		Subfeature.where("feature_id = ?",feature).uniq.pluck(:category)
 	end

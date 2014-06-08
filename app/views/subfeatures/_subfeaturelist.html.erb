@@ -2,15 +2,15 @@
 	<div class="panel panel-default">
 	  <div class="panel-heading">
 	  	<%= s.name %>
-	  	<span class="label label-info"><%= s.status %></span>
         <div class="dropdown pull-right">
+        	<span class="<%= span_classname(s.status) %>"><%= s.status %></span>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
 
             <ul class="dropdown-menu" role="menu">
             <li role="presentation" class="dropdown-header">Change Status</li>
-                <li><a href="#">Pending</a></li>
-                <li><a href="#">Fail</a></li>
-                <li><a href="#">Passed</a></li>
+            	<% @subfeaturestatuses.each do |status| %>
+            		<li><%= link_to "#{status}", idea_feature_subfeature_path(:feature_id => s.feature_id, :id => s.id, :status => status), :method => :put %></li>
+            	<% end %>
                 <li role="presentation" class="divider"></li>
                 <li role="presentation" class="dropdown-header">Other Options</li>
                 <li><%= link_to "Delete", idea_feature_subfeature_path(:feature_id => s.feature_id, :id => s.id) , :method => :delete %></li>

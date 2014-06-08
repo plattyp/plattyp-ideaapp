@@ -15,7 +15,6 @@ class SubfeaturesController < ApplicationController
     @subfeature.user_id = @user.id
     @subfeature.idea_id = @idea.id
     @subfeature.feature_id = @feature.id
-    @subfeature.status = "New"
 
     if @subfeature.save
       redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature was added!"
@@ -32,10 +31,12 @@ class SubfeaturesController < ApplicationController
   def update
     @subfeature = @feature.subfeatures.find(params[:id])
 
+    @subfeature.status = params[:status]
+
     if @subfeature.update_attributes(subfeature_params)
-      redirect_to edit_idea_feature_subfeature_path(@idea, @feature, @subfeature), :notice =>"The subfeature is updated!"
+      redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature was updated"
     else
-      redirect_to edit_idea_feature_subfeature_path(@idea, @feature, @subfeature), :notice => "Sorry, but the subfeature could not be updated!"
+      redirect_to edit_idea_feature_path(@idea, @feature), :notice => "Sorry, but the subfeature could not be updated."
     end
   end
 
@@ -48,7 +49,7 @@ class SubfeaturesController < ApplicationController
   private
 
   def subfeature_params
-    params.require(:subfeature).permit(:name, :description, :category, :status)
+    params.fetch(:subfeature, {}).permit(:name, :description, :category, :status) 
   end
 
   def get_idea

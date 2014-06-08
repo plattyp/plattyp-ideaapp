@@ -2,5 +2,6 @@
 	<%= s.input :name %>
 	<%= s.input :description %>
 	<%= s.input :category %>
+	<%= s.input :status, collection: @subfeaturestatuses,:label => "Status", include_blank: false  %>
 	<%= s.button :submit %>
 <% end %>
