@@ -9,8 +9,14 @@ Ideaapp::Application.routes.draw do
     resources :ideas
   end
 
+  #The relationship for the users that are a part of an idea's workroom
   resources :ideas do
     resources :ideausers
+  end
+
+  #The invitation to join an idea's workroom
+  resources :ideas do
+    resources :invitedusers
   end
 
   resources :ideas do
@@ -26,9 +32,6 @@ Ideaapp::Application.routes.draw do
   resources :ideas do
     resources :ideamessages, :controller => 'ideamessages'
   end
-
-  #Modal for Adding Users to an Idea
-  get "ideausers/invite_user" => 'ideas#invite_user', :as => :invite_user
 
   #Set homepage
   root to: "ideas#index"

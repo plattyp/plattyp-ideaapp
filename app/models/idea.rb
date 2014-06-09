@@ -17,6 +17,7 @@ class Idea < ActiveRecord::Base
 	has_many :users, :through => :ideausers
 	has_many :domains, :through => :ideadomains
 	has_many :ideadomains
+	has_many :invitedusers
 
 	#For creating Ideauser association records from Idea
 	accepts_nested_attributes_for :ideausers, :allow_destroy => true

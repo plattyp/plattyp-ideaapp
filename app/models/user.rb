@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :subfeatures, :through => :features
   has_many :ideamessages
   belongs_to :group
+  has_many :invitedusers
 
   def group_usernames
   	users = User.all.map {|i| [i.username, i.id]}
