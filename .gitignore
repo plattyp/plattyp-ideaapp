@@ -14,3 +14,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore the following directories
+/config/deploy/*
+/config/environments/*
+/config/database.yml
+/config/deploy.rb
+/config/environment.rb
+/config/application.rb
