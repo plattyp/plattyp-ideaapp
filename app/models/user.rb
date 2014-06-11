@@ -16,4 +16,12 @@ class User < ActiveRecord::Base
   def group_usernames
   	users = User.all.map {|i| [i.username, i.id]}
   end
+
+  def self.search_users(email)
+    User.where("email = ?",email)
+  end
+
+  def self.return_ideausers(idea_id)
+      User.joins(:ideausers).where("ideausers.idea_id = ?",idea_id).select("username","role","email")
+  end
 end

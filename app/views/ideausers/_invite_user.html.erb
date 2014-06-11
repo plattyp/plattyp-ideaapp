@@ -1,7 +1,0 @@
-<%= simple_form_for [@idea, Inviteduser.new] do |s| %>
-	<%= s.input :emailaddress, :label => 'Email Address' %>
-	<%= s.input :role %>
-	<%= s.input :user_id, input_html: {value: current_user.id}, as: :hidden %>
-	<%= s.input :idea_id, input_html: {value: @idea.id}, as: :hidden %>
-	<%= s.button :submit, 'Invite User' %>
-<% end %>

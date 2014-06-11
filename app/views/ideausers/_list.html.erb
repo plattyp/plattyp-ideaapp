@@ -1,5 +1,16 @@
-<ul>
-	<% @idea.users.each do |user| %>
-		<li><%= user.username %></li>
-	<% end %>
-</ul>
+<div class="messages-container">
+	<table class="table table-striped">
+		<tr>
+			<th>User</th>
+			<th>Status</th>
+			<th>Role</th>
+		</tr>
+		<% @users.each do |username, status, role| %>
+		<tr>
+			<td><%= username %></td>
+			<td><%= status %></td>
+			<td><%= role %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>

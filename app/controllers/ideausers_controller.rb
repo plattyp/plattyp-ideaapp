@@ -3,7 +3,6 @@ class IdeausersController < ApplicationController
 	before_action :get_idea
 	
 	def index
-		@users = @idea.users.all
 	end
 
 	def new
@@ -11,7 +10,7 @@ class IdeausersController < ApplicationController
 	end
 
 	def create
-		@user = @idea.ideausers.build
+		@user = @idea.ideausers.build(ideauser_params)
 
 		if @user.save
 			redirect_to idea_ideauser_path(@idea), :notice => "The user was added!"
@@ -22,6 +21,10 @@ class IdeausersController < ApplicationController
 
 
 	private
+
+	def ideauser_params
+		params.require(:ideauser).permit(:user_id, :idea_id, :role)
+	end
 
 	def get_idea
 		@idea = Idea.find(params[:idea_id])
