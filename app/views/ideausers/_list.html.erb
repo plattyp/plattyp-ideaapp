@@ -4,12 +4,22 @@
 			<th>User</th>
 			<th>Status</th>
 			<th>Role</th>
+			<th>Actions</th>
 		</tr>
-		<% @users.each do |username, status, role| %>
+		<% @users.each do |username, status, role, id| %>
 		<tr>
 			<td><%= username %></td>
 			<td><%= status %></td>
 			<td><%= role %></td>
+			<td>
+				<div class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span><b class="caret"></b></a>
+					<ul class="dropdown-menu" role="menu">
+	           			<li>Make Admin</li>
+	           			<li><%= link_to "Delete #{id}:" %></li>
+	           		</ul>
+	           	</div>
+			</td>
 		</tr>
 		<% end %>
 	</table>

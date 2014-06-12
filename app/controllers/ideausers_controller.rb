@@ -19,6 +19,11 @@ class IdeausersController < ApplicationController
 		end
 	end
 
+	def destroy
+		@user = Ideauser.find_by_user_id_and_idea_id(params[:user_id],params[:idea_id])
+		@user.destroy
+		redirect_to idea_invitedusers_path(@idea), :notice => "The user was removed."
+	end
 
 	private
 
