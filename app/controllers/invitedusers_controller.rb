@@ -19,7 +19,7 @@ class InvitedusersController < ApplicationController
 		@matcheduser = User.search_users(@inviteduser.emailaddress)
 
 		#Checks to see if an invite was already send for this user
-		@invitedusercheck = Inviteduser.search_previouslyinvited(@inviteduser.emailaddress, @idea.id)
+		@invitedusercheck = Inviteduser.search_invited(@inviteduser.emailaddress, @idea.id)
 
 		if @invitedusercheck.count === 0
 			if @inviteduser.save
@@ -32,6 +32,7 @@ class InvitedusersController < ApplicationController
 					#If user already is a member of the site, it will add him to the workroom
 					@matcheduser.each do |user|
 						Ideauser.create(:user_id => user.id, :idea_id => @idea.id, :role => "Read Access")
+						InviteduserMailer.addedtoidea_email(user.email, @idea).deliver
 						redirect_to idea_invitedusers_path(@idea), :notice => "The user was added to the workroom successfully!"
 					end
 				end
@@ -41,6 +42,12 @@ class InvitedusersController < ApplicationController
 		else
 			redirect_to idea_invitedusers_path(@idea), :notice => "The user has already been invited!"
 		end
+	end
+
+	def destroy
+		@inviteduser = @idea.invitedusers.find(params[:id])
+		@inviteduser.destroy
+		redirect_to idea_invitedusers_path(@idea), :notice => "The user was uninvited."
 	end
 
 	private

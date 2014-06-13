@@ -6,8 +6,8 @@ class Inviteduser < ActiveRecord::Base
 		Inviteduser.where("idea_id = ? AND emailaddress not in (?)",idea_id,emails).select("emailaddress","role")
 	end
 
-	def self.search_previouslyinvited(email, idea_id)
-		Inviteduser.where("emailaddress = ? AND idea_id = ?",email,idea_id)
+	def self.search_invited(emailaddress, idea_id)
+		Inviteduser.where("emailaddress = ? AND idea_id = ?",emailaddress,idea_id)
 	end
 
 	def self.return_ideasforgivenuser(email)

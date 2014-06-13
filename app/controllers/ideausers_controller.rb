@@ -20,8 +20,23 @@ class IdeausersController < ApplicationController
 	end
 
 	def destroy
-		@user = Ideauser.find_by_user_id_and_idea_id(params[:user_id],params[:idea_id])
-		@user.destroy
+		@ideauser = @idea.ideausers.find(params[:id])
+
+		#Before deletion, check to see if the user has an existing invitation for the idea to delete that as well
+		@user = User.return_userinfo(@ideauser.user_id)
+
+		#Search for the invitation using the user's email address and idea id
+		@user.each do |u|
+			@inviteduser = Inviteduser.search_invited(u.email,@idea.id)
+		end
+
+		#Delete invitation if one exists
+		@inviteduser.each do |i|
+			Inviteduser.destroy(i.id)
+		end
+
+		#Then go on destroying the association between the user and the id
+		@ideauser.destroy
 		redirect_to idea_invitedusers_path(@idea), :notice => "The user was removed."
 	end
 

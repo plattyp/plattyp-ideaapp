@@ -21,7 +21,11 @@ class User < ActiveRecord::Base
     User.where("email = ?",email)
   end
 
+  def self.return_userinfo(user_id)
+    User.where("id = ?", user_id)
+  end
+
   def self.return_ideausers(idea_id)
-      User.joins(:ideausers).where("ideausers.idea_id = ?",idea_id).select("username","role","email","users.id")
+    User.joins(:ideausers).where("ideausers.idea_id = ?",idea_id).select("username","role","email","users.id")
   end
 end

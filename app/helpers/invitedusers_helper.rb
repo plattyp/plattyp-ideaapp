@@ -29,4 +29,9 @@ module InvitedusersHelper
 
 		return @users
 	end
+
+	#Passing in the email and idea_id will retrieve the unique ID for the inviteduser to be sent to remove him.
+	def self.return_associatedid(emailaddress, idea_id)
+		Inviteduser.search_invited(emailaddress, idea_id)
+	end
 end
