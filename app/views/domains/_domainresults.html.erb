@@ -3,13 +3,15 @@
 		<tr>
 			<th>Domain</th>
 			<th>Status</th>
-			<th>Expiration Date </th>
+			<th>Expiration Date</th>
+			<th>Actions</th>
 		</tr>
-		<% @domains.each do |domain| %>
+		<% @domainresults.each do |domain| %>
 		<tr>
 			<td><%=domain.url %></td>
-			<td><%=domain.domainstatus_id %></td>
+			<td><%=domain.status %></td>
 			<td><%=domain.expirationdate %></td>
+			<td><%= link_to "Add to Watchlist", idea_domains_path(:url => domain.url), :method => :post %></td>
 		</tr>
 		<% end %>
 	</table>
