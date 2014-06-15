@@ -6,13 +6,11 @@
 			<th>Expiration Date</th>
 			<th>Actions</th>
 		</tr>
-		<% @domainresults.each do |domain| %>
 		<tr>
-			<td><%=domain.url %></td>
-			<td><%=domain.status %></td>
-			<td><%=domain.expirationdate %></td>
-			<td><%= link_to "Add to Watchlist", idea_domains_path(:url => domain.url), :method => :post %></td>
+			<td><%=@domainresults.url %></td>
+			<td><%=@domainresults.domainstatus_id %></td>
+			<td><%=@domainresults.expirationdate %></td>
+			<td><%= link_to "Add to Watchlist", idea_domains_path(:name => @domainresults.name, :url => @domainresults.url, :domainstatus_id => @domainresults.domainstatus_id, :expirationdate => @domainresults.expirationdate), :method => :post %></td>
 		</tr>
-		<% end %>
 	</table>
 </div>

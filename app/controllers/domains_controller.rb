@@ -1,32 +1,30 @@
 class DomainsController < ApplicationController
 	respond_to :html, :xml, :json
 	before_action :get_idea, :get_user
-	require 'whois'
+	require 'robowhois'
 
 	def index
 		unless params[:search].blank?
-			@domainsearch = Whois.whois(params[:search])
 
-			@domainsearch.each do |s|
-				@domainresults.url = s.domain
-				@domainresults.status = s.status
-				@domainresults.expirationdate = s.expires_on
-			end
+			#Establish a call to the API to search
+			client = RoboWhois.new(:api_key => '5c058dc8594cce541b386c16412279f3')
+
+			domainsearch = client.whois_properties(params[:search])
+
+			@domainresults = Domain.new
+			@domainresults.name = domainsearch['properties']['domain']
+			@domainresults.url = domainsearch['properties']['domain']
+			@domainresults.domainstatus_id = domainsearch['properties']['status'].blank? ? "available" : domainsearch['properties']['status']
+			@domainresults.expirationdate = domainsearch['properties']['expires_on']
 		end
-	end
-
-	def new
-		@domain = Domain.new
 	end
 
 	def create
 		@domain = @idea.domains.build(domain_params)
-
-		#Setting attribute values now until this actually looks up the info from Whois
-		@domain.name = params[:url]
+		@domain.name = params[:name]
 		@domain.url = params[:url]
-		@domain.domainstatus_id = "Added"
-		@domain.expirationdate = Time.zone.now.to_date
+		@domain.domainstatus_id = params[:domainstatus_id]
+		@domain.expirationdate = params[:expirationdate]
 
 		#Search existing domains to see if the domain exists
 		@domainsearch = Domain.search(@domain.url)
@@ -42,13 +40,14 @@ class DomainsController < ApplicationController
 		else
 			#If the domain already exists, just create the association to add to the watchlist
 			@ideadomain = Ideadomain.create(:idea_id => @idea.id, :domain_id => domainsearch.id, :user_id => @user.id)
+			redirect_to idea_domain_path(@idea), :notice => "The domain was unable to be added to your watchlist"
 		end
 	end
 
 	private
 
 	def domain_params
-		params.fetch(:domain, {}).permit(:url)
+		params.fetch(:domain, {}).permit(:name, :url, :domainstatus_id, :expirationdate)
 	end
 
 	def get_idea

@@ -64,7 +64,7 @@ gem 'simple_form'
 gem "formtastic", github: "justinfrench/formtastic"
 
 #For whois searching
-gem 'whois'
+gem 'robowhois'
 
 #Adding activeadmin so that it can be used as a backend
 gem 'activeadmin', github: 'gregbell/active_admin'
