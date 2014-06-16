@@ -2,7 +2,7 @@
 	<% @subfeaturesdistinct.each do |category, count| %>
 		<li class="list-group-item">
 			<span class="badge"><%= count %></span>
-			<%= link_to "#{category}", edit_idea_feature_path(:feature => @feature, :category =>category) %>
+			<%= link_to "#{category}", edit_idea_feature_path(:feature => @feature, :subfeaturecategory_id =>subfeaturecategory_id) %>
 		</li>
 	<% end %>
 </ul>

@@ -8,6 +8,8 @@ class SubfeaturesController < ApplicationController
 
   def new
     @subfeature = @feature.subfeatures.build
+    #Gets a list of subfeatures' categories
+    @uniquecategories = Subfeaturecategory.returnideacategories(@idea.id)
   end
 
   def create
@@ -49,7 +51,7 @@ class SubfeaturesController < ApplicationController
   private
 
   def subfeature_params
-    params.fetch(:subfeature, {}).permit(:name, :description, :category, :status) 
+    params.fetch(:subfeature, {}).permit(:name, :description, :subfeaturecategory_id, :status) 
   end
 
   def get_idea

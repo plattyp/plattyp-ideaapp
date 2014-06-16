@@ -1,4 +1,5 @@
 Ideaapp::Application.routes.draw do
+  get "subfeaturecategories/index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users, controllers: { registrations: 'registrations'}
   ActiveAdmin.routes(self)

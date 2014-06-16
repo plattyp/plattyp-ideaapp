@@ -12,7 +12,6 @@
 	</div>
 	<div class ="col-md-2">
 		<%= render :partial => "/subfeatures/subfeaturecategories" %>
-		<a href="javascript:toggle();" id="linkText" >Add a Subfeature</a>
 	</div>
 	<div class="col-md-8">
 		<div id="toggleList" style="display:block;">
@@ -20,6 +19,9 @@
 		</div>
 		<div id="toggleCreate" style="display:none;">
 			<%= render :partial => '/subfeatures/newsubfeature' %>
+		</div>
+		<div class="addsubfeaturelink">
+			<a href="javascript:toggle();" id="linkText" >Add a Subfeature</a>
 		</div>
 	</div>
 </div>

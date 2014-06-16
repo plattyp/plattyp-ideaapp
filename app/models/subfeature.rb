@@ -12,16 +12,15 @@ class Subfeature < ActiveRecord::Base
 		Subfeature.where("feature_id = ?",feature).uniq.pluck(:category)
 	end
 
-	def self.subfeature_count(feature,category)
-		Subfeature.where("feature_id = ? AND category = ?", feature, category).count
+	def self.subfeature_count(feature,subfeaturecategory)
+		Subfeature.joins(:subfeaturecategories).where("feature_id = ? AND subfeaturecategory_id = ?", feature, subfeaturecategory).count
 	end
-
 
 	def self.select_where(feature,category)
 		if category.blank?
 			Subfeature.where("feature_id = ?", feature).all
 		else
-			Subfeature.where("feature_id = ? AND category = ?", feature, category).all
+			Subfeature.where("feature_id = ? AND subfeaturecategory_id = ?", feature, category).all
 		end
 	end
 end

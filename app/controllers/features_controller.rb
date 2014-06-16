@@ -27,11 +27,11 @@ class FeaturesController < ApplicationController
 
 	def edit
 		@feature = @idea.features.find(params[:id])
-		@subfeatures = Subfeature.select_where(params[:id],params[:category])
+		@subfeatures = Subfeature.select_where(params[:id],params[:subfeaturecategory_id])
 		@subfeaturestatuses = Subfeature.subfeaturestatuslist
 
 		#Gets a list of subfeatures' categories for a given feature
-		@uniquecategories = Subfeature.unique_categories(params[:id])
+		@uniquecategories = Subfeaturecategory.returnideacategories(@idea.id)
 
 		#Creates a hash	
 		@subfeaturesdistinct = Hash.new
@@ -39,8 +39,8 @@ class FeaturesController < ApplicationController
 		#Iterates through the list of subfeature categories and hashes the name and the count of subfeatures within each category
 		@uniquecategories.each do |category|
 			#Calls the model method to get a count of subfeatures in that category
-			subfeaturecount = Subfeature.subfeature_count(params[:id],category)
-			@subfeaturesdistinct.store(category,subfeaturecount)
+			subfeaturecount = Subfeature.subfeature_count(params[:id],category.id)
+			@subfeaturesdistinct.store(category.name,subfeaturecount)
 		end
 	end
 
