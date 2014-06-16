@@ -29,6 +29,11 @@ Ideaapp::Application.routes.draw do
     resources :domains, :controller => 'domains'
   end
 
+  #The association to domains
+  resources :ideas do
+    resources :ideadomains, :controller => 'ideadomains'
+  end
+
   resources :ideas do
     resources :ideamessages, :controller => 'ideamessages'
   end

@@ -8,7 +8,7 @@
 		</tr>
 		<tr>
 			<td><%=@domainresults.url %></td>
-			<td><%=@domainresults.domainstatus_id %></td>
+			<td><span class="<%= IdeadomainsHelper.span_classname(@domainresults.domainstatus_id) %>"><%=@domainresults.domainstatus_id %></span></td>
 			<td><%=@domainresults.expirationdate %></td>
 			<td><%= link_to "Add to Watchlist", idea_domains_path(:name => @domainresults.name, :url => @domainresults.url, :domainstatus_id => @domainresults.domainstatus_id, :expirationdate => @domainresults.expirationdate), :method => :post %></td>
 		</tr>
