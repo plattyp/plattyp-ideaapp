@@ -20,6 +20,11 @@ Ideaapp::Application.routes.draw do
     resources :invitedusers
   end
 
+  #The route to create subfeature categories
+  resources :ideas do
+    resources :subfeaturecategories
+  end
+
   resources :ideas do
     resources :features do
       resources :subfeatures

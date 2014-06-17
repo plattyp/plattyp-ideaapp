@@ -40,7 +40,7 @@ class FeaturesController < ApplicationController
 		@uniquecategories.each do |category|
 			#Calls the model method to get a count of subfeatures in that category
 			subfeaturecount = Subfeature.subfeature_count(params[:id],category.id)
-			@subfeaturesdistinct.store(category.name,subfeaturecount)
+			@subfeaturesdistinct.store(category.id,subfeaturecount)
 		end
 	end
 

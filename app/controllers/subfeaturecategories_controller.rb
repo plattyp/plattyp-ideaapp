@@ -1,11 +1,23 @@
 class SubfeaturecategoriesController < ApplicationController
+  respond_to :html, :xml, :json
+  before_action :get_idea, :get_user
+
   def index
+    @subfeaturecategories = @idea.subfeaturecategories.all
   end
 
   def edit
+    @subfeaturecategory = @idea.subfeaturecategories.find(params[:id])
   end
 
   def update
+    @subfeaturecategory = @idea.subfeaturecategories.find(params[:id])
+
+    if @subfeaturecategory.update_attributes(subfeaturecategory_params)
+      redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature category was updated"
+    else
+      redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature category was not updated"
+    end
   end
 
   def new
@@ -14,11 +26,12 @@ class SubfeaturecategoriesController < ApplicationController
 
   def create
     @subfeaturecategory = @idea.subfeaturecategories.build(subfeaturecategory_params)
+    @subfeaturecategory.idea_id = @idea.id
 
     if @subfeaturecategory.save
-      redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature category was added!"
+      redirect_to idea_subfeaturecategories_path(@idea), :notice => "The subfeature category was added!"
     else
-      redirect_to new_idea_feature_subfeature_path(@idea, @feature), :notice => "Sorry, but the subfeature category could not be added!"
+      redirect_to idea_subfeaturecategories_path(@idea), :notice => "Sorry, but the subfeature category could not be added!"
     end
   end
 
@@ -28,7 +41,7 @@ class SubfeaturecategoriesController < ApplicationController
   private
 
   def subfeaturecategory_params
-    params.require(:subfeaturecategory).permit(:categoryname, :idea_id)
+    params.require(:subfeaturecategory).permit(:categoryname)
   end
 
   def get_idea
@@ -37,9 +50,5 @@ class SubfeaturecategoriesController < ApplicationController
 
   def get_user
     @user = current_user
-  end
-
-  def get_feature
-    @feature = Feature.find(params[:feature_id])
   end
 end

@@ -2,6 +2,7 @@ class Subfeature < ActiveRecord::Base
 	belongs_to :feature
 	belongs_to :idea
 	belongs_to :user
+	belongs_to :subfeaturecategory
 
 
 	def self.subfeaturestatuslist
@@ -13,7 +14,7 @@ class Subfeature < ActiveRecord::Base
 	end
 
 	def self.subfeature_count(feature,subfeaturecategory)
-		Subfeature.joins(:subfeaturecategories).where("feature_id = ? AND subfeaturecategory_id = ?", feature, subfeaturecategory).count
+		Subfeature.joins(:subfeaturecategory).where("feature_id = ? AND subfeaturecategory_id = ?", feature, subfeaturecategory).count
 	end
 
 	def self.select_where(feature,category)

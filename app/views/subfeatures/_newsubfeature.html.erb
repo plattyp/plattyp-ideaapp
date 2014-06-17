@@ -1,7 +1,7 @@
 <%= simple_form_for [@idea, @feature, Subfeature.new] do |s| %>
 	<%= s.input :name %>
 	<%= s.input :description %>
-	<%= s.input :subfeaturecategory_id, collection: @uniquecategories,:label => "Category", include_blank: false %>
+	<%= s.input :subfeaturecategory_id, collection: @uniquecategories ,:label => "Category", include_blank: false, :label_method => :categoryname, :value_method => :id %>
 	<%= s.input :status, collection: @subfeaturestatuses,:label => "Status", include_blank: false  %>
 	<%= s.button :submit %>
 <% end %>

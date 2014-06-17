@@ -1,0 +1,16 @@
+<div class="domains-container">
+	<table class="table table-striped">
+		<tr>
+			<th>Category</th>
+			<th>No of Subfeatures</th>
+			<th>Actions</th>
+		</tr>
+		<% @subfeaturecategories.each do |cat| %>
+		<tr>
+			<td><%= cat.categoryname %></td>
+			<td><%= SubfeaturecategoriesHelper.returnsubfeaturecount(@idea.id,cat.id) %></td>
+			<td>Actions</td>
+		</tr>
+		<% end %>
+	</table>
+</div>
