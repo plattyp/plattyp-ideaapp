@@ -7,9 +7,14 @@
 		</tr>
 		<% @subfeaturecategories.each do |cat| %>
 		<tr>
-			<td><%= cat.categoryname %></td>
+			<td>
+				<a href="#" data-xeditable="true" data-pk="<%= cat.id %>" data-model="subfeaturecategory" data-name="categoryname" data-url="<%= idea_subfeaturecategory_url(:idea_id => @idea.id, :id => cat.id) %>" data-title="Updated Category Name">
+					<%= cat.categoryname %>
+				</a>
+			</td>
 			<td><%= SubfeaturecategoriesHelper.returnsubfeaturecount(@idea.id,cat.id) %></td>
-			<td>Actions</td>
+			<td><%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, idea_subfeaturecategory_path(:idea_id => @idea.id, :id => cat.id), :method => :delete, data: { confirm: 'Are you sure you want to delete this subfeature category (All subfeatures will be deleted as well)?' } %>
+			</td>
 		</tr>
 		<% end %>
 	</table>

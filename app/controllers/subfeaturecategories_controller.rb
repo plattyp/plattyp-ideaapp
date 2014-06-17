@@ -11,13 +11,25 @@ class SubfeaturecategoriesController < ApplicationController
   end
 
   def update
-    @subfeaturecategory = @idea.subfeaturecategories.find(params[:id])
+    @subfeaturecategory = Subfeaturecategory.find(params[:id])
 
-    if @subfeaturecategory.update_attributes(subfeaturecategory_params)
-      redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature category was updated"
-    else
-      redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature category was not updated"
+    respond_to do |format|
+      if @subfeaturecategory.update(subfeaturecategory_params)
+        format.html { redirect_to idea_subfeaturecategories_path(@idea), notice: 'Subcategory was successfully updated' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @subfeaturecategory.errors, status: :unprocessable_entity}
+      end
     end
+
+    # @subfeaturecategory = @idea.subfeaturecategories.find(params[:id])
+
+    # if @subfeaturecategory.update_attributes(subfeaturecategory_params)
+    #   redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature category was updated"
+    # else
+    #   redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature category was not updated"
+    # end
   end
 
   def new
@@ -36,6 +48,9 @@ class SubfeaturecategoriesController < ApplicationController
   end
 
   def destroy
+    @subfeaturecategory = @idea.subfeaturecategories.find(params[:id])
+    @subfeaturecategory.destroy
+    redirect_to idea_subfeaturecategories_path(@idea), :notice => "The subfeature category was deleted!"
   end
 
   private

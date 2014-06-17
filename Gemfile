@@ -63,6 +63,9 @@ gem 'simple_form'
 #Fix to Active-Admin
 gem "formtastic", github: "justinfrench/formtastic"
 
+#Inline editing of Twitter Bootsrap
+gem 'bootstrap-x-editable-rails'
+
 #For whois searching
 gem 'robowhois'
 

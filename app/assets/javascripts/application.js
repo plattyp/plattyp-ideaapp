@@ -22,3 +22,4 @@
 //= require twitter/typeahead.min
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
+//= require bootstrap3-editable/bootstrap-editable

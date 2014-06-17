@@ -25,6 +25,10 @@ class IdeasController < ApplicationController
     @idea = @user.ideas.build(idea_params)
     @idea.ideausers.build(:user => @user, :is_admin => true)
   	if @idea.save
+        #Create initial subfeature categories for the idea
+        onboard(@idea.id)
+
+        #Redirect back to the index
         redirect_to ideas_path, :notice =>"The idea was saved!"
   	else
       render :action => "new"
@@ -67,6 +71,16 @@ class IdeasController < ApplicationController
     
   	@idea.destroy
   	redirect_to ideas_path, :notice => "Your idea was deleted!"
+  end
+
+  def onboard(idea_id)
+    #Sets an initial array
+    @initialcategories = ["Design","Functionality","Business"]
+
+    #Loops through array and create's a category for each value for the given idea
+    @initialcategories.each do |i|
+      Subfeaturecategory.create(:categoryname => i,:idea_id => idea_id)
+    end
   end
 
   private
