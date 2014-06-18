@@ -1,6 +1,6 @@
 class Subfeaturecategory < ActiveRecord::Base
 	belongs_to :idea
-	has_many :subfeatures
+	has_many :subfeatures, dependent: :destroy
 
 	def self.returnideacategories(idea_id)
 		Subfeaturecategory.where("idea_id = ?",idea_id).select("id","categoryname")

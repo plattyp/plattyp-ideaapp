@@ -2,7 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
+# Added ready page:load so that it loads the javascript on load of turbolink
+$(document).on 'ready page:load', ->
   $("[data-xeditable=true]").each ->
     $(@).editable
       ajaxOptions:

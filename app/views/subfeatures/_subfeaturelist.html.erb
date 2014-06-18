@@ -13,7 +13,8 @@
             	<% end %>
                 <li role="presentation" class="divider"></li>
                 <li role="presentation" class="dropdown-header">Other Options</li>
-                <li><%= link_to "Delete", idea_feature_subfeature_path(:feature_id => s.feature_id, :id => s.id) , :method => :delete %></li>
+                <li><%= link_to "Edit", edit_idea_feature_subfeature_path(:idea_id => @idea.id, :feature_id => s.feature_id, :id => s.id) %>
+                <li><%= link_to "Delete", idea_feature_subfeature_path(:feature_id => s.feature_id, :id => s.id) , :method => :delete, data: { confirm: 'Are you sure you want to delete this subfeature?' } %></li>
             </ul>
         </div>
 	  </div>

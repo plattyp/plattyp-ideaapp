@@ -28,6 +28,23 @@ class SubfeaturesController < ApplicationController
 
   def edit
     @subfeature = @feature.subfeatures.find(params[:id])
+
+
+    #This is to support the rest of the functionality on the pag
+    @subfeaturestatuses = Subfeature.subfeaturestatuslist
+
+    #Gets a list of subfeatures' categories for a given feature
+    @uniquecategories = Subfeaturecategory.returnideacategories(@idea.id)
+
+    #Creates a hash 
+    @subfeaturesdistinct = Hash.new
+
+    #Iterates through the list of subfeature categories and hashes the name and the count of subfeatures within each category
+    @uniquecategories.each do |category|
+      #Calls the model method to get a count of subfeatures in that category
+      subfeaturecount = Subfeature.subfeature_count(params[:feature_id],category.id)
+      @subfeaturesdistinct.store(category.id,subfeaturecount)
+    end
   end
 
   def update

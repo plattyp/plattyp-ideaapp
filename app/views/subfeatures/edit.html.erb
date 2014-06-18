@@ -1,2 +1,20 @@
-<h1>Subfeatures#edit</h1>
-<p>Find me in app/views/subfeatures/edit.html.erb</p>
+<div class="row">
+	<%= render :partial => '/ideas/navigation' %>
+	<div class="col-md-10">
+		<h2>Features</h2>
+		<%= render :partial => '/features/featurenav' %>
+		<%= render :partial => '/features/editfeature' %>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class ="col-md-2">
+	</div>
+	<div class ="col-md-2">
+		<%= render :partial => "/subfeatures/subfeaturecategories" %>
+		<%= link_to "Manage Categories", idea_subfeaturecategories_path(:idea_id => @idea.id) %>
+	</div>
+	<div class="col-md-8">
+		<%= render :partial => '/subfeatures/editsubfeature' %>
+	</div>
+</div>
