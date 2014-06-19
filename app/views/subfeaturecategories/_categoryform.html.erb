@@ -1,4 +1,4 @@
-<%= simple_form_for [@idea, Subfeaturecategory.new] do |cat| %>
+<%= simple_form_for @subfeaturecategory, :url => url_for(:action => 'create', :controller => 'subfeaturecategories') do |cat| %>
 	<%= cat.input :categoryname, label: false, :placeholder => "Type a category name" %>
 	<%= cat.button :submit, :value => 'Add Category', :class => 'btn btn-primary' %>
 <% end %>

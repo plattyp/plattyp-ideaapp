@@ -3,25 +3,27 @@ class IdeamessagesController < ApplicationController
 	before_action :get_idea, :get_user
 
 	def index
-		@messages = @idea.ideamessages.all
+		@ideamessages = @idea.ideamessages.all
+
+		#Create an instance variable to allow new messages created on the invex
+		@ideamessage = @idea.ideamessages.build
 	end
 
 	def show
 	end
 
 	def new
-		@message = @idea.ideamessages.build
-		@message.user_id = @user.id
-		respond_with(@message)
+		@ideamessage = @idea.ideamessages.build
+		respond_with(@ideamessage)
 	end
 
 	def create
-		@message = @idea.ideamessages.build(message_params)
-		@message.user_id = @user.id
-		if @message.save
-			redirect_to edit_idea_ideamessages_path(@idea), :notice => "Your message was sent!"
+		@ideamessage = @idea.ideamessages.build(message_params)
+		@ideamessage.user_id = @user.id
+		if @ideamessage.save
+			redirect_to idea_ideamessages_path(@idea), :notice => "Your message was sent!"
 		else
-			redirect_to edit_idea_ideamessages_path(@idea), :notice => "Sorry, but your message could not be sent"
+			redirect_to idea_ideamessages_path(@idea), :notice => "Sorry, but your message could not be sent"
 		end
 	end
 

@@ -4,6 +4,9 @@ class InvitedusersController < ApplicationController
 
 	def index
 		@users = InvitedusersHelper.return_alluserslist(@idea.id)
+
+		#Create an instance variable to use to create new invitations on the index
+		@inviteduser = @idea.invitedusers.build
 	end
 
 	def new

@@ -4,6 +4,9 @@ class SubfeaturecategoriesController < ApplicationController
 
   def index
     @subfeaturecategories = @idea.subfeaturecategories.all
+
+    #Create an instance variable to create new subfeature categories from the index
+    @subfeaturecategory = @idea.subfeaturecategories.build
   end
 
   def edit
@@ -22,14 +25,6 @@ class SubfeaturecategoriesController < ApplicationController
         format.json { render json: @subfeaturecategory.errors, status: :unprocessable_entity}
       end
     end
-
-    # @subfeaturecategory = @idea.subfeaturecategories.find(params[:id])
-
-    # if @subfeaturecategory.update_attributes(subfeaturecategory_params)
-    #   redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature category was updated"
-    # else
-    #   redirect_to edit_idea_feature_path(@idea, @feature), :notice => "The subfeature category was not updated"
-    # end
   end
 
   def new

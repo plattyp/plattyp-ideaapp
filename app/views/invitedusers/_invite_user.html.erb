@@ -1,4 +1,4 @@
-<%= simple_form_for [@idea, Inviteduser.new] do |s| %>
+<%= simple_form_for @inviteduser, :url => url_for(:action => 'create', :controller => 'invitedusers') do |s| %>
 	<%= s.input :emailaddress, :label => 'Email Address' %>
 	<%= s.input :user_id, input_html: {value: current_user.id}, as: :hidden %>
 	<%= s.input :idea_id, input_html: {value: @idea.id}, as: :hidden %>
