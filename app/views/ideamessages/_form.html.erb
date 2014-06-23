@@ -1,4 +1,4 @@
 <%= simple_form_for @ideamessage, :url => url_for(:action => 'create', :controller => 'ideamessages'), :method => 'post' do |message| %>
-	<%= message.input :message %>
+	<%= message.input :message, label: false, :placeholder => "Add a message to the thread"%>
 	<%= message.button :submit, 'Submit', :class => 'btn-primary' %>
 <% end %>

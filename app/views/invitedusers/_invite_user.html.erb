@@ -2,5 +2,5 @@
 	<%= s.input :emailaddress, :label => 'Email Address' %>
 	<%= s.input :user_id, input_html: {value: current_user.id}, as: :hidden %>
 	<%= s.input :idea_id, input_html: {value: @idea.id}, as: :hidden %>
-	<%= s.button :submit, :value => "Invite User", :class => "btn btn-default" %>
+	<%= s.button :submit, :value => "Invite User", :class => "btn btn-primary" %>
 <% end %>

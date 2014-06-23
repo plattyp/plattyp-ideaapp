@@ -1,4 +1,4 @@
 <%= simple_form_for :domain, :url => idea_domains_path, :method => "get" do |f| %>
-	<%= f.input :search, input_html: { value: nil }, :placeholder => "Search Domains" %>
-	<%= f.submit :search, :name => nil, :class=> "btn btn-primary" %>
+	<%= f.input :search, input_html: { value: nil }, label: false, :placeholder => "Search Domains" %>
+	<%= f.submit :search, :value => 'Search', :name => nil, :class=> "btn btn-primary" %>
 <% end %>

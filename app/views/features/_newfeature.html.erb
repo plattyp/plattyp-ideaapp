@@ -1,5 +1,5 @@
 <%= simple_form_for [@idea, @feature] do |feature| %>
 	<%= feature.input :name %>
 	<%= feature.input :description %>
-	<%= feature.button :submit %>
+	<%= feature.button :submit, :class=> "btn btn-primary"%>
 <% end %>

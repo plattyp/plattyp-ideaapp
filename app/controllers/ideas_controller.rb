@@ -18,7 +18,7 @@ class IdeasController < ApplicationController
 
   def new
   	@idea = Idea.new
-    @ideatype_options = Ideatype.where('active = true').all.map {|i| [i.name, i.id]}
+    @ideatype_options = Ideatype.returnideatypes
   end
 
   def create
@@ -31,6 +31,7 @@ class IdeasController < ApplicationController
         #Redirect back to the index
         redirect_to ideas_path, :notice =>"The idea was saved!"
   	else
+      @ideatype_options = Ideatype.returnideatypes
       render :action => "new"
   	end
   end

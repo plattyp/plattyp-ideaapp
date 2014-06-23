@@ -4,6 +4,10 @@ class Idea < ActiveRecord::Base
 	validates :description, :presence => true
 	validates :ideatype_id, :presence => true
 
+	
+	#Default sort order
+	default_scope order('created_at DESC')
+
 	#Going to be used to capitalize the idea before saving
 	def name=(s)
 		write_attribute(:name, s.to_s.titleize)
