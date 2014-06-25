@@ -4,10 +4,6 @@ class Idea < ActiveRecord::Base
 	validates :description, :presence => true
 	validates :ideatype_id, :presence => true
 
-	
-	#Default sort order
-	default_scope order('created_at DESC')
-
 	#Going to be used to capitalize the idea before saving
 	def name=(s)
 		write_attribute(:name, s.to_s.titleize)
@@ -35,5 +31,17 @@ class Idea < ActiveRecord::Base
 	
 	def createdbyuser
 		User.first
+	end
+
+	def self.returnideas(ideatype_id)
+		if ideatype_id.blank?
+			Idea.select("id","name","description","ideatype_id")
+		else
+			Idea.where("ideatype_id = ?", ideatype_id)
+		end
+	end
+
+	def self.returnideatypes
+		Idea.joins(:ideatype).uniq.pluck("ideatypes.id","ideatypes.name")
 	end
 end
