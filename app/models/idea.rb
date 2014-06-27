@@ -37,7 +37,7 @@ class Idea < ActiveRecord::Base
 		if ideatype_id.blank?
 			Idea.select("id","name","description","ideatype_id")
 		else
-			Idea.where("ideatype_id = ?", ideatype_id)
+			Idea.where("ideatype_id = ?", ideatype_id).select("id","name","description","ideatype_id")
 		end
 	end
 

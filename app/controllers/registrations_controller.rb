@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-	after_filter :add_invitedideas
+	after_filter :add_invitedideas, :add_usertogroup
 
 	private
 
@@ -13,5 +13,11 @@ class RegistrationsController < Devise::RegistrationsController
 	    		Ideauser.create(:user_id => resource.id, :idea_id => i.idea_id, :role => i.role)
 			end
 	    end
+	end
+
+	def add_usertogroup
+		if resource.persisted?
+			Group.create(params[:username])
+		end
 	end
 end

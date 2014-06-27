@@ -7,7 +7,7 @@
 			  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter<b class="caret"></b></a>
 				  	<ul class="dropdown-menu" role="menu">
 				  		<% @ideatypes.each do |i| %>
-				  		<li><a href="#"><%= i[1] %></a></li>
+				  		<li><%= link_to "#{i[1]}", ideas_path(:ideatype_id => i[0]) %></li>
 				  		<% end %>
 				  	</ul>
 			  </div>
