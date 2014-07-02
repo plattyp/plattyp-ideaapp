@@ -33,11 +33,11 @@ class Idea < ActiveRecord::Base
 		User.first
 	end
 
-	def self.returnideas(ideatype_id)
+	def self.returnideas(ideatype_id,user_id)
 		if ideatype_id.blank?
-			Idea.select("id","name","description","ideatype_id")
+			Idea.joins(:ideausers).where("ideausers.user_id = ?", user_id).select("ideas.id","name","description","ideatype_id")
 		else
-			Idea.where("ideatype_id = ?", ideatype_id).select("id","name","description","ideatype_id")
+			Idea.joins(:ideausers).where("ideatype_id = ? AND ideausers.user_id = ?", ideatype_id, user_id).select("ideas.id","name","description","ideatype_id")
 		end
 	end
 

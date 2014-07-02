@@ -17,7 +17,23 @@ class RegistrationsController < Devise::RegistrationsController
 
 	def add_usertogroup
 		if resource.persisted?
-			Group.create(params[:username])
+			#Create Group
+			group = Group.new
+
+			#Assign Group Name
+			group.name = resource.username + "'s group"
+
+			#Generate random secret code to join
+			o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
+			group.joinsecret = (0...25).map { o[rand(o.length)] }.join
+
+			#Save the group
+			group.save
+
+			#Update the user with a group id
+			resource.group_id = group.id
+
+			resource.save
 		end
 	end
 end

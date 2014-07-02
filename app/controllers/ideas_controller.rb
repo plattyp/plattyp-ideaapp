@@ -4,7 +4,7 @@ class IdeasController < ApplicationController
 
   def index
     # Looks at the user's id and shows all ideas that belong to that user
-    @ideas = Idea.returnideas(params[:ideatype_id])
+    @ideas = Idea.returnideas(params[:ideatype_id],@user.id)
     @ideatypes = Idea.returnideatypes
   end
 
