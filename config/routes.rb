@@ -10,6 +10,10 @@ Ideaapp::Application.routes.draw do
     resources :ideas
   end
 
+  resources :groups do
+    resources :ideatypes
+  end
+
   #The relationship for the users that are a part of an idea's workroom
   resources :ideas do
     resources :ideausers

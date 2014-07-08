@@ -41,7 +41,8 @@ class Idea < ActiveRecord::Base
 		end
 	end
 
-	def self.returnideatypes
-		Idea.joins(:ideatype).uniq.pluck("ideatypes.id","ideatypes.name")
+	def self.returnideatypes(user_id)
+		Idea.joins(:ideatype, :ideausers).where("ideausers.user_id = ?", user_id).uniq.pluck("ideatypes.id","ideatypes.name")
 	end
+	
 end

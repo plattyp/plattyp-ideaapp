@@ -5,7 +5,7 @@ class IdeasController < ApplicationController
   def index
     # Looks at the user's id and shows all ideas that belong to that user
     @ideas = Idea.returnideas(params[:ideatype_id],@user.id)
-    @ideatypes = Idea.returnideatypes
+    @ideatypes = Idea.returnideatypes(@user.id)
   end
 
   def show
@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
 
   def new
   	@idea = Idea.new
-    @ideatype_options = Ideatype.returnideatypes
+    @ideatype_options = Ideatype.returnideatypes(@group.id)
   end
 
   def create
@@ -32,7 +32,7 @@ class IdeasController < ApplicationController
         #Redirect back to the index
         redirect_to ideas_path, :notice =>"The idea was saved!"
   	else
-      @ideatype_options = Ideatype.returnideatypes
+      @ideatype_options = Ideatype.returnideatypes(@group.id)
       render :action => "new"
   	end
   end
@@ -41,7 +41,7 @@ class IdeasController < ApplicationController
     #Looks to see if the user's group has access to an idea & redirects if they don't
     if @user.ideas.find_by_id(params[:id])
       @idea = @user.ideas.find(params[:id])
-      @ideatype_options = Ideatype.where('active = true').all.map {|i| [i.name, i.id]}
+      @ideatype_options = Ideatype.returnideatypes(@group.id)
     else
       redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
     end
