@@ -3,7 +3,14 @@ class SubfeaturecategoriesController < ApplicationController
   before_action :get_idea, :get_user
 
   def index
-    @subfeaturecategories = @idea.subfeaturecategories.all
+    @subfeaturecategories = Subfeaturecategory.returnideacategories(@idea.id)
+
+    @subfeaturecategorieswithcount = []
+
+    @subfeaturecategories.each do |i|
+      subfeaturecategory = [i.id, i.categoryname, Subfeaturecategory.idea_subfeature_count(@idea.id,i.id)]
+      @subfeaturecategorieswithcount << subfeaturecategory
+    end
 
     #Create an instance variable to create new subfeature categories from the index
     @subfeaturecategory = @idea.subfeaturecategories.build

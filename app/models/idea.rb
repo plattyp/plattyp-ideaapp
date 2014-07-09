@@ -44,5 +44,9 @@ class Idea < ActiveRecord::Base
 	def self.returnideatypes(user_id)
 		Idea.joins(:ideatype, :ideausers).where("ideausers.user_id = ?", user_id).uniq.pluck("ideatypes.id","ideatypes.name")
 	end
+
+	def self.ideacountbyideatype(ideatype_id)
+		Idea.where("ideatype_id = ?", ideatype_id).count
+	end
 	
 end

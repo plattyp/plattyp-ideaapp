@@ -1,0 +1,2 @@
+module IdeatypesHelper
+end

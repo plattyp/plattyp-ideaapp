@@ -1,0 +1,4 @@
+<%= simple_form_for @ideatype, :url => url_for(:action => 'create', :controller => 'ideatypes') do |i| %>
+	<%= i.input :name, label: false, :placeholder => "Type an idea type" %>
+	<%= i.button :submit, :value => 'Add Idea Type', :class => 'btn btn-primary' %>
+<% end %>
