@@ -34,13 +34,17 @@ class FeaturesController < ApplicationController
 		@uniquecategories = Subfeaturecategory.returnideacategories(@idea.id)
 
 		#Creates a hash	
-		@subfeaturesdistinct = Hash.new
+		@subfeaturesdistinct = []
 
 		#Iterates through the list of subfeature categories and hashes the name and the count of subfeatures within each category
 		@uniquecategories.each do |category|
 			#Calls the model method to get a count of subfeatures in that category
 			subfeaturecount = Subfeature.subfeature_count(params[:id],category.id)
-			@subfeaturesdistinct.store(category.id,subfeaturecount)
+
+			#Creates an array of the id, name and count
+			subfeaturecategories = [category.id, category.categoryname, subfeaturecount]
+
+			@subfeaturesdistinct << subfeaturecategories
 		end
 	end
 

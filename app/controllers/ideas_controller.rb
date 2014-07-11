@@ -24,7 +24,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = @user.ideas.build(idea_params)
-    @idea.ideausers.build(:user => @user, :is_admin => true)
+    @idea.ideausers.build(:user => @user, :is_admin => true, :role => "Super Admin")
   	if @idea.save
         #Create initial subfeature categories for the idea
         onboard(@idea.id)

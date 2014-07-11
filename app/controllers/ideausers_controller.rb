@@ -19,25 +19,42 @@ class IdeausersController < ApplicationController
 		end
 	end
 
+	def update
+		@ideauser = @idea.ideausers.find(params[:id])
+		@ideauser.update_attributes(ideauser_params)
+	end
+
 	def destroy
 		@ideauser = @idea.ideausers.find(params[:id])
 
-		#Before deletion, check to see if the user has an existing invitation for the idea to delete that as well
-		@user = User.return_userinfo(@ideauser.user_id)
+		if @ideauser.is_admin
+			redirect_to idea_invitedusers_path(@idea), :notice => "The user could not be removed due to being super admin of the idea"
+		else
+			#Before deletion, check to see if the user has an existing invitation for the idea to delete that as well
+			@user = User.return_userinfo(@ideauser.user_id)
 
-		#Search for the invitation using the user's email address and idea id
-		@user.each do |u|
-			@inviteduser = Inviteduser.search_invited(u.email,@idea.id)
+			#Search for the invitation using the user's email address and idea id
+			@user.each do |u|
+				@inviteduser = Inviteduser.search_invited(u.email,@idea.id)
+			end
+
+			#Delete invitation if one exists
+			@inviteduser.each do |i|
+				Inviteduser.destroy(i.id)
+			end
+
+			#Then go on destroying the association between the user and the id
+			@ideauser.destroy
+			redirect_to idea_invitedusers_path(@idea), :notice => "The user was removed."
 		end
+	end
 
-		#Delete invitation if one exists
-		@inviteduser.each do |i|
-			Inviteduser.destroy(i.id)
+	def make_admin
+		if Ideauser.update(:role => "Admin")
+			redirect_to idea_invitedusers_path(@idea), :notice => "The user upgraded to Admin."
+		else
+			redirect_to idea_invitedusers_path(@idea), :notice => "The user could not be upgraded."
 		end
-
-		#Then go on destroying the association between the user and the id
-		@ideauser.destroy
-		redirect_to idea_invitedusers_path(@idea), :notice => "The user was removed."
 	end
 
 	private

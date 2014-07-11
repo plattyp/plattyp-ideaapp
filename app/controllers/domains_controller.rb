@@ -22,17 +22,25 @@ class DomainsController < ApplicationController
 				#Establish a call to the API to search
 				client = RoboWhois.new(:api_key => '5c058dc8594cce541b386c16412279f3')
 
-				#Pass the search URL
-				domainsearch = client.whois_properties(@search)
+				#Pass the search URL with error handling
+				begin
+					@domainsearch = client.whois_properties(@search)
+				rescue => @error
+					@domainsearch = nil
+				end
 
-				#Set the object with the properties from the API Search
-				@domainresults.name = @search
-				@domainresults.url = @search
-				@domainresults.domainstatus_id = domainsearch['properties']['available?'] ? "available" : "registered"
-				@domainresults.expirationdate = domainsearch['properties']['expires_on']
+				unless @domainsearch === nil
+					#Set the object with the properties from the API Search
+					@domainresults.name = @search
+					@domainresults.url = @search
+					@domainresults.domainstatus_id = @domainsearch['properties']['available?'] ? "available" : "registered"
+					@domainresults.expirationdate = @domainsearch['properties']['expires_on']
 
-				#Store the results in our database so that they can be used in the future
-				Domain.create(:name => @domainresults.name, :url => @domainresults.url, :domainstatus_id => @domainresults.domainstatus_id, :expirationdate => @domainresults.expirationdate)
+					#Store the results in our database so that they can be used in the future
+					Domain.create(:name => @domainresults.name, :url => @domainresults.url, :domainstatus_id => @domainresults.domainstatus_id, :expirationdate => @domainresults.expirationdate)
+				else
+					redirect_to idea_domains_path(@idea.id), :notice => "An Error has occurred: #{@error}"
+				end
 			else
 				#Load the results from our database into the object
 				@domainsearch.each do |d|

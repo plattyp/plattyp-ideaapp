@@ -12,11 +12,12 @@
 			<td><%= status %></td>
 			<td><%= role %></td>
 			<td>
+			<% unless role === "Super Admin" %>
 				<div class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span><b class="caret"></b></a>
 					<ul class="dropdown-menu" role="menu">
-	           			<li>Make Admin</li>
 	           			<% IdeausersHelper.return_associatedid(@idea.id,id).each do |i| %>
+	           				<li>Make Admin</li>
 	           				<li>
 	           				<%= link_to "Delete", idea_ideauser_path(:id => i.id), :method => :delete %>
 	           				</li>
@@ -28,6 +29,7 @@
 	           			<% end %>
 	           		</ul>
 	           	</div>
+			<% end %>
 			</td>
 		</tr>
 		<% end %>

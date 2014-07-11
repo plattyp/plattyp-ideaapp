@@ -16,7 +16,8 @@ class InvitedusersController < ApplicationController
 	def create
 		@inviteduser = @idea.invitedusers.build(inviteduser_params)
 		@inviteduser.invited_by_user_id = @user.id
-		@inviteduser.role = "Read Access"
+		role = "Particpant"
+		@inviteduser.role = role
 
 		#Checks to see if a matching user already exists in the system
 		@matcheduser = User.search_users(@inviteduser.emailaddress)
@@ -34,7 +35,7 @@ class InvitedusersController < ApplicationController
 				else
 					#If user already is a member of the site, it will add him to the workroom
 					@matcheduser.each do |user|
-						Ideauser.create(:user_id => user.id, :idea_id => @idea.id, :role => "Read Access")
+						Ideauser.create(:user_id => user.id, :idea_id => @idea.id, :role => role)
 						InviteduserMailer.addedtoidea_email(user.email, @idea).deliver
 						redirect_to idea_invitedusers_path(@idea), :notice => "The user was added to the workroom successfully!"
 					end

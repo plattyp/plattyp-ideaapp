@@ -1,10 +1,8 @@
 <ul class="list-group">
-	<% @subfeaturesdistinct.each do |category_id, count| %>
-		<% SubfeaturecategoriesHelper.returncategory(category_id).each do |n| %>
+	<% @subfeaturesdistinct.each do |c| %>
 		<li class="list-group-item">
-			<span class="badge"><%= count %></span>
-			<%= link_to "#{n.categoryname}", edit_idea_feature_path(:subfeaturecategory_id =>category_id) %>
+			<span class="badge"><%= c[2] %></span>
+			<%= link_to "#{c[1]}", edit_idea_feature_path(:subfeaturecategory_id => c[0]) %>
 		</li>
-		<% end %>
 	<% end %>
 </ul>
