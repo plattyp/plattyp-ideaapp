@@ -1,6 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
 	after_filter :add_invitedideas, :add_usertogroup
 
+	def manage_account
+	end
+	
 	private
 
 	def add_invitedideas

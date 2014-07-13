@@ -48,6 +48,8 @@ Ideaapp::Application.routes.draw do
     resources :ideamessages, :controller => 'ideamessages'
   end
 
+  get 'settings' => 'settings#index'
+
   #Set homepage
   root to: "ideas#index"
 
