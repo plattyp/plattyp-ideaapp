@@ -6,16 +6,14 @@
 			<th>Expiration Date</th>
 			<th>Actions</th>
 		</tr>
-		<% @idea.domains.each do |domain| %>
+		<% @domainwatchlist.each do |url, domainstatus_id, expirationdate, id| %>
 		<tr>
-			<td><%=domain.url %></td>
-			<td><span class="<%= IdeadomainsHelper.span_classname(domain.domainstatus_id) %>"><%=domain.domainstatus_id %></span></td>
-			<td><%=domain.expirationdate %></td>
-			<% IdeadomainsHelper.return_associatedid(@idea.id,domain.id).each do |d| %>
+			<td><%= url %></td>
+			<td><span class="<%= IdeadomainsHelper.span_classname(domainstatus_id) %>"><%= domainstatus_id %></span></td>
+			<td><%= expirationdate %></td>
 			<td>
-			<%= link_to "Unwatch", idea_ideadomain_path(:id => d.id), :method => :delete %>
+			<%= link_to "Unwatch", idea_ideadomain_path(:id => id), :method => :delete %>
 			</td>
-			<% end %>
 		</tr>
 		<% end %>
 	</table>

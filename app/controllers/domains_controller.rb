@@ -51,6 +51,15 @@ class DomainsController < ApplicationController
 				end
 			end
 		end
+
+		#For the watchlist
+		@domainwatchlist = []
+
+		@idea.domains.each do |i|
+			Ideadomain.search(@idea.id,i.id).each do |x|
+				@domainwatchlist << [i.url, i.domainstatus_id, i.expirationdate, x.id]
+			end
+		end
 	end
 
 	def create

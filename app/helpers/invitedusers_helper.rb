@@ -24,14 +24,9 @@ module InvitedusersHelper
 
 		#Stores all users that are invited but not yet on the site
 		@invitedusers.each do |x|
-			@users << [x.emailaddress,"Hasn't Joined",x.role,0]
+			@users << [x.emailaddress,"Hasn't Joined",x.role,x.id]
 		end
 
 		return @users
-	end
-
-	#Passing in the email and idea_id will retrieve the unique ID for the inviteduser to be sent to remove him.
-	def self.return_associatedid(emailaddress, idea_id)
-		Inviteduser.search_invited(emailaddress, idea_id)
 	end
 end
