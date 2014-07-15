@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :ideamessages
   belongs_to :group
   has_many :invitedusers
+  has_many :settings
 
   #Create a virtual attribute to accept as a parameter for users
   attr_accessor :signupcode

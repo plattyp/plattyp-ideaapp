@@ -35,9 +35,9 @@ class Idea < ActiveRecord::Base
 
 	def self.returnideas(ideatype_id,user_id)
 		if ideatype_id.blank?
-			Idea.joins(:ideausers).where("ideausers.user_id = ?", user_id).select("ideas.id","name","description","ideatype_id")
+			Idea.joins(:ideausers).where("ideausers.user_id = ?", user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
 		else
-			Idea.joins(:ideausers).where("ideatype_id = ? AND ideausers.user_id = ?", ideatype_id, user_id).select("ideas.id","name","description","ideatype_id")
+			Idea.joins(:ideausers).where("ideatype_id = ? AND ideausers.user_id = ?", ideatype_id, user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
 		end
 	end
 

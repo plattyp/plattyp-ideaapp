@@ -1,4 +1,5 @@
 module InvitedusersHelper
+	#Used by the InvitedUsers controller to return a joint list of Invited and Idea Users
 	def self.return_alluserslist(idea_id)
 		#First create the Hash the will store both users joined and not joined
 		@users = Array.new

@@ -19,9 +19,9 @@ class IdeatypesController < ApplicationController
 		@ideatype.group_id = @group.id
 
 		if @ideatype.save
-			redirect_to group_ideatypes_path(@group.id), :notice =>"The Idea Type was added!"
+			redirect_to settings_path, :notice =>"The Idea Type was added!"
 		else
-			redirect_to group_ideatypes_path(@group.id), :notice =>"The Idea Type could not be added"
+			redirect_to settings_path, :notice =>"The Idea Type could not be added"
 		end
 	end
 
@@ -35,11 +35,11 @@ class IdeatypesController < ApplicationController
 		if @group.ideatypes.find_by_id(params[:id])
 			@ideatype = @group.ideatypes.find(params[:id])
 		else
-			redirect_to group_ideatypes_path(@group.id), :notice => "You do not have access to delete this Idea Type"
+			redirect_to settings_path, :notice => "You do not have access to delete this Idea Type"
 		end
 
 		@ideatype.destroy
-		redirect_to group_ideatypes_path(@group.id), :notice => "The Idea Type was deleted!"
+		redirect_to settings_path, :notice => "The Idea Type was deleted!"
 
 	end
 

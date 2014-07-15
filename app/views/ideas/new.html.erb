@@ -6,8 +6,6 @@
 			<%= idea.input :name %>
 			<%= idea.input :description %>
 			<%= idea.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type", include_blank: false, :label_method => :name, :value_method => :id  %>
-			<%= link_to "Manage Idea Types", group_ideatypes_path(@group.id) %>
-			<br />
 			<br />
 			<%= idea.button :submit, :class => 'btn-primary'%>
 		<% end %>
