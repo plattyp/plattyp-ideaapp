@@ -15,11 +15,16 @@ class SettingsController < ApplicationController
 			@ideatype = Ideatype.new
 	end
 
-	def onboard
-		@initialcategories = ["Design","Functionality","Business"]
+	def create
+		@setting = @user.settings.build(setting_params)
+		@setting.save
 	end
 
 	private
+
+	def setting_params
+		params.require(:setting).permit(:settingtype, :value, :user_id, :group_id)
+	end
 
 	def get_user
 		@user = current_user

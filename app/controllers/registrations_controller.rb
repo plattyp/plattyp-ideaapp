@@ -37,6 +37,28 @@ class RegistrationsController < Devise::RegistrationsController
 			resource.group_id = group.id
 
 			resource.save
+
+			#After the group is added, call method to onboard initial settings for user/group
+			add_initialsettings
 		end
 	end
+
+	def add_initialsettings
+		if resource.persisted? # user is created successfuly
+			#Find user account
+			@onboarduser = User.find_by_id(resource.id)
+
+			#Find group by user
+			@onboardgroup = @user.group
+
+			#Initial subfeature categories for a given user (Should eventually be modified by Admin to be dynamic)
+			@initialsettings = Setting.retrieve_adminvalues(params[:settingtype])
+
+			#Create new instance
+			@initialsettings.each do |i|
+				initalsetting = Setting.create(:settingtype => i.settingtype, :value => i.value, :user_id => resource.id, :group_id => @onboardgroup.id)
+			end
+		end
+	end
+
 end

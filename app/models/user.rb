@@ -21,10 +21,6 @@ class User < ActiveRecord::Base
   #Validates uniqueness of the username
   validates :username, uniqueness: { case_sensitive: false }
 
-  #Initialize an array and set the value to the sign up code
-  #@signupcode = Array.new
-  #@signupcode << 'joinme'
-
   #Ensures the signupcode is entered correctly
   validates :signupcode, :inclusion => { :in => ['joinme'], :message => "Not a valid sign up code"}
 
