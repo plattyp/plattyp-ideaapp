@@ -13,11 +13,33 @@ class SettingsController < ApplicationController
 
 			#To create an instance variable from index
 			@ideatype = Ideatype.new
+
+		#Subfeature Categories
+			@subfeaturecategories = Setting.retrieve_groupvalues(@group.id,"Subfeature Category")
+
+			#To create an instance varaible from index
+			@subfeaturecategory = Setting.new
 	end
 
 	def create
 		@setting = @user.settings.build(setting_params)
-		@setting.save
+		@setting.group_id = @group.id
+		
+		if @setting.save
+			redirect_to settings_path, :notice => "The #{@setting.settingtype} was added!"
+		else
+			redirect_to settings_path, :notice => "The #{@setting.settingtype} was unable to be added!"
+		end
+
+	end
+
+	def destroy
+		@setting = @group.settings.find_by_id(params[:id])
+		if @setting.destroy
+			redirect_to settings_path, :notice => "The #{@setting.settingtype} was deleted!"
+		else
+			redirect_to settings_path, :notice => "The #{@setting.settingtype} was unable to be deleted!"
+		end
 	end
 
 	private

@@ -76,12 +76,12 @@ class IdeasController < ApplicationController
   end
 
   def onboard(idea_id)
-    #Sets an initial array
-    @initialcategories = ["Design","Functionality","Business"]
+    #Gets defult values from Settings table for given group
+    @initialcategories = Setting.retrieve_groupvalues(@group.id,"Subfeature Category")
 
     #Loops through array and create's a category for each value for the given idea
     @initialcategories.each do |i|
-      Subfeaturecategory.create(:categoryname => i,:idea_id => idea_id)
+      Subfeaturecategory.create(:categoryname => i.value,:idea_id => idea_id)
     end
   end
 

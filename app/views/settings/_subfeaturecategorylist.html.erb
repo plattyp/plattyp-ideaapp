@@ -1,0 +1,16 @@
+<div class="domains-container">
+	<table class="table table-striped">
+		<tr>
+			<th>Name</th>
+			<th>Actions</th>
+		</tr>
+		<% @subfeaturecategories.each do |i| %>
+				<tr>
+					<td><%= i.value %></td>
+					<td>					 
+						<%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, setting_path(:id => i.id), :method => :delete, data: { confirm: 'Are you sure you want to delete this Subfeature Category?' } %>
+					</td>
+				</tr>
+		<% end %>
+	</table>
+</div>

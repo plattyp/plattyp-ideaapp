@@ -1,5 +1,5 @@
 class Setting < ActiveRecord::Base
-	belongs_to :user
+	belongs_to :group
 
 	def self.retrieve_adminvalues(settingtype)
 		if settingtype.blank?

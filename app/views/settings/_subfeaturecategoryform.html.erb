@@ -1,0 +1,5 @@
+<%= simple_form_for @subfeaturecategory, as: :setting, url: settings_path do |i| %>
+	<%= i.input :settingtype, :as => :hidden, :input_html => {:value => "Subfeature Category"} %>
+	<%= i.input :value, label: false, :placeholder => "Type a Subfeature Category" %>
+	<%= i.button :submit, :value => 'Add Subfeature Category', :class => 'btn btn-primary' %>
+<% end %>
