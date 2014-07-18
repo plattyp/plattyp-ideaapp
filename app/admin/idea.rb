@@ -1,6 +1,18 @@
 ActiveAdmin.register Idea do
   
-  permit_params :name, :description, :ideatype
+  index do
+    column :id 
+    column :name
+    column :description
+    default_actions
+  end
+
+
+  filter :ideatype
+  filter :name
+  filter :description
+  filter :created_at
+  filter :updated_at
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
