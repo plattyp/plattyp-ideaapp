@@ -9,10 +9,9 @@
 		  			<%= simple_form_for :idea do |i| %>
 		  				<%= i.input :ideatypes, 
 		  								 :collection => @ideatypes,
-		  								 :label_method => :last,
-		  								 :value_method => :first,
 		  								 label: false,
-		  								 :as => :check_boxes%>
+		  								 :as => :check_boxes,
+		  								 input_html: {checked: true} %>
 		  				<%= i.button :submit, :value => "Filter", :class => 'btn-primary' %>
 		  			<% end %>
 		  	</div>
@@ -26,7 +25,7 @@
 			  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter<b class="caret"></b></a>
 				  	<ul class="dropdown-menu" role="menu">
 				  		<% @ideatypes.each do |i| %>
-				  		<li><%= link_to "#{i[1]}", ideas_path(:ideatype_id => i[0]) %></li>
+				  		<li><%= link_to "#{i[0]}", ideas_path(:ideatype_id => i[1]) %></li>
 				  		<% end %>
 				  	</ul>
 			  </div>
