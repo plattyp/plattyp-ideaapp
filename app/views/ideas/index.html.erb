@@ -6,13 +6,13 @@
 		  	</div>
 		  	<div class="panel-body">
 		  		<h6>Idea Types</h6>
-		  			<%= simple_form_for :idea do |i| %>
+		  			<%= simple_form_for :idea, url: ideas_path, :method => :get do |i| %>
 		  				<%= i.input :ideatypes, 
 		  								 :collection => @ideatypes,
 		  								 label: false,
 		  								 :as => :check_boxes,
-		  								 input_html: {checked: true} %>
-		  				<%= i.button :submit, :value => "Filter", :class => 'btn-primary' %>
+		  								 input_html: {checked: true},
+		  								 :onchange => 'this.form.submit();' %>
 		  			<% end %>
 		  	</div>
 		</div>
