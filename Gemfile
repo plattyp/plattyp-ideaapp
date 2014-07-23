@@ -56,6 +56,7 @@ end
 # New model gem for increased security
 gem 'devise'
 gem 'bcrypt'
+gem 'omniauth-google-oauth2'
 
 #Better forming
 gem 'simple_form'

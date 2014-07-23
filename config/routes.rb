@@ -1,7 +1,7 @@
 Ideaapp::Application.routes.draw do
   get "subfeaturecategories/index"
   devise_for :admin_users, ActiveAdmin::Devise.config
-  devise_for :users, controllers: { registrations: 'registrations'}
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks'}
   ActiveAdmin.routes(self)
 
 
