@@ -85,3 +85,6 @@ end
 
 # Use the Unicorn app server
 gem 'unicorn'
+
+#For storing sessions
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'

@@ -1,7 +1,20 @@
 class RegistrationsController < Devise::RegistrationsController
-	after_filter :add_invitedideas, :add_usertogroup
+	#after_filter :add_invitedideas, :add_usertogroup
 
-	def manage_account
+	def create
+		super
+		if resource.save
+			set_flash_message :notice, :signed_up
+
+			add_invitedideas
+			add_usertogroup
+			#sign_in_and_redirect(resource_name, resource)\
+			#this commented line is responsible for sign in and redirection
+			#change to something you want..
+		else
+			clean_up_passwords(resource)
+			render_with_scope :new
+		end
 	end
 	
 	private
@@ -56,7 +69,12 @@ class RegistrationsController < Devise::RegistrationsController
 
 			#Create new instance
 			@initialsettings.each do |i|
-				initalsetting = Setting.create(:settingtype => i.settingtype, :value => i.value, :user_id => resource.id, :group_id => @onboardgroup.id)
+				case i.settingtype
+				when "Subfeature Category"
+					initalsetting = Setting.create(:settingtype => i.settingtype, :value => i.value, :user_id => resource.id, :group_id => @onboardgroup.id)
+				when "Idea Type"
+					ideatype = Ideatype.create(:name => i.value, :active => true, :group_id => @onboardgroup.id)
+				end
 			end
 		end
 	end
