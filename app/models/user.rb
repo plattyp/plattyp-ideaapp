@@ -42,8 +42,17 @@ class User < ActiveRecord::Base
   #Validates uniqueness of the username
   validates :username, uniqueness: { case_sensitive: false }
 
+  #Retrieve sign up code from Admin
+  @joinsecret = Array.new
+  secretresults = Setting.retrieve_adminvalues("Join Secret")
+
+  #Iterate through sign up codes and add to array
+  secretresults.each do |i|
+    @joinsecret << i.value
+  end
+
   #Ensures the signupcode is entered correctly
-  validates :signupcode, :inclusion => { :in => ['joinme'], :message => "Not a valid sign up code"}
+  validates :signupcode, :inclusion => { :in => @joinsecret, :message => "Not a valid sign up code"}
 
   def group_usernames
   	users = User.all.map {|i| [i.username, i.id]}

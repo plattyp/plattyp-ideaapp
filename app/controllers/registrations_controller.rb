@@ -1,23 +1,38 @@
 class RegistrationsController < Devise::RegistrationsController
-	#after_filter :add_invitedideas, :add_usertogroup
+	before_filter :configure_permitted_parameters
 
 	def create
 		super
 		if resource.save
 			set_flash_message :notice, :signed_up
 
+			#Onboarding methods
 			add_invitedideas
 			add_usertogroup
-			#sign_in_and_redirect(resource_name, resource)\
-			#this commented line is responsible for sign in and redirection
-			#change to something you want..
 		else
 			clean_up_passwords(resource)
-			render_with_scope :new
+		end
+	end
+
+	def edit
+		returnedsignups = Setting.retrieve_adminvalues("Join Secret")
+
+		returnedsignups.each do |i|
+			@signupcode = i.value
 		end
 	end
 	
 	private
+
+  	def sign_up_params
+    	params.require(:user).permit(:email, :password, :password_confirmation, 
+				     :username, :group_id, :signupcode,:provider, :uid)
+  	end
+
+	def account_update_params
+		params.require(:user).permit(:email, :password, :current_password, 
+  					 :password_confirmation, :username, :group_id, :provider, :uid, :signupcode)
+	end
 
 	def add_invitedideas
 	    if resource.persisted? # user is created successfuly
