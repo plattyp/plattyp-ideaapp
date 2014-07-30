@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
         if registered_user
           return registered_user
         else
-          user = User.create(username: data["name"],
+          @user = User.create(username: data["name"],
             provider:access_token.provider,
             email: data["email"],
             uid: access_token.uid ,
@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
             #Need to figure out how to prompt for this
             signupcode: 'joinme'
           )
+
+          #Calls onboarding method
+          onboarduser(@user)
+
+          return @user
         end
      end
   end
@@ -70,5 +75,57 @@ class User < ActiveRecord::Base
 
   def self.return_ideausers(idea_id)
     User.joins(:ideausers).where("ideausers.idea_id = ?",idea_id).select("username","role","email","ideausers.id")
+  end
+
+  def self.onboarduser(user)
+    #Adds the user to any ideas based on any outstanding invites
+
+      #search all ideas a user has been invited to prior to sign-up
+      @allideas = Inviteduser.return_ideasforgivenuser(user.email)
+
+      #iterate through the ideas and add the user to each idea 
+      @allideas.each do |i|
+        Ideauser.create(:user_id => user.id, :idea_id => i.idea_id, :role => i.role)
+      end
+
+    #Adds the user to his/her own group on creation to support Group level settings
+
+      #Create Group
+      group = Group.new
+
+      #Assign Group Name
+      group.name = user.username + "'s group"
+
+      #Generate random secret code to join
+      o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
+      group.joinsecret = (0...25).map { o[rand(o.length)] }.join
+
+      #Save the group
+      group.save
+
+      #Update the user with a group id
+      user.group_id = group.id
+
+      user.save
+
+    #Creates initial settings for the user at the Group level
+      #Find user account
+      @onboarduser = User.find_by_id(user.id)
+
+      #Find group by user
+      @onboardgroup = user.group
+
+      #Initial subfeature categories for a given user (Should eventually be modified by Admin to be dynamic)
+      @initialsettings = Setting.retrieve_adminvalues(nil)
+
+      #Create new instance
+      @initialsettings.each do |i|
+        case i.settingtype
+        when "Subfeature Category"
+          initalsetting = Setting.create(:settingtype => i.settingtype, :value => i.value, :user_id => user.id, :group_id => @onboardgroup.id)
+        when "Idea Type"
+          ideatype = Ideatype.create(:name => i.value, :active => true, :group_id => @onboardgroup.id)
+        end
+      end
   end
 end
