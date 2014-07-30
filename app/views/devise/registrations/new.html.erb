@@ -15,9 +15,20 @@
 		  </div>
 
 		  <div class="form-actions">
-			<%= f.button :submit, :value => 'Sign up', :class => 'btn btn-primary' %>
-		  </div>
+		  	<div class="row">
+			  	<div class="col-md-4">
+					<%= f.button :submit, :value => 'Sign up', :class => 'btn btn-block btn-primary' %>
 		<% end %>
+				</div>
+				<div class="col-md-8">
+				<% if devise_mapping.omniauthable? %>
+				  <% resource_class.omniauth_providers.each do |provider| %>
+				    <%= button_to(RegistrationsHelper.providertext(provider), omniauth_authorize_path(resource_name, provider), :class => 'btn btn-block btn-danger') %>
+				  <% end %>
+				<% end %>
+				</div>
+			</div>
+		  </div>
 
 		<%= render "devise/shared/links" %>
 	</div>

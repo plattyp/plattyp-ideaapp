@@ -29,7 +29,9 @@ class User < ActiveRecord::Base
             provider:access_token.provider,
             email: data["email"],
             uid: access_token.uid ,
-            password: Devise.friendly_token[0,20]
+            password: Devise.friendly_token[0,20] ,
+            #Need to figure out how to prompt for this
+            signupcode: 'joinme'
           )
         end
      end
