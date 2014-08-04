@@ -3,7 +3,15 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+		<% if devise_mapping.omniauthable? %>
+		  <% resource_class.omniauth_providers.each do |provider| %>
+		    <%= button_to(RegistrationsHelper.providertext(provider), omniauth_authorize_path(resource_name, provider), :class => 'btn btn-block btn-danger') %>
+		  <% end %>
+		<% end %>
+		<div class="sign-in-disclaimer-text">
+			<h4>or sign up manually</h4>
+		</div>
+		<%= simple_form_for(@user, as: resource_name, url: registration_path(resource_name)) do |f| %>
 		  <%= f.error_notification %>
 
 		  <div class="form-inputs">
@@ -14,21 +22,8 @@
 	        <%= f.input :signupcode, required: true, :label => 'Sign Up Code' %>
 		  </div>
 
-		  <div class="form-actions">
-		  	<div class="row">
-			  	<div class="col-md-4">
-					<%= f.button :submit, :value => 'Sign up', :class => 'btn btn-block btn-primary' %>
+		  <%= f.button :submit, :value => 'Sign up', :class => 'btn btn-block btn-primary' %>
 		<% end %>
-				</div>
-				<div class="col-md-8">
-				<% if devise_mapping.omniauthable? %>
-				  <% resource_class.omniauth_providers.each do |provider| %>
-				    <%= button_to(RegistrationsHelper.providertext(provider), omniauth_authorize_path(resource_name, provider), :class => 'btn btn-block btn-danger') %>
-				  <% end %>
-				<% end %>
-				</div>
-			</div>
-		  </div>
 
 		<%= render "devise/shared/links" %>
 	</div>

@@ -12,6 +12,14 @@ class RegistrationsController < Devise::RegistrationsController
 		end
 	end
 
+	def new
+		@user = User.new(
+		:email => params[:email],
+		:password => params[:password],
+		:password => params[:password_confirmation],
+		:username => params[:username])
+	end
+
 	def edit
 		#Used to fill hidden value on edit form for the joinsecret
 		returnedsignups = Setting.retrieve_adminvalues("Join Secret")
