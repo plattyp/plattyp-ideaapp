@@ -2,6 +2,9 @@ Ideaapp::Application.routes.draw do
   get "subfeaturecategories/index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks'}
+  as :user do
+    put "registrations/signup", :to => "registrations#signup", :as => "signup"
+  end
   ActiveAdmin.routes(self)
 
 
@@ -48,10 +51,13 @@ Ideaapp::Application.routes.draw do
     resources :ideamessages, :controller => 'ideamessages'
   end
 
-  #get 'settings' => 'settings#index'
-
   #For settings
-  resources :settings
+  resources :settings do
+    collection do
+      get :signupcode
+    end
+  end
+
 
   #Set homepage
   root to: "ideas#index"

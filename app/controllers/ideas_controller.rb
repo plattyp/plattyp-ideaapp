@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   respond_to :html, :xml, :json
-  before_action :get_user, :get_group, :group_users
+  before_action :get_user, :get_group, :group_users, :check_user_status
 
   def index
     # Looks at the user's id and shows all ideas that belong to that user

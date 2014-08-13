@@ -42,6 +42,15 @@ class SettingsController < ApplicationController
 		end
 	end
 
+	def signupcode
+	    #Looks to see if the user's group has access to an idea & redirects if they don't
+	    if @user.status != 2
+	      @currentuser = @user
+	    else
+	      redirect_to ideas_path, :notice => "You have already been validated!"
+	    end
+	end
+
 	private
 
 	def setting_params

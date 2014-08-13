@@ -25,13 +25,23 @@ class User < ActiveRecord::Base
         if registered_user
           return registered_user
         else
+          #Retrieve the signupcode from Admin
+          returnedsignups = Setting.retrieve_adminvalues("Join Secret")
+
+          #The @signupcode is used to Create the user below (Otherwise it would not validate on create)
+          returnedsignups.each do |i|
+            @signupcode = i.value
+          end
+
           @user = User.create(username: data["name"],
             provider:access_token.provider,
             email: data["email"],
             uid: access_token.uid ,
             password: Devise.friendly_token[0,20] ,
             #Need to figure out how to prompt for this
-            signupcode: 'joinme'
+            signupcode: @signupcode,
+            #Setting status to 1 means the user has been created, but has not given a signupcode to continue
+            status: 1
           )
 
           #Calls onboarding method
