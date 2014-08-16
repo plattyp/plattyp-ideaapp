@@ -41,7 +41,8 @@ class User < ActiveRecord::Base
             #Need to figure out how to prompt for this
             signupcode: @signupcode,
             #Setting status to 1 means the user has been created, but has not given a signupcode to continue
-            status: 1
+            status: 1,
+            imageurl: data["image"]
           )
 
           #Calls onboarding method
