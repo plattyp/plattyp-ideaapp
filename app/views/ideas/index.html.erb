@@ -6,14 +6,13 @@
 		  	</div>
 		  	<div class="panel-body">
 		  		<h6>Idea Types</h6>
-		  			<%= simple_form_for :idea, url: ideas_path, :method => :get do |i| %>
-		  				<%= i.input :ideatypes, 
-		  								 :collection => @ideatypes,
-		  								 label: false,
-		  								 :as => :check_boxes,
-		  								 input_html: {checked: true},
-		  								 :onchange => 'this.form.submit();' %>
-		  			<% end %>
+		  		<form class="filter_form", method="get">
+				<% @ideatypelist.each do |a| %>
+				    <%= check_box_tag("ideatype_ids[]", a[1], a[2]) %>
+				    <%= a[0] %><br />
+				<% end %><br />
+    			<input type="submit" value="Apply Filter" class="btn btn-block btn-primary"/>
+  				</form>
 		  	</div>
 		</div>
 		<%= button_to "Add an Idea", new_idea_path, :class => 'btn btn-block btn-danger', :method => :get %>
@@ -23,13 +22,10 @@
 		<div class="panel panel-default">
 		  	<div class="panel-heading">
 		  	Ideas
-			  <div class="dropdown pull-right">
-			  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter<b class="caret"></b></a>
-				  	<ul class="dropdown-menu" role="menu">
-				  		<% @ideatypes.each do |i| %>
-				  		<li><%= link_to "#{i[0]}", ideas_path(:ideatype_id => i[1]) %></li>
-				  		<% end %>
-				  	</ul>
+			  <div class="pull-right">
+			  	<form class="filter_form", method="get">
+			  	<input type="submit" value="F" class="btn btn-default btn-sm"/>
+			  	</form>
 			  </div>
 			</div>
 			<div class="panel-body">

@@ -1,4 +1,7 @@
 class Idea < ActiveRecord::Base
+	#Serialize a list of ideatype_ids
+	serialize :ideatype_ids, Array
+
 	#Basic validation
 	validates :name, :presence => true
 	validates :description, :presence => true
@@ -33,11 +36,11 @@ class Idea < ActiveRecord::Base
 		User.first
 	end
 
-	def self.returnideas(ideatype_id,user_id)
-		if ideatype_id.blank?
+	def self.returnideas(ideatype_ids,user_id)
+		if ideatype_ids.blank?
 			Idea.joins(:ideausers).where("ideausers.user_id = ?", user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
 		else
-			Idea.joins(:ideausers).where("ideatype_id = ? AND ideausers.user_id = ?", ideatype_id, user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
+			Idea.joins(:ideausers).where("ideatype_id IN (?) AND ideausers.user_id = ?", ideatype_ids, user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
 		end
 	end
 

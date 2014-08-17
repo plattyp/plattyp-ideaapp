@@ -4,8 +4,25 @@ class IdeasController < ApplicationController
 
   def index
     # Looks at the user's id and shows all ideas that belong to that user
-    @ideas = Idea.returnideas(params[:ideatype_id],@user.id)
+    @ideas = Idea.returnideas(params[:ideatype_ids],@user.id)
     @ideatypes = Idea.returnideatypes(@user.id)
+
+    # Returns the selected list of ideatypes
+    @selectedideatypes = params[:ideatype_ids]
+    @ideatypelist = []
+
+    @ideatypes.each do |i|
+      if @selectedideatypes.blank?
+        selected = true
+      else
+        if @selectedideatypes.include?(i[1].to_s)
+          selected = true
+        else
+          selected = false
+        end
+      end
+      @ideatypelist << [i[0],i[1],selected]
+    end
   end
 
   def show
