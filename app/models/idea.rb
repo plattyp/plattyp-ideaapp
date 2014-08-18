@@ -36,11 +36,13 @@ class Idea < ActiveRecord::Base
 		User.first
 	end
 
-	def self.returnideas(ideatype_ids,user_id)
-		if ideatype_ids.blank?
+	def self.returnideas(ideatype_ids,user_id,searchstring)
+		if ideatype_ids.blank? and searchstring.blank?
 			Idea.joins(:ideausers).where("ideausers.user_id = ?", user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
-		else
+		elsif searchstring.blank?
 			Idea.joins(:ideausers).where("ideatype_id IN (?) AND ideausers.user_id = ?", ideatype_ids, user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
+		else
+			Idea.joins(:ideausers).where("ideatype_id IN (?) AND ideausers.user_id = ? AND idea.name LIKE ?", ideatype_ids, user_id, searchstring).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
 		end
 	end
 
