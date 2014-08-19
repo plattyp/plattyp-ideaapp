@@ -37,12 +37,18 @@ class Idea < ActiveRecord::Base
 	end
 
 	def self.returnideas(ideatype_ids,user_id,searchstring)
+
+
 		if ideatype_ids.blank? and searchstring.blank?
 			Idea.joins(:ideausers).where("ideausers.user_id = ?", user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
-		elsif searchstring.blank?
+		elsif ideatype_ids.blank? === false and searchstring.blank?
 			Idea.joins(:ideausers).where("ideatype_id IN (?) AND ideausers.user_id = ?", ideatype_ids, user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
+		elsif searchstring.blank? === false and ideatype_ids.blank?
+			wildinput = "%" + searchstring.downcase + "%"
+			Idea.joins(:ideausers).where("ideausers.user_id = ? AND lower(ideas.name) LIKE ?",user_id, wildinput).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
 		else
-			Idea.joins(:ideausers).where("ideatype_id IN (?) AND ideausers.user_id = ? AND idea.name LIKE ?", ideatype_ids, user_id, searchstring).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
+			wildinput = "%" + searchstring.downcase + "%"
+			Idea.joins(:ideausers).where("ideatype_id IN (?) AND ideausers.user_id = ? AND lower(ideas.name) LIKE ?", ideatype_ids, user_id, wildinput).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
 		end
 	end
 
