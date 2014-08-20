@@ -11,6 +11,10 @@ class IdeasController < ApplicationController
     @selectedideatypes = params[:ideatype_ids]
     @ideatypelist = []
 
+    # Set the Search String parameter to be used by the view
+    @searchstring = params[:searchstring]
+
+    # Iterate through the ideatypes to set which are already set
     @ideatypes.each do |i|
       if @selectedideatypes.blank?
         selected = true
