@@ -63,7 +63,13 @@
 					</div>
 					<% end %>
 				<% else %>
-					<p class="noideastext">You currently have no ideas created/shared</p>
+					<p class="noideastext">
+						<% if @searchstring.blank? & @ideatypelist.blank? %>
+							You currently have no ideas created/shared
+						<% elsif %>
+							No ideas match your criteria
+						<% end %>
+					</p>
 				<% end %>
 			</div>
 		</div>

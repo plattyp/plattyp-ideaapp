@@ -1,6 +1,7 @@
 class IdeasController < ApplicationController
   respond_to :html, :xml, :json
   before_action :get_user, :get_group, :group_users, :check_user_status
+  before_action :check_user_access, :if => @idea, :only => [:show, :edit, :update]
 
   def index
     # Looks at the user's id and shows all ideas that belong to that user
@@ -30,12 +31,8 @@ class IdeasController < ApplicationController
   end
 
   def show
-    #Looks to see if the user's group has access to an idea & redirects if they dont
-    if @user.ideas.find_by_id(params[:id])
-      @idea = @user.ideas.find(params[:id])
-    else
-      redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
-    end
+    #Security is handled using before_action and check_user_access controller
+    @idea = @user.ideas.find(params[:id])
   end
 
   def new
@@ -59,23 +56,13 @@ class IdeasController < ApplicationController
   end
 
   def edit
-    #Looks to see if the user's group has access to an idea & redirects if they don't
-    if @user.ideas.find_by_id(params[:id])
-      @idea = @user.ideas.find(params[:id])
-      @ideatype_options = Ideatype.returnideatypes(@group.id)
-    else
-      redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
-    end
+    #Security is handled using before_action and check_user_access controller
+    @idea = @user.ideas.find(params[:id])
+    @ideatype_options = Ideatype.returnideatypes(@group.id)
   end
 
   def update
-    #Looks to see if the user's group has access to an idea & redirects if they don't
-    if @user.ideas.find_by_id(params[:id])
-      @idea = @user.ideas.find(params[:id])
-    else
-      redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
-    end
-
+    #Security is handled using before_action and check_user_access controller
   	if @idea.update_attributes(idea_params)
   		  redirect_to edit_idea_path(@idea, :anchor => 'idea'), :notice =>"The idea is updated!"
   	else
@@ -85,13 +72,8 @@ class IdeasController < ApplicationController
   end
 
   def destroy
-    #Looks to see if the user's group has access to an idea & redirects if they don't
-    if @user.ideas.find_by_id(params[:id])
-      @idea = @user.ideas.find(params[:id])
-    else
-      redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
-    end
-    
+    #Security is handled using before_action and check_user_access controller
+    @idea = @user.ideas.find(params[:id])
   	@idea.destroy
   	redirect_to ideas_path, :notice => "Your idea was deleted!"
   end
@@ -122,6 +104,16 @@ class IdeasController < ApplicationController
 
   def group_users
     @users = User.all.map {|i| [i.username, i.id]}
+  end
+
+  def get_idea
+    @idea = Idea.find_by_id(params[:id])
+  end
+
+  def check_user_access
+    unless @user.ideas.find_by_id(params[:id])
+      redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
+    end
   end
 
 end

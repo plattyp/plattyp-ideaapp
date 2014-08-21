@@ -37,8 +37,6 @@ class Idea < ActiveRecord::Base
 	end
 
 	def self.returnideas(ideatype_ids,user_id,searchstring)
-
-
 		if ideatype_ids.blank? and searchstring.blank?
 			Idea.joins(:ideausers).where("ideausers.user_id = ?", user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
 		elsif ideatype_ids.blank? === false and searchstring.blank?
