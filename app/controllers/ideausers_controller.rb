@@ -1,6 +1,6 @@
 class IdeausersController < ApplicationController
 	respond_to :html, :xml, :json
-	before_action :get_idea
+	before_action :get_idea, :check_user_access
 	
 	def index
 	end
@@ -65,5 +65,11 @@ class IdeausersController < ApplicationController
 
 	def get_idea
 		@idea = Idea.find(params[:idea_id])
+	end
+
+	def check_user_access
+		unless @user.ideas.find_by_id(params[:idea_id])
+			redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
+		end
 	end
 end
