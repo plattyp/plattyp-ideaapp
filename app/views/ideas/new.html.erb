@@ -2,12 +2,9 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<%= simple_form_for (@idea) do |idea| %>
-			<%= idea.input :name %>
-			<%= idea.input :description %>
-			<%= idea.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type", include_blank: false, :label_method => :name, :value_method => :id  %>
-			<br />
-			<%= idea.button :submit, :class => 'btn-primary'%>
-		<% end %>
+	<%= simple_form_for (@idea) do |i| %>
+		<%= render "createidea", :i => i %>
+		<%= i.button :submit, :value => "Continue", :class => 'btn-primary'%>
+	<% end %>
 	</div>
 </div>

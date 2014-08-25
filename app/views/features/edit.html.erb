@@ -10,11 +10,11 @@
 <div class="row">
 	<div class ="col-md-2">
 	</div>
-	<div class ="col-md-2">
+	<div class ="col-md-3">
 		<%= render :partial => "/subfeatures/subfeaturecategories" %>
 		<%= link_to "Manage Categories", idea_subfeaturecategories_path(:idea_id => @idea.id) %>
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-7">
 		<div id="toggleList" style="display:block;">
 			<%= render :partial => '/subfeatures/subfeaturelist' %>
 		</div>

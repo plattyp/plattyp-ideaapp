@@ -2,6 +2,9 @@ class Idea < ActiveRecord::Base
 	#Serialize a list of ideatype_ids
 	serialize :ideatype_ids, Array
 
+	#For a multistep idea creation process
+	attr_writer :current_step
+
 	#Basic validation
 	validates :name, :presence => true
 	validates :description, :presence => true
@@ -25,6 +28,7 @@ class Idea < ActiveRecord::Base
 
 	#For creating Ideauser association records from Idea
 	accepts_nested_attributes_for :ideausers, :allow_destroy => true
+	accepts_nested_attributes_for :features, :ideausers, :invitedusers
 
 	def add_users_form
 		collection = ideausers.build
@@ -36,6 +40,32 @@ class Idea < ActiveRecord::Base
 		User.first
 	end
 
+	#Used for the wizard to easily create ideas
+	def current_step
+		@current_step || creation_steps.first
+	end
+
+	def creation_steps
+		%w[createidea addfeatures inviteusers]
+	end
+
+	def next_step
+		self.current_step = creation_steps[creation_steps.index(current_step)+1]
+	end
+
+	def previous_step
+		self.current_step = creation_steps[creation_steps.index(current_step)-1]
+	end
+		
+	def first_step?
+		current_step == creation_steps.first
+	end
+
+	def last_step?
+		current_step == creation_steps.last
+	end
+
+	#Methods to query ideas and their attributes
 	def self.returnideas(ideatype_ids,user_id,searchstring)
 		if ideatype_ids.blank? and searchstring.blank?
 			Idea.joins(:ideausers).where("ideausers.user_id = ?", user_id).select("ideas.id","name","description","ideatype_id").order("ideas.created_at DESC")
