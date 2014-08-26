@@ -1,0 +1,3 @@
+<%= simple_form_for @inviteduser, :url => url_for(:action => 'create', :controller => 'invitedusers') do |s| %>
+	<%= s.input :emailaddress, :label => 'Email Address' %>
+<% end %>

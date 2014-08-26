@@ -1,0 +1,16 @@
+<%= i.input :name %>
+<%= i.input :description %>
+<%= i.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type", include_blank: false, :label_method => :name, :value_method => :id  %>
+<% count = 0 %>
+<%= i.simple_fields_for :features, @idea.features.build do |f| %>
+	<% count += 1 %>
+	<p>Feature <%= count %></p>
+	<%= f.input :name %>
+	<%= f.input :description %>
+<% end %>
+<%= i.simple_fields_for :features, @idea.features.build do |f| %>
+	<% count += 1 %>
+	<p>Feature <%= count %></p>
+	<%= f.input :name %>
+	<%= f.input :description %>
+<% end %>

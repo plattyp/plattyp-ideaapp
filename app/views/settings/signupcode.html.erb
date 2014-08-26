@@ -1,0 +1,12 @@
+<h2>Sign Up Code</h2>
+
+<div class="row">
+	<div class="col-md-6">
+	<p>Use the form below to submit your Sign Up Code so that you can begin your use of the Application</p>
+		<%= simple_form_for(@currentuser, as: @currentuser, url: signup_path(@currentuser), html: { method: :put }) do |f| %>
+			<%= f.error_notification %>
+			<%= f.input :signupcode, label: false%>
+			<%= f.button :submit, :class => 'btn-primary', :value => 'Submit Sign Up Code' %>
+		<% end %>
+	</div>
+</div>
