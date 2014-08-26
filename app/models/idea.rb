@@ -28,7 +28,7 @@ class Idea < ActiveRecord::Base
 
 	#For creating Ideauser association records from Idea
 	accepts_nested_attributes_for :ideausers, :allow_destroy => true
-	accepts_nested_attributes_for :features, :ideausers, :invitedusers
+	accepts_nested_attributes_for :features
 
 	def add_users_form
 		collection = ideausers.build

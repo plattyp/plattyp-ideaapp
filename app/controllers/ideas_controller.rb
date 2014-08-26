@@ -91,7 +91,7 @@ class IdeasController < ApplicationController
   private
 
   def idea_params
-    params.require(:idea).permit(:name, :description, :ideatype_id, ideausers_attributes: [:idea_id, :user_id], features_attributes: [:name, :description], invitedusers_attributes:[:emailaddress])
+    params.require(:idea).permit(:name, :description, :ideatype_id, ideausers_attributes: [:idea_id, :user_id], features_attributes: [:name, :description, :idea_id, :user_id])
   end
 
   def get_user
