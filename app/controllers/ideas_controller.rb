@@ -5,11 +5,11 @@ class IdeasController < ApplicationController
 
   def index
     # Looks at the user's id and shows all ideas that belong to that user
-    @ideas = Idea.returnideas(params[:ideatype_ids],@user.id,params[:searchstring])
-    @ideatypes = Idea.returnideatypes(@user.id)
+    @ideas = Idea.returnideas(params[:ideatypes],@user.id,params[:searchstring])
+    @ideatypes = Idea.returndistinctideatypes(@user.id)
 
     # Returns the selected list of ideatypes
-    @selectedideatypes = params[:ideatype_ids]
+    @selectedideatypes = params[:ideatypes]
     @ideatypelist = []
 
     # Set the Search String parameter to be used by the view
@@ -20,13 +20,13 @@ class IdeasController < ApplicationController
       if @selectedideatypes.blank?
         selected = true
       else
-        if @selectedideatypes.include?(i[1].to_s)
+        if @selectedideatypes.include?(i.to_s)
           selected = true
         else
           selected = false
         end
       end
-      @ideatypelist << [i[0],i[1],selected]
+      @ideatypelist << [i,selected]
     end
   end
 
