@@ -23,6 +23,7 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
 //= require bootstrap3-editable/bootstrap-editable
+//= require cocoon
 
 jQuery(function() {
   return $.ajax({

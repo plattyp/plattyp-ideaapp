@@ -2,9 +2,6 @@
 
 <div class="row">
 	<div class="col-md-6">
-	<%= simple_form_for (@idea) do |i| %>
-		<%= render "createidea", :i => i %>
-		<%= i.button :submit, :value => "Continue", :class => 'btn-primary'%>
-	<% end %>
+		<%= render :partial => "createidea" %>
 	</div>
 </div>

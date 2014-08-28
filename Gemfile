@@ -61,6 +61,9 @@ gem 'omniauth-google-oauth2'
 #Better forming
 gem 'simple_form'
 
+#For Nested Model Forms
+gem 'cocoon'
+
 #Fix to Active-Admin
 gem "formtastic", github: "justinfrench/formtastic"
 
