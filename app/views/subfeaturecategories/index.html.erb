@@ -1,9 +1,24 @@
 <div class="row">
-	<%= render :partial => '/ideas/navigation' %>
-	<div class="col-md-10">
-		<h2>Manage Subfeature Categories</h2>
-		<%= render :partial => 'categoryform' %>
-		</br>
-		<%= render :partial => 'categorylist' %>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+		  	Menu
+		  	</div>
+		  	<div class="panel-body">
+			<%= render :partial => '/ideas/navigation' %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+			Manage Subfeature Categories
+			</div>
+			<div class="panel-body">
+				<%= render :partial => 'categoryform' %>
+				</br>
+				<%= render :partial => 'categorylist' %>
+			</div>
+		</div>
 	</div>
 </div>

@@ -1,13 +1,28 @@
 <div class="row">
-	<%= render :partial => 'navigation' %>
-	<div class="col-md-10">
-		<h2>Edit Idea</h2>
-		<%= simple_form_for(@idea) do |idea| %>
-			<%= idea.input :name %>
-			<%= idea.input :description %>
-			<%= idea.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type",include_blank: false, selected: @idea.ideatype_id  %>
-			<%= idea.button :submit, :class => 'btn-primary' %>
-		<% end %>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+		  	Menu
+		  	</div>
+		  	<div class="panel-body">
+			<%= render :partial => 'navigation' %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+			Edit Idea
+			</div>
+			<div class="panel-body">
+			<%= simple_form_for(@idea) do |idea| %>
+				<%= idea.input :name %>
+				<%= idea.input :description %>
+				<%= idea.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type",include_blank: false, selected: @idea.ideatype_id  %>
+				<%= idea.button :submit, :class => 'btn-primary' %>
+			<% end %>
+			</div>
+		</div>
 	</div>
 </div>
 

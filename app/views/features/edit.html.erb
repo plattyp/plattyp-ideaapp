@@ -1,28 +1,41 @@
 <div class="row">
-	<%= render :partial => '/ideas/navigation' %>
-	<div class="col-md-10">
-		<h2>Features</h2>
-		<%= render :partial => 'featurenav' %>
-		<%= render :partial => 'editfeature' %>
-	</div>
-</div>
-<br />
-<div class="row">
-	<div class ="col-md-2">
-	</div>
-	<div class ="col-md-3">
-		<%= render :partial => "/subfeatures/subfeaturecategories" %>
-		<%= link_to "Manage Categories", idea_subfeaturecategories_path(:idea_id => @idea.id) %>
-	</div>
-	<div class="col-md-7">
-		<div id="toggleList" style="display:block;">
-			<%= render :partial => '/subfeatures/subfeaturelist' %>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+		  	Menu
+		  	</div>
+		  	<div class="panel-body">
+			<%= render :partial => '/ideas/navigation' %>
+			</div>
 		</div>
-		<div id="toggleCreate" style="display:none;">
-			<%= render :partial => '/subfeatures/newsubfeature' %>
-		</div>
-		<div class="addsubfeaturelink">
-			<a href="javascript:toggle();" id="linkText" >Add a Subfeature</a>
+	</div>
+	<div class="col-md-9">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+			Features
+			</div>
+			<div class="panel-body">
+				<%= render :partial => 'featurenav' %>
+				<%= render :partial => 'editfeature' %>
+			<br />
+				<div class="row">
+					<div class ="col-md-3">
+						<%= render :partial => "/subfeatures/subfeaturecategories" %>
+						<%= link_to "Manage Categories", idea_subfeaturecategories_path(:idea_id => @idea.id) %>
+					</div>
+					<div class="col-md-9">
+						<div id="toggleList" style="display:block;">
+							<%= render :partial => '/subfeatures/subfeaturelist' %>
+						</div>
+						<div id="toggleCreate" style="display:none;">
+							<%= render :partial => '/subfeatures/newsubfeature' %>
+						</div>
+						<div class="addsubfeaturelink">
+							<a href="javascript:toggle();" id="linkText" >Add a Subfeature</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,4 +1,4 @@
-<ul class="nav nav-pills nav-stacked col-md-2">
+<ul class="nav nav-pills nav-stacked">
 	<li class="<%= 'active' if params[:controller] == 'ideas' %>"><%= link_to "Overview", edit_idea_path(@idea), :date => {:toggle => "pill"} %>
 	<li class="<%= 'active' if params[:controller] == 'features' || params[:controller] == 'subfeaturecategories' %>"><%= link_to "Features", idea_features_path(@idea), :date => {:toggle => "pill"} %>
 	<li class="<%= 'active' if params[:controller] == 'ideamessages' %>"><%= link_to "Messages", idea_ideamessages_path(@idea), :date => {:toggle => "pill"} %>

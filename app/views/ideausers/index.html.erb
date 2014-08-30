@@ -1,8 +1,23 @@
 <div class="row">
-    <%= render :partial => '/ideas/navigation' %>
-    <div class="col-md-10">
-        <h4>Current Users</h4>
-        <%= render partial: 'list'%>
-        <%= render partial: 'invite_user'%>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+		  	Menu
+		  	</div>
+		  	<div class="panel-body">
+			<%= render :partial => '/ideas/navigation' %>
+			</div>
+		</div>
+	</div>
+    <div class="col-md-9">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+        	Current Users
+        	</div>
+        	<div class="panel-body">
+        		<%= render partial: 'list'%>
+        		<%= render partial: 'invite_user'%>
+        	</div>
+        </div>
     </div>
 </div>

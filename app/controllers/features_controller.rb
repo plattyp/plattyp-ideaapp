@@ -33,7 +33,7 @@ class FeaturesController < ApplicationController
 		#Gets a list of subfeatures' categories for a given feature
 		@uniquecategories = Subfeaturecategory.returnideacategories(@idea.id)
 
-		#Creates a hash	
+		#Creates an array	
 		@subfeaturesdistinct = []
 
 		#Iterates through the list of subfeature categories and hashes the name and the count of subfeatures within each category

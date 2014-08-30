@@ -1,16 +1,35 @@
-<%= simple_form_for @idea do |f| %>
-	<%= f.input :name %>
-	<%= f.input :description %>
-	<%= f.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type", include_blank: false, :label_method => :name, :value_method => :id  %>
-	<h3>Features</h3>
-	<div class="features">
-		<%= f.simple_fields_for :features do |feature| %>
-			<%= render "feature_fields", :f => feature %>
-		<% end %>
+<div class="row">
+	<%= simple_form_for @idea do |f| %>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+		  	What's your Idea?
+		  	</div>
+		  	<div class="panel-body">
+				<%= f.input :name %>
+				<%= f.input :description %>
+				<%= f.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type", include_blank: false, :label_method => :name, :value_method => :id  %>
+				<%= f.button :submit, :value => "Create Idea", :class => 'btn-primary'%>
+			</div>
+		</div>
 	</div>
-	<div class="links">
-		<%= link_to_add_association 'add feature', f, :features %>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+		  	Add on Some Features
+		  	</div>
+		  	<div class="panel-body">
+				<div class="features">
+					<%= f.simple_fields_for :features do |feature| %>
+						<%= render "feature_fields", :f => feature %>
+					<% end %>
+				</div>
+				<div class="links">
+					<%= link_to_add_association 'Add Feature', f, :features %>
+				</div>
+				<br />
+			</div>
+		</div>
 	</div>
-	<br />
-	<%= f.button :submit, :value => "Create Idea", :class => 'btn-primary'%>
-<% end %>
+	<% end %>
+</div>

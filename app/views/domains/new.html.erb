@@ -1,9 +1,24 @@
 <div class="row">
-	<%= render :partial => '/ideas/navigation' %>
-	<div class="col-md-10">
-		<h2>Domains</h2>
-		<%= render :partial => 'searchform' %>
-		<br/>
-		<%= render :partial => 'domainwatchlist' %>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+		  	Menu
+		  	</div>
+		  	<div class="panel-body">
+			<%= render :partial => '/ideas/navigation' %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="panel panel-default">
+		  	<div class="panel-heading">
+			Domains
+			</div>
+			<div class="panel-body">
+				<%= render :partial => 'searchform' %>
+				<br/>
+				<%= render :partial => 'domainwatchlist' %>
+			</div>
+		</div>
 	</div>
 </div>
