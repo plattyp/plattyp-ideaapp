@@ -3,7 +3,8 @@ class Idea < ActiveRecord::Base
 	serialize :ideatype_ids, Array
 
 	#For a multistep idea creation process
-	attr_writer :current_step
+	attr_accessor :step
+	attr_writer :step
 
 	#Basic validation
 	validates :name, :presence => true
@@ -41,28 +42,16 @@ class Idea < ActiveRecord::Base
 	end
 
 	#Used for the wizard to easily create ideas
-	def current_step
-		@current_step || creation_steps.first
+	def self.current_step
+		@step.nil? ? 1 : @step
 	end
 
-	def creation_steps
-		%w[createidea addfeatures inviteusers]
+	def self.next_step
+		@step = current_step + 1
 	end
 
-	def next_step
-		self.current_step = creation_steps[creation_steps.index(current_step)+1]
-	end
-
-	def previous_step
-		self.current_step = creation_steps[creation_steps.index(current_step)-1]
-	end
-		
-	def first_step?
-		current_step == creation_steps.first
-	end
-
-	def last_step?
-		current_step == creation_steps.last
+	def self.previous_step
+		@step = current_step - 1
 	end
 
 	#Methods to query ideas and their attributes

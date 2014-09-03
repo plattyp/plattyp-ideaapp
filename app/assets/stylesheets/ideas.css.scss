@@ -14,3 +14,26 @@
   width: 200px; 
   float: right;
 }
+
+.createstep1 {
+	display: inline-block;
+}
+
+.createstep2 {
+	display: none;
+}
+
+.createbutton {
+	display: none;
+	float: right;
+}
+
+#createbackwardnavigation {
+	display: inline-block;
+	float: left;
+}
+
+#createforwardnavigation {
+	display: inline-block;
+	float: right;
+}

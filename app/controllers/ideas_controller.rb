@@ -88,6 +88,22 @@ class IdeasController < ApplicationController
     end
   end
 
+  def next_step
+    if Idea.next_step
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
+  def previous_step
+    if Idea.previous_step
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
   private
 
   def idea_params

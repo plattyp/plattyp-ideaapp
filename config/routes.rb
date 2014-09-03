@@ -7,6 +7,15 @@ Ideaapp::Application.routes.draw do
   end
   ActiveAdmin.routes(self)
 
+  #Create a route so that the steps can be moved with the create tracker
+  resources :ideas do
+    collection do
+      get :next_step
+      post :next_step
+      get :previous_step
+      post :previous_step
+    end
+  end
 
   #Set relationship between ideas and features
   resources :users do
