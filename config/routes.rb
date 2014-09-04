@@ -12,8 +12,6 @@ Ideaapp::Application.routes.draw do
     collection do
       get :next_step
       post :next_step
-      get :previous_step
-      post :previous_step
     end
   end
 

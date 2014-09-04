@@ -28,8 +28,9 @@ class Idea < ActiveRecord::Base
 	has_many :subfeaturecategories, dependent: :destroy
 
 	#For creating Ideauser association records from Idea
-	accepts_nested_attributes_for :ideausers, :allow_destroy => true
-	accepts_nested_attributes_for :features, :reject_if => :all_blank, :allow_destroy => true
+	accepts_nested_attributes_for :ideausers,    :allow_destroy => true
+	accepts_nested_attributes_for :invitedusers, :reject_if => :all_blank, :allow_destroy => true
+	accepts_nested_attributes_for :features,     :reject_if => :all_blank, :allow_destroy => true
 
 	def add_users_form
 		collection = ideausers.build

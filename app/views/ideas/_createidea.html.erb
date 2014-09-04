@@ -4,36 +4,46 @@
 	<%= simple_form_for @idea do |f| %>
 	<div class="col-md-8">
 		<div class="panel panel-default">
-		  	<div class="panel-heading">
+		  	<div id="ideapanelheader" class="panel-heading">
 		  	What's your Idea?
 		  	</div>
 		  	<div class="panel-body">
-		  		<div class="createstep1">
-					<%= f.input :name %>
-					<%= f.input :description %>
-					<%= f.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type", include_blank: false, :label_method => :name, :value_method => :id  %>
-				</div>
-				<div class="createstep2">
-					<div class="features">
-						<%= f.simple_fields_for :features do |feature| %>
-							<%= render "feature_fields", :f => feature %>
-						<% end %>
+		  		<div id="stepcontainer">
+			  		<div id="createstep1">
+						<%= f.input :name %>
+						<%= f.input :description %>
+						<%= f.input :ideatype_id, collection: @ideatype_options,:label => "Idea Type", include_blank: false, :label_method => :name, :value_method => :id  %>
 					</div>
-					<div class="links">
-						<%= link_to_add_association 'Add Feature', f, :features %>
+					<div id="createstep2">
+						<div class="features">
+							<%= f.simple_fields_for :features do |feature| %>
+								<%= render "feature_fields", :f => feature %>
+							<% end %>
+						</div>
+						<div class="links">
+							<%= link_to_add_association 'Add Feature', f, :features %>
+						</div>
+					</div>
+					<div id="createstep3">
+						<div class="invitedusers">
+							<%= f.simple_fields_for :invitedusers do |user| %>
+								<%= render "inviteduser_fields", :f => user %>
+							<% end %>
+						</div>
+						<div class="links">
+							<%= link_to_add_association 'Invite Another', f, :invitedusers %>
+						</div>
 					</div>
 				</div>
-				<div class="createbutton">
+				<div id="createbutton">
 					<%= f.button :submit, :value => "Create Idea", :class => 'createbutton btn-primary'%>
 				</div>
 	<% end %>
-				<% unless Idea.current_step === 1 %>
-					<div id="createbackwardnavigation">
-						<%= button_to "Back", {:action => 'previous_step'}, :form_class => 'backbtnform', :class => 'btn btn-primary' %>
-					</div>
-				<% end %>
+				<div id="createbackwardnavigation">
+					<%= button_to "Back", {:action => 'next_step', :stepno => @stepno, :direction => 'back'}, :form_class => 'backbtnform', :class => 'btn btn-primary' %>
+				</div>
 				<div id="createforwardnavigation">
-					<%= button_to "Continue", {:action => 'next_step'}, :form_class => 'forwardbtnform', :class => 'btn btn-primary' %>
+					<%= button_to "Continue", {:action => 'next_step', :stepno => @stepno, :direction => 'forward'}, :form_class => 'forwardbtnform', :class => 'btn btn-primary' %>
 				</div>
 			</div>
 		</div>

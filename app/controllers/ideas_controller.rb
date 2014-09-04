@@ -36,6 +36,7 @@ class IdeasController < ApplicationController
   end
 
   def new
+    @stepno = 1
   	@idea = Idea.new
     @ideatype_options = Ideatype.returnideatypes(@group.id)
   end
@@ -89,25 +90,21 @@ class IdeasController < ApplicationController
   end
 
   def next_step
-    if Idea.next_step
-      respond_to do |format|
-        format.js
-      end
+    if params[:direction] === 'forward'
+      @stepno = params[:stepno].to_i + 1
+    else
+      @stepno = params[:stepno].to_i - 1
     end
-  end
 
-  def previous_step
-    if Idea.previous_step
-      respond_to do |format|
-        format.js
-      end
+    respond_to do |format|
+      format.js
     end
   end
 
   private
 
   def idea_params
-    params.require(:idea).permit(:name, :description, :ideatype_id, ideausers_attributes: [:idea_id, :user_id], features_attributes: [:id, :name, :description, :idea_id, :user_id, :_destroy])
+    params.require(:idea).permit(:name, :description, :ideatype_id, ideausers_attributes: [:idea_id, :user_id], features_attributes: [:id, :name, :description, :idea_id, :user_id, :_destroy], invitedusers_attributes: [:id, :emailaddress, :idea_id, :invited_by_user_id, :_destroy])
   end
 
   def get_user
