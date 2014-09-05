@@ -20,12 +20,12 @@ module InvitedusersHelper
 
 		#Stores all users that belong to the site into the Hash
 		@ideausers.each do |i|
-			@users << [i.username,"Joined",i.role,i.id]
+			@users << [i.username,"Joined",i.role,i.id,i.imageurl]
 		end
 
 		#Stores all users that are invited but not yet on the site
 		@invitedusers.each do |x|
-			@users << [x.emailaddress,"Hasn't Joined",x.role,x.id]
+			@users << [x.emailaddress,"Hasn't Joined",x.role,x.id,nil]
 		end
 
 		return @users

@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
   end
 
   def self.return_ideausers(idea_id)
-    User.joins(:ideausers).where("ideausers.idea_id = ?",idea_id).select("username","role","email","ideausers.id")
+    User.joins(:ideausers).where("ideausers.idea_id = ?",idea_id).select("username","role","email","ideausers.id","imageurl")
   end
 
   def self.onboarduser(user)
