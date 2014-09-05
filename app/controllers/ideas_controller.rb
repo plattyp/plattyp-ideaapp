@@ -48,6 +48,14 @@ class IdeasController < ApplicationController
         #Create initial subfeature categories for the idea
         onboard(@idea.id)
 
+        #Get all invited users so that they can be added accordingly
+        @recentlyinvited = Inviteduser.return_unprocessed(@idea.id)
+
+        #Iterate through to the users that have not been processed
+        @recentlyinvited.each do |i|
+          invite_user(i)
+        end
+
         #Redirect back to the index
         redirect_to ideas_path, :notice =>"The idea was saved!"
   	else
@@ -101,10 +109,61 @@ class IdeasController < ApplicationController
     end
   end
 
+  def invite_user(invited)
+    @inviteduser = invited
+    role = "Participant"
+    @inviteduser.role = role
+
+    #Checks to see if a matching user already exists in the system
+    @matcheduser = User.search_users(@inviteduser.emailaddress)
+
+    #Checks to see if an invite was already sent for this user
+    @invitedusercheck = Inviteduser.search_invited(@inviteduser.emailaddress, @idea.id).first
+
+    #If he has not been invited, an entry will be made in InvitedUsers table
+    if @invitedusercheck.nil?
+      if @inviteduser.save
+        #Checks to see if a current user with that email exists
+        if @matcheduser.count === 0
+          #If he doesn't exist, an email is sent to the user
+          InviteduserMailer.invited_email(@inviteduser.emailaddress).deliver
+          return true, "An email was sent to invite the user!"
+        else
+          #If user already is a member of the site, it will add him to the workroom
+          @matcheduser.each do |user|
+            Ideauser.create(:user_id => user.id, :idea_id => @idea.id, :role => role)
+            InviteduserMailer.addedtoidea_email(user.email, @idea).deliver
+            return true, "The user was added to the workroom successfully!"
+          end
+        end
+      else
+        return false, "Sorry, but the user could not be added."
+      end
+    else
+      #If the user's role field is empty, it implies that he has been invited but not processed.
+      if @invitedusercheck.role.nil?
+        if @matcheduser.count === 0
+          #If he doesn't exist, an email is sent to the user
+          InviteduserMailer.invited_email(@invitedusercheck.emailaddress).deliver
+        else
+          #If user already is a member of the site, it will add him to the workroom and send an email
+          @matcheduser.each do |user|
+            Ideauser.create(:user_id => user.id, :idea_id => @idea.id, :role => role)
+            InviteduserMailer.addedtoidea_email(user.email, @idea).deliver
+          end
+        end
+        @invitedusercheck.update_attributes(:role => role)
+        return true, "The user was added to the workroom successfully!"
+      else
+        return false, "The user has already been invited!"
+      end
+    end
+  end
+
   private
 
   def idea_params
-    params.require(:idea).permit(:name, :description, :ideatype_id, ideausers_attributes: [:idea_id, :user_id], features_attributes: [:id, :name, :description, :idea_id, :user_id, :_destroy], invitedusers_attributes: [:id, :emailaddress, :idea_id, :invited_by_user_id, :_destroy])
+    params.require(:idea).permit(:name, :description, :ideatype_id, ideausers_attributes: [:idea_id, :user_id, :role], features_attributes: [:id, :name, :description, :idea_id, :user_id, :_destroy], invitedusers_attributes: [:id, :emailaddress, :idea_id, :invited_by_user_id, :role, :_destroy])
   end
 
   def get_user

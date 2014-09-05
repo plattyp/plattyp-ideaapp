@@ -1,6 +1,6 @@
 class IdeausersController < ApplicationController
 	respond_to :html, :xml, :json
-	before_action :get_idea, :check_user_access
+	before_action :get_idea, :get_user, :check_user_access
 	
 	def index
 	end
@@ -65,6 +65,10 @@ class IdeausersController < ApplicationController
 
 	def get_idea
 		@idea = Idea.find(params[:idea_id])
+	end
+
+	def get_user
+		@user = current_user
 	end
 
 	def check_user_access

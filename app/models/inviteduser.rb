@@ -13,6 +13,10 @@ class Inviteduser < ActiveRecord::Base
 		Inviteduser.where("emailaddress = ? AND idea_id = ?",emailaddress,idea_id)
 	end
 
+	def self.return_unprocessed(idea_id)
+		Inviteduser.where("idea_id = ? AND role IS NULL",idea_id)
+	end
+
 	def self.return_ideasforgivenuser(email)
 		Inviteduser.where("emailaddress = ?",email)
 	end
