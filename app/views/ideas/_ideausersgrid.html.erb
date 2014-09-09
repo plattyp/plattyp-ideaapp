@@ -1,0 +1,6 @@
+<div id="ideausergrid">
+	<% @users = InvitedusersHelper.return_alluserslist(@idea.id) %>
+	<% @users.each do |username, status, role, id, picurl| %>
+		<%= image_tag(ApplicationHelper.profilepicture(picurl), :title => "#{username}") %>
+	<% end %>
+</div>

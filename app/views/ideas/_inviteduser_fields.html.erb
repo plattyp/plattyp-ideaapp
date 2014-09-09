@@ -1,0 +1,5 @@
+<div class="nested-fields">
+	<%= f.input :emailaddress, :label => 'Email Address' %>
+	<%= f.input :invited_by_user_id, input_html: {value: current_user.id}, as: :hidden %>
+	<%= link_to_remove_association 'Remove', f %>
+</div>

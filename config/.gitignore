@@ -13,4 +13,3 @@ environments/*
 database.yml
 deploy.rb
 environment.rb
-application.rb

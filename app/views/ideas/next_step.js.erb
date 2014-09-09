@@ -1,0 +1,51 @@
+$(".forwardbtnform").get(0).setAttribute('action','/ideas/next_step?direction=forward&stepno=<%= @stepno %>');
+$(".backbtnform").get(0).setAttribute('action','/ideas/next_step?direction=back&stepno=<%= @stepno %>');
+<% case @stepno %>
+<% when 1 %>
+	<%# Hide Back button %>
+	$("#createbackwardnavigation").css("display","none");
+	<%# Display input fields from first container %>
+	$("#createstep1").css("display","inline-block");
+	<%# Hide input fields from second container %>
+	$("#createstep2").css("display","hide");
+	<%# Modify the Panel Header to reflect container %>
+	$("#ideapanelheader").html("What's your Idea?");
+	<%# Update Tracker %>
+	$("#trackerstep1").get(0).setAttribute('class','btn btn-primary active');
+	$("#trackerstep2").get(0).setAttribute('class','btn btn-default');
+	$("#trackerstep3").get(0).setAttribute('class','btn btn-default');
+<% when 2 %>
+	<%# Display Back button %>
+	$("#createbackwardnavigation").css("display","inline-block");
+	<%# Display Continue button %>
+	$("#createforwardnavigation").css("display","inline-block");
+	<%# Hide Create button %>
+	$("#createbutton").css("display","none");
+	<%# Hide input fields from first container %>
+	$("#createstep1").css("display","none");
+	<%# Hide input fields from second container %>
+	$("#createstep3").css("display","none");
+	<%# Display input fields from second container %>
+	$("#createstep2").css("display","inline-block");
+	<%# Modify the Panel Header to reflect container %>
+	$("#ideapanelheader").html("Add some features");
+	<%# Update Tracker %>
+	$("#trackerstep1").get(0).setAttribute('class','btn btn-primary');
+	$("#trackerstep2").get(0).setAttribute('class','btn btn-primary active');
+	$("#trackerstep3").get(0).setAttribute('class','btn btn-default');
+<% when 3 %>
+	<%# Hide input fields from second container %>
+	$("#createstep2").css("display","none");
+	<%# Display input fields from third container %>
+	$("#createstep3").css("display","inline-block");
+	<%# Modify the Panel Header to reflect container %>
+	$("#ideapanelheader").html("Invite others to join");
+	<%# Hide Continue button %>
+	$("#createforwardnavigation").css("display","none");
+	<%# Display Create button %>
+	$("#createbutton").css("display","inline-block");
+	<%# Update Tracker %>
+	$("#trackerstep1").get(0).setAttribute('class','btn btn-primary');
+	$("#trackerstep2").get(0).setAttribute('class','btn btn-primary');
+	$("#trackerstep3").get(0).setAttribute('class','btn btn-primary active');
+<% end %>
