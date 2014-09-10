@@ -17,7 +17,5 @@
 
 # Ignore the following directories
 /config/deploy/*
-/config/environments/*
-/config/database.yml
 /config/deploy.rb
-/config/environment.rb
+/config/environment_variables.yml

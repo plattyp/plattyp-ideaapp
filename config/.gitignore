@@ -9,7 +9,5 @@
 
 # Ignore the following directories
 deploy/*
-environments/*
-database.yml
 deploy.rb
-environment.rb
+environment_variables.yml
