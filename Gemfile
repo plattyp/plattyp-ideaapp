@@ -76,18 +76,14 @@ gem 'robowhois'
 #Adding activeadmin so that it can be used as a backend
 gem 'activeadmin', github: 'gregbell/active_admin'
 
-
-# For Deployment
-gem 'capistrano', '~> 3.1.0', require: false, group: :development
-gem 'rvm1-capistrano3', require: false
-
-group :development do
-gem 'capistrano-rails',   '~> 1.1', require: false
-gem 'capistrano-bundler', '~> 1.1', require: false
-end
-
 # Use the Unicorn app server
 gem 'unicorn'
 
 #For storing sessions
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
+#For deployment
+gem 'capistrano', '~> 3.1.0'
+gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano-rails', '~> 1.1.1'
+gem 'capistrano-rbenv', '~> 2.0', :require => false
