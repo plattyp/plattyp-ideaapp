@@ -18,12 +18,9 @@ require 'capistrano/deploy'
 #Add based on tutorial deployment
 require 'capistrano/bundler'
 require 'capistrano/rails'
-require 'capistrano/rbenv'
-set :rbenv_type, :user # or :system, depends on your rbenv setup
-set :rbenv_ruby, '2.1.2'
-set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-set :rbenv_map_bins, %w{rake gem bundle ruby rails}
-set :rbenv_roles, :all # default value
+require 'capistrano/rvm'
+set :rvm_type, :user
+set :rvm_ruby_version, '2.1.2'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
