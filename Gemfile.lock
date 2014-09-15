@@ -102,6 +102,9 @@ GEM
     execjs (2.2.1)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     formtastic (2.3.1)
       actionpack (>= 3.0)
     has_scope (0.6.0.rc)
@@ -259,6 +262,7 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.0.0)
   devise
+  figaro
   formtastic
   jbuilder (~> 1.2)
   jquery-rails

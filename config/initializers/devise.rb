@@ -3,7 +3,13 @@
 Devise.setup do |config|
 
   # Per the security udate to devise, a secret key must be set
-  config.secret_key = ENV['SECRET_TOKEN'] if Rails.env.production?
+  secret = Figaro.env.secret_token
+
+  if secret.nil? || secret.length < 10
+    raise "Secret token cannot be loaded"
+  else
+    config.secret_key = secret
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,

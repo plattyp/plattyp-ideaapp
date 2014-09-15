@@ -11,3 +11,5 @@
 deploy/*
 deploy.rb
 environment_variables.yml
+# Ignore application configuration
+application.yml
