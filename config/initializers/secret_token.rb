@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Ideaapp::Application.config.secret_key_base = '1d561309bb4793f50eaf6469d6855d9106cdbea13c29da5304b8c3ce2a222361070c92fba092ad72cc62a095fea2cb81555cf704bf01c6042023ea92bba98d32'
+Ideaapp::Application.config.secret_key_base = ENV["SECRET"]
