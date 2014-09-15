@@ -5,7 +5,7 @@ Ideaapp::Application.routes.draw do
   as :user do
     put "registrations/signup", :to => "registrations#signup", :as => "signup"
   end
-  ActiveAdmin.routes(self)
+  ActiveAdmin.routes(self) unless ARGV.grep(/assets:precompile/).any?
 
   #Create a route so that the steps can be moved with the create tracker
   resources :ideas do
