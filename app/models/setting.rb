@@ -1,4 +1,5 @@
 class Setting < ActiveRecord::Base
+	self.table_name = "settings"
 	belongs_to :group
 
 	def self.retrieve_adminvalues(settingtype)
