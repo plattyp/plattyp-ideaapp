@@ -268,7 +268,7 @@ DEPENDENCIES
   rails_layout
   rake
   robowhois
-  sass-rails (~> 4.0.2)
+  sass-rails (~> 4.0.3)
   sdoc
   simple_form
   turbolinks
