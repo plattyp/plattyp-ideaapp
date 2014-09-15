@@ -15,6 +15,8 @@ if File.exists?(File.expand_path('../environment_variables.yml', __FILE__))
   end
 end
 
+config.assets.initialize_on_precompile = false
+
 module Ideaapp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
