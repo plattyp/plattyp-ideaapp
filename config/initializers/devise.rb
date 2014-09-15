@@ -5,9 +5,6 @@ Devise.setup do |config|
   # Per the security udate to devise, a secret key must be set
   config.secret_key = ENV['DEVISE_SECRET_KEY'] if Rails.env.production?
 
-  # For the devise upgrade
-  config.allow_insecure_token_lookup = true
-
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
