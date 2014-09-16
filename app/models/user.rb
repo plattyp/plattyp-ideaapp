@@ -71,8 +71,8 @@ class User < ActiveRecord::Base
     return @joinsecret
   end
 
-  #Ensures the signupcode is entered correctly
-  validates :signupcode, :inclusion => { :in => signupcodes, :message => "Not a valid sign up code"}
+  #Ensures the signupcode is entered correctly (this will need to be looked at after deployment)
+  validates :signupcode, :inclusion => { :in => %w(joinme), :message => "Not a valid sign up code"}
 
   def group_usernames
   	users = User.all.map {|i| [i.username, i.id]}
