@@ -3,9 +3,9 @@
 Devise.setup do |config|
 
   # Per the security udate to devise, a secret key must be set
-  secret = Figaro.env.secret_token
+  secret = ENV["SECRET_TOKEN"]
 
-  if secret.nil? || secret.length < 10
+  if secret.nil? || secret.length < 30
     raise "Secret token cannot be loaded"
   else
     config.secret_key = secret
