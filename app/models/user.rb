@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
 
   #Retrieve sign up code from Admin
   @joinsecret = Array.new
-  secretresults = Setting.retrieve_adminvalues("Join Secret")
+  #secretresults = Setting.retrieve_adminvalues("Join Secret")
 
   #Iterate through sign up codes and add to array
   secretresults.each do |i|
