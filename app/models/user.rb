@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
         return user
       else
         registered_user = User.where(:email => access_token.info.email).first
-        if registered_userla
+        if registered_user
           return registered_user
         else
           #Retrieve the signupcode from Admin
