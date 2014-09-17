@@ -7,7 +7,7 @@ index do
   column :settingtype
   column :value
   column :admin_default
-  default_actions
+  actions
 end
 
 filter :admin_default

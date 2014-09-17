@@ -4,7 +4,7 @@ ActiveAdmin.register Idea do
     column :id 
     column :name
     column :description
-    default_actions
+    actions
   end
 
 
