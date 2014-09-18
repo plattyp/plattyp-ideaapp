@@ -21,3 +21,9 @@
 /config/environment_variables.yml
 # Ignore application configuration
 /config/application.yml
+
+# Ignore the following files
+VHOST
+default
+hosts
+nginx.conf
