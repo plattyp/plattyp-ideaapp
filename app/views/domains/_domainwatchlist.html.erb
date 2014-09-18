@@ -3,14 +3,14 @@
 		<tr>
 			<th>Domain</th>
 			<th>Status</th>
-			<th>Expiration Date</th>
+			<th class="small_view">Expiration Date</th>
 			<th>Actions</th>
 		</tr>
 		<% @domainwatchlist.each do |url, domainstatus_id, expirationdate, id| %>
 		<tr>
 			<td><%= url %></td>
 			<td><span class="<%= IdeadomainsHelper.span_classname(domainstatus_id) %>"><%= domainstatus_id %></span></td>
-			<td><%= expirationdate %></td>
+			<td class="small_view"><%= expirationdate %></td>
 			<td>
 			<%= link_to "Unwatch", idea_ideadomain_path(:id => id), :method => :delete %>
 			</td>

@@ -1,6 +1,30 @@
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs small_view">
+	<% @featuretabs.each do |feature| %>
+		<li class="<%= 'active' if current_page?(edit_idea_feature_path(@idea, feature)) %>"><%= link_to feature.name, edit_idea_feature_path(@idea, feature) %></li>
+	<% end %>
+	<% unless @featuredropdown.blank? %>
+		<li class="dropdown">
+			<a href="#" id="featuretabdropdown" class="dropdown-toggle" data-toggle="dropdown">
+			Additional
+			<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="featuretabdropdown">
+			<% @featuredropdown.each do |feature| %>
+				<li class="<%= 'active' if current_page?(edit_idea_feature_path(@idea, feature)) %>"><%= link_to feature.name, edit_idea_feature_path(@idea, feature) %></li>
+			<% end %>
+			</ul>
+		</li>
+	<% end %>
+</ul>
+<div class="btn-group btn-block enlarge_view">
+  <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
+    Select a Feature
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
 	<% @idea.features.each do |feature| %>
 		<li class="<%= 'active' if current_page?(edit_idea_feature_path(@idea, feature)) %>"><%= link_to feature.name, edit_idea_feature_path(@idea, feature) %></li>
 	<% end %>
-		<li><%= link_to "+", new_idea_feature_path(@idea) %></li>
-</ul>
+  </ul>
+  <br />
+</div>

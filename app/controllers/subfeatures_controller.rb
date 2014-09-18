@@ -1,4 +1,4 @@
-class SubfeaturesController < ApplicationController
+class SubfeaturesController < FeaturesController
   respond_to :html, :xml, :json
   before_action :get_idea, :get_user, :get_feature, :check_user_access
 
@@ -27,8 +27,10 @@ class SubfeaturesController < ApplicationController
   end
 
   def edit
+    #Get feature navigation arrays
+    featurenav
+    
     @subfeature = @feature.subfeatures.find(params[:id])
-
 
     #This is to support the rest of the functionality on the pag
     @subfeaturestatuses = Subfeature.subfeaturestatuslist

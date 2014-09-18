@@ -3,7 +3,7 @@ class FeaturesController < ApplicationController
 	before_action :get_idea, :get_user, :check_user_access
 
 	def index
-		@features = @idea.features.all
+		featurenav
 	end
 
 	def show
@@ -26,6 +26,7 @@ class FeaturesController < ApplicationController
 	end
 
 	def edit
+		featurenav
 		@feature = @idea.features.find(params[:id])
 		@subfeatures = Subfeature.select_where(params[:id],params[:subfeaturecategory_id])
 		@subfeaturestatuses = Subfeature.subfeaturestatuslist
@@ -62,6 +63,25 @@ class FeaturesController < ApplicationController
 		@feature = @idea.features.find(params[:id])
 		@feature.destroy
 		redirect_to idea_features_path(@idea), :notice =>"The feature was deleted!"
+	end
+
+	def featurenav
+		@features = @idea.features.all
+
+		charactercount = 0
+		@featuretabs = Array.new
+		@featuredropdown = Array.new
+
+		@features.each do |f|
+			charactercount += f.name.length
+			if charactercount < 50
+				@featuretabs << f
+			else
+				@featuredropdown << f
+			end
+		end
+
+		return @featuretabs, @featuredropdown
 	end
 
 	private

@@ -6,6 +6,9 @@
 		<div class="panel panel-default">
 		  	<div class="panel-heading">
 			Features
+				<div class="pull-right">
+					<p><%= link_to "Add Feature", new_idea_feature_path(@idea) %></p>
+				</div>
 			</div>
 			<div class="panel-body">
 				<%= render :partial => 'featurenav' %>
