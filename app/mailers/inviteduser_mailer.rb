@@ -1,6 +1,6 @@
 class InviteduserMailer < ActionMailer::Base
-  default from: "contact@platty.co"
-  default_url_options[:host] = 'localhost:3000'
+  default from: ENV["FROM_EMAIL"]
+  default_url_options[:host] = ENV["DEFAULT_URL_MAIL_OPTIONS"]
 
   def invited_email(email)
   	mail(to: email, subject: 'You''ve been invited to collaborate on an idea!')

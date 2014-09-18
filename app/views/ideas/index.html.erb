@@ -5,20 +5,28 @@
 		  	Filters
 		  	</div>
 		  	<div class="panel-body">
-  				<% unless @searchstring.blank? %>
-	  				<h6>Idea Name:</h6>
-	  				<%= @searchstring %><br />
-	  				<%= button_to_function "x", '$(".filter_form").find("input[type=hidden], searchstring").val("");$(".filter_form").submit();', :class => 'btn btn-default' %>
-  				<% end %>
-		  		<h6>Idea Types:</h6>
-		  		<form class="filter_form", method="get">
-				<% @ideatypelist.each do |a| %>
-				    <%= check_box_tag("ideatypes[]", a[0], a[1]) %>
-				    <%= a[0] %><br />
-				<% end %><br />
-				<input type="hidden" name="searchstring" value="<%= params[:searchstring] %>">
-    			<input type="submit" value="Apply Filter" class="btn btn-block btn-primary"/>
-  				</form>
+		  		<% if @searchstring.blank? && @ideatypelist.blank? %>
+		  			<p class="noideastext">
+		  				No Filters Applied
+		  			</p>
+		  		<% else %>
+	  				<% unless @searchstring.blank? %>
+		  				<h6>Idea Name:</h6>
+		  				<%= @searchstring %><br />
+		  				<%= button_to_function "x", '$(".filter_form").find("input[type=hidden], searchstring").val("");$(".filter_form").submit();', :class => 'btn btn-default' %>
+	  				<% end %>
+	  				<% unless @ideatypelist.blank? %>
+			  		<h6>Idea Types:</h6>
+			  		<% end %>
+				  		<form class="filter_form", method="get">
+						<% @ideatypelist.each do |a| %>
+						    <%= check_box_tag("ideatypes[]", a[0], a[1]) %>
+						    <%= a[0] %><br />
+						<% end %><br />
+						<input type="hidden" name="searchstring" value="<%= params[:searchstring] %>">
+		    			<input type="submit" value="Apply Filter" class="btn btn-block btn-primary"/>
+		  			</form>
+		  		<% end %>
 		  	</div>
 		</div>
 		<%= button_to "Add an Idea", new_idea_path, :class => 'btn btn-block btn-danger', :method => :get %>
