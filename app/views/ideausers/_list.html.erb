@@ -2,15 +2,15 @@
 	<table class="table table-striped">
 		<tr>
 			<th>User</th>
-			<th>Status</th>
-			<th>Role</th>
+			<th class="small_view">Status</th>
+			<th class="small_view">Role</th>
 			<th>Actions</th>
 		</tr>
 		<% @users.each do |username, status, role, id, picurl| %>
 		<tr>
 			<td><%= username %></td>
-			<td><%= status %></td>
-			<td><%= role %></td>
+			<td class="small_view"><%= status %></td>
+			<td class="small_view"><%= role %></td>
 			<td>
 			<% unless role === "Super Admin" %>
 				<div class="dropdown">
