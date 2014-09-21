@@ -8,6 +8,14 @@ class IdeasController < ApplicationController
     @ideas = Idea.returnideas(params[:ideatypes],@user.id,params[:searchstring])
     @ideatypes = Idea.returndistinctideatypes(@user.id)
 
+    # Lookup the Creator/Admin for the idea and add to an array
+    @ideasarray = Array.new
+    @ideas.each do |i|
+      # Lookup the admin for the idea
+      creator = Ideauser.return_admin(i.id).first
+      @ideasarray << [i.id,i.name,i.description,i.ideatypename,creator.username]
+    end
+
     # Returns the selected list of ideatypes
     @selectedideatypes = params[:ideatypes]
     @ideatypelist = []

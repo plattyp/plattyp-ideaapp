@@ -37,7 +37,6 @@ class Idea < ActiveRecord::Base
 	end
 
 	#Methods for custom retrieval of data
-	
 	def createdbyuser
 		User.first
 	end
@@ -58,15 +57,15 @@ class Idea < ActiveRecord::Base
 	#Methods to query ideas and their attributes
 	def self.returnideas(ideatypes,user_id,searchstring)
 		if ideatypes.blank? and searchstring.blank?
-			Idea.joins(:ideausers,:ideatype).where("ideausers.user_id = ?", user_id).select("ideas.id","ideas.name","description","ideatype_id").order("ideas.created_at DESC")
+			Idea.joins(:ideausers,:ideatype).where("ideausers.user_id = ?", user_id).select("ideas.id","ideas.name","description","ideatypes.name as ideatypename").order("ideas.created_at DESC")
 		elsif ideatypes.blank? === false and searchstring.blank?
-			Idea.joins(:ideausers,:ideatype).where("ideatypes.name IN (?) AND ideausers.user_id = ?", ideatypes, user_id).select("ideas.id","ideas.name","description","ideatype_id").order("ideas.created_at DESC")
+			Idea.joins(:ideausers,:ideatype).where("ideatypes.name IN (?) AND ideausers.user_id = ?", ideatypes, user_id).select("ideas.id","ideas.name","description","ideatypes.name as ideatypename").order("ideas.created_at DESC")
 		elsif searchstring.blank? === false and ideatypes.blank?
 			wildinput = "%" + searchstring.downcase + "%"
-			Idea.joins(:ideausers,:ideatype).where("ideausers.user_id = ? AND lower(ideas.name) LIKE ?",user_id, wildinput).select("ideas.id","ideas.name","description","ideatype_id").order("ideas.created_at DESC")
+			Idea.joins(:ideausers,:ideatype).where("ideausers.user_id = ? AND lower(ideas.name) LIKE ?",user_id, wildinput).select("ideas.id","ideas.name","description","ideatypes.name as ideatypename").order("ideas.created_at DESC")
 		else
 			wildinput = "%" + searchstring.downcase + "%"
-			Idea.joins(:ideausers,:ideatype).where("ideatypes.name IN (?) AND ideausers.user_id = ? AND lower(ideas.name) LIKE ?", ideatypes, user_id, wildinput).select("ideas.id","ideas.name","description","ideatype_id").order("ideas.created_at DESC")
+			Idea.joins(:ideausers,:ideatype).where("ideatypes.name IN (?) AND ideausers.user_id = ? AND lower(ideas.name) LIKE ?", ideatypes, user_id, wildinput).select("ideas.id","ideas.name","description","ideatypes.name as ideatypename").order("ideas.created_at DESC")
 		end
 	end
 
