@@ -177,6 +177,8 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.4)
       sprockets-rails (~> 2.0.0)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
     rails_layout (1.0.21)
     railties (4.0.4)
       actionpack (= 4.0.4)
@@ -269,6 +271,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   pg
   rails (= 4.0.4)
+  rails-observers
   rails_layout
   rake
   robowhois

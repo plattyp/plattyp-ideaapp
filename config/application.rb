@@ -30,5 +30,8 @@ module Ideaapp
     # config.i18n.default_locale = :de
 
     # A devise setting to prevent Heroku from accessing the DB or load models when precompiling the assets.
+
+    # To support model observing for notifications
+    config.active_record.observers = :ideamessage_observer, :notification_observer
   end
 end

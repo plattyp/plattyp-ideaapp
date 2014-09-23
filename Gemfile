@@ -84,3 +84,6 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 
 #For storing sensitive keys
 gem "figaro"
+
+#To support notifications
+gem 'rails-observers'

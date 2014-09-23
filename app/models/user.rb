@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   belongs_to :group
   has_many :invitedusers
   has_many :settings
+  has_many :sent_notifications, class_name: "Notification", foreign_key: "sender_id"
+  has_many :received_notifications, class_name: "Notification", foreign_key: "receiver_id"
 
   #Google Authentication
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
