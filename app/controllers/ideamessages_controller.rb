@@ -1,12 +1,15 @@
-class IdeamessagesController < ApplicationController
+class IdeamessagesController < IdeasController
 	respond_to :html, :xml, :json
-	before_action :get_idea, :get_user, :check_user_access
+	before_action :get_idea, :get_user, :get_group, :check_user_access
 
 	def index
 		@ideamessages = @idea.ideamessages.all
 
 		#Create an instance variable to allow new messages created on the invex
 		@ideamessage = @idea.ideamessages.build
+
+   		#Return unread messages count
+    	@unread_message_count = notification_count("Ideamessage")
 	end
 
 	def show

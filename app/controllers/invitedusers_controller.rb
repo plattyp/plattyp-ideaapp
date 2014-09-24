@@ -7,6 +7,9 @@ class InvitedusersController < IdeasController
 
 		#Create an instance variable to use to create new invitations on the index
 		@inviteduser = @idea.invitedusers.build
+
+   		#Return unread messages count
+    	@unread_message_count = notification_count("Ideamessage")
 	end
 
 	def new

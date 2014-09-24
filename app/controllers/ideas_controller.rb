@@ -13,7 +13,8 @@ class IdeasController < ApplicationController
     @ideas.each do |i|
       # Lookup the admin for the idea
       creator = Ideauser.return_admin(i.id).first
-      @ideasarray << [i.id,i.name,i.description,i.ideatypename,creator.username]
+      unreadmessagecount = Notification.return_notificationcount(@user.id,"Ideamessage",i.id)
+      @ideasarray << [i.id,i.name,i.description,i.ideatypename,creator.username,unreadmessagecount]
     end
 
     # Returns the selected list of ideatypes
@@ -76,6 +77,9 @@ class IdeasController < ApplicationController
     #Security is handled using before_action and check_user_access controller
     @idea = @user.ideas.find(params[:id])
     @ideatype_options = Ideatype.returnideatypes(@group.id)
+
+    #Return unread messages count
+    @unread_message_count = notification_count("Ideamessage")
   end
 
   def update
@@ -194,6 +198,10 @@ class IdeasController < ApplicationController
     unless @user.ideas.find_by_id(params[:id])
       redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
     end
+  end
+
+  def notification_count(type)
+    Notification.return_notificationcount(@user.id,type,@idea.id)
   end
 
 end

@@ -1,7 +1,17 @@
 <ul class="nav nav-pills nav-stacked">
-	<li class="<%= 'active' if params[:controller] == 'ideas' %>"><%= link_to "Overview", edit_idea_path(@idea), :date => {:toggle => "pill"} %>
-	<li class="<%= 'active' if params[:controller] == 'features' || params[:controller] == 'subfeaturecategories' %>"><%= link_to "Features", idea_features_path(@idea), :date => {:toggle => "pill"} %>
-	<li class="<%= 'active' if params[:controller] == 'ideamessages' %>"><%= link_to "Messages", idea_ideamessages_path(@idea), :date => {:toggle => "pill"} %>
-	<li class="<%= 'active' if params[:controller] == 'domains' %>"><%= link_to "Domains", idea_domains_path(@idea), :date => {:toggle => "pill"} %>
-	<li class="<%= 'active' if params[:controller] == 'invitedusers' %>"><%= link_to "Manage Users", idea_invitedusers_path(@idea), :date => {:toggle => "pill"} %>
+	<li class="<%= 'active' if params[:controller] == 'ideas' %>">
+		<%= link_to "Overview", edit_idea_path(@idea), :date => {:toggle => "pill"} %>
+	</li>
+	<li class="<%= 'active' if params[:controller] == 'features' || params[:controller] == 'subfeaturecategories' %>">
+		<%= link_to "Features", idea_features_path(@idea), :date => {:toggle => "pill"} %>
+	</li>
+	<li class="<%= 'active' if params[:controller] == 'ideamessages' %>">
+		<%= link_to "Messages <span class='badge pull-right'>#{@unread_message_count}</span>".html_safe, idea_ideamessages_path(@idea), :date => {:toggle => "pill"} %>
+	</li>
+	<li class="<%= 'active' if params[:controller] == 'domains' %>">
+		<%= link_to "Domains", idea_domains_path(@idea), :date => {:toggle => "pill"} %>
+	</li>
+	<li class="<%= 'active' if params[:controller] == 'invitedusers' %>">
+		<%= link_to "Manage Users", idea_invitedusers_path(@idea), :date => {:toggle => "pill"} %>
+	</li>
 </ul>

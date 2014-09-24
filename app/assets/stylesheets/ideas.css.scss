@@ -43,3 +43,18 @@
 	display: inline-block;
 	float: right;
 }
+
+.badge-notify {
+   position:relative;
+   top: -16px;
+   left: -10px;
+}
+
+.notifyconcontainer {
+	float: right;
+}
+
+.unreadmessageicon {
+	font-size: 20px;
+	color: gray;
+}

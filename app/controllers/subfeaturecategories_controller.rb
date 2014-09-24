@@ -1,6 +1,6 @@
-class SubfeaturecategoriesController < ApplicationController
+class SubfeaturecategoriesController < IdeasController
   respond_to :html, :xml, :json
-  before_action :get_idea, :get_user, :check_user_access
+  before_action :get_idea, :get_user, :get_group, :check_user_access
 
   def index
     @subfeaturecategories = Subfeaturecategory.returnideacategories(@idea.id)
@@ -14,6 +14,9 @@ class SubfeaturecategoriesController < ApplicationController
 
     #Create an instance variable to create new subfeature categories from the index
     @subfeaturecategory = @idea.subfeaturecategories.build
+
+    #Return unread messages count
+    @unread_message_count = notification_count("Ideamessage")
   end
 
   def edit

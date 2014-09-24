@@ -1,6 +1,6 @@
-class DomainsController < ApplicationController
+class DomainsController < IdeasController
 	respond_to :html, :xml, :json
-	before_action :get_idea, :get_user, :check_user_access
+	before_action :get_idea, :get_user, :get_group, :check_user_access
 	require 'robowhois'
 
 	def index
@@ -60,6 +60,9 @@ class DomainsController < ApplicationController
 				@domainwatchlist << [i.url, i.domainstatus_id, i.expirationdate, x.id]
 			end
 		end
+
+   		#Return unread messages count
+    	@unread_message_count = notification_count("Ideamessage")
 	end
 
 	def create
