@@ -1,14 +1,15 @@
-<div class="messages-container">
-	<table class="table table-striped">
-		<tr>
-			<th>Message</th>
-			<th>User</th>
-		</tr>
-		<% @idea.ideamessages.each do |message| %>
-		<tr>
-			<td><%=message.message %></td>
-			<td><%=message.user.username if message.user %></td>
-		</tr>
-		<% end %>
-	</table>
-</div>
+<ul class="message-list">
+	<% @idea.ideamessages.each do |m| %>
+	<li>
+		<a href="#">
+			<%= image_tag(ApplicationHelper.profilepicture(nil,50), :class => "avatar", :title => "#{m.user.username if m.user}") %>
+		</a>
+		<div>
+			<strong><%=m.user.username if m.user %></strong>
+			<br />
+			<%=m.message %>
+		</div>
+		<div class="date"><%= m.created_at.to_formatted_s(:long) unless m.created_at.nil? %></div>
+	</li>
+	<% end %>
+</ul>

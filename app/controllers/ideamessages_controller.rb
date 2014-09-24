@@ -5,7 +5,7 @@ class IdeamessagesController < IdeasController
 	def index
 		@ideamessages = @idea.ideamessages.all
 
-		#Create an instance variable to allow new messages created on the invex
+		#Create an instance variable to allow new messages created on the index
 		@ideamessage = @idea.ideamessages.build
 
    		#Return unread messages count

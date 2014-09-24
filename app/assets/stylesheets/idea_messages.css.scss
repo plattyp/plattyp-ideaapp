@@ -1,3 +1,45 @@
 // Place all the styles related to the idea_messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul.message-list {
+  padding: 0;
+}
+ul.message-list a:hover {
+  text-decoration: none;
+}
+ul.message-list li:last-child {
+  border-bottom: none;
+}
+ul.message-list li:first-child {
+  border-top: none;
+  border-bottom: 1px solid #d1d4d7;
+}
+ul.message-list li {
+  padding: 5px 10px;
+  list-style: none;
+  border-bottom: 1px solid #d1d4d7;
+  font-size: 12px;
+}
+ul.message-list li a img.avatar {
+  height: 50px;
+  width: 50px;
+  float: left;
+  margin-top: 3px;
+  margin-right: 15px;
+  -webkit-border-radius: 50em;
+  -moz-border-radius: 50em;
+  border-radius: 50em;
+}
+ul.message-list li div {
+  margin-left: 65px;
+}
+ul.message-list li div.date {
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #d1d4d7;
+}
+ul.message-list.no-padding li {
+  padding: 5px 0;
+}

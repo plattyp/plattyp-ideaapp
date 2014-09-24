@@ -62,7 +62,7 @@
 					  				<li><%= link_to "Delete", idea_path(id), :method => :delete, data: { confirm: 'Are you sure you want to delete this idea? (All data for this idea will be deleted as well)' } %></li>
 					  		</div>
 					  		<div class="notifyconcontainer">
-								<%= link_to "<span class='glyphicon glyphicon-envelope unreadmessageicon'></span><span class='badge alert-danger badge-notify'>#{unreadmessagecount}</span>".html_safe, idea_ideamessages_path(id) %>
+								<%= link_to "<span class='glyphicon glyphicon-envelope unreadmessageicon'></span><span class='badge label-notification badge-notify'>#{unreadmessagecount}</span>".html_safe, idea_ideamessages_path(id) %>
 							</div>
 					  	</div>
 					  	<div class="panel-body">
