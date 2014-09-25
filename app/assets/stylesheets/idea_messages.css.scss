@@ -5,22 +5,28 @@
 ul.message-list {
   padding: 0;
 }
+
 ul.message-list a:hover {
   text-decoration: none;
 }
+
 ul.message-list li:last-child {
   border-bottom: none;
 }
+
 ul.message-list li:first-child {
-  border-top: none;
+  margin-top: 10px;
+  border-top: 1px solid #d1d4d7;
   border-bottom: 1px solid #d1d4d7;
 }
+
 ul.message-list li {
   padding: 5px 10px;
   list-style: none;
   border-bottom: 1px solid #d1d4d7;
   font-size: 12px;
 }
+
 ul.message-list li a img.avatar {
   height: 50px;
   width: 50px;
@@ -31,15 +37,18 @@ ul.message-list li a img.avatar {
   -moz-border-radius: 50em;
   border-radius: 50em;
 }
+
 ul.message-list li div {
   margin-left: 65px;
 }
+
 ul.message-list li div.date {
   margin-top: 5px;
   font-size: 10px;
   font-weight: bold;
   color: #d1d4d7;
 }
+
 ul.message-list.no-padding li {
   padding: 5px 0;
 }

@@ -3,13 +3,16 @@ class IdeamessagesController < IdeasController
 	before_action :get_idea, :get_user, :get_group, :check_user_access
 
 	def index
-		@ideamessages = @idea.ideamessages.all
+		@ideamessages = Ideamessage.return_messages(@idea.id)
 
 		#Create an instance variable to allow new messages created on the index
 		@ideamessage = @idea.ideamessages.build
 
    		#Return unread messages count
     	@unread_message_count = notification_count("Ideamessage")
+
+    	#Mark unread notifications as read for the user
+    	unread = Notification.markread(@idea.id,@user.id,"Ideamessage")
 	end
 
 	def show

@@ -10,12 +10,16 @@ class IdeasController < ApplicationController
 
     # Lookup the Creator/Admin for the idea and add to an array
     @ideasarray = Array.new
+    ideasarray = Array.new
     @ideas.each do |i|
       # Lookup the admin for the idea
       creator = Ideauser.return_admin(i.id).first
       unreadmessagecount = Notification.return_notificationcount(@user.id,"Ideamessage",i.id)
-      @ideasarray << [i.id,i.name,i.description,i.ideatypename,creator.username,unreadmessagecount]
+      ideasarray << [i.id,i.name,i.description,i.ideatypename,creator.username,unreadmessagecount]
     end
+
+    # Sort by Notifications
+    @ideasarray = ideasarray.sort {|a,b| b[5] <=> a[5]}
 
     # Returns the selected list of ideatypes
     @selectedideatypes = params[:ideatypes]

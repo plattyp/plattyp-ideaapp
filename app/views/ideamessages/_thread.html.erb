@@ -1,11 +1,11 @@
 <ul class="message-list">
-	<% @idea.ideamessages.each do |m| %>
+	<% @ideamessages.each do |m| %>
 	<li>
 		<a href="#">
-			<%= image_tag(ApplicationHelper.profilepicture(nil,50), :class => "avatar", :title => "#{m.user.username if m.user}") %>
+			<%= image_tag(ApplicationHelper.profilepicture(m.imageurl,50), :class => "avatar", :title => "#{m.username}") %>
 		</a>
 		<div>
-			<strong><%=m.user.username if m.user %></strong>
+			<strong><%=m.username %></strong>
 			<br />
 			<%=m.message %>
 		</div>

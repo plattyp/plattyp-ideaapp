@@ -10,4 +10,8 @@ class Ideamessage < ActiveRecord::Base
 	def self.return_message_info(message_id)
 		Ideamessage.joins(:user).where("ideamessages.id = ?",message_id).select("users.username as sender","idea_id","ideamessages.created_at").first
 	end
+
+	def self.return_messages(idea_id)
+		Ideamessage.joins(:user).where("idea_id = ?",idea_id).select("users.username","users.imageurl","ideamessages.message","ideamessages.created_at")
+	end
 end
