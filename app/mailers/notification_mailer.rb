@@ -6,8 +6,8 @@ class NotificationMailer < ActionMailer::Base
   	# Set the notification properties
   	case body.notifiable_type
   	when "Ideamessage"
-  		messageinfo = Ideamessage.return_message_info(body.notifiable_id)
-  		subject = "You have received a new message from #{messageinfo.sender}"
+  		@messageinfo = Ideamessage.return_message_info(body.notifiable_id)
+  		subject = "You have received a new message from #{@messageinfo.sender}"
   	end
 
   	# Send out the email

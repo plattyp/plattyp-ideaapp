@@ -8,7 +8,7 @@ class Ideamessage < ActiveRecord::Base
 	default_scope order('created_at DESC')
 
 	def self.return_message_info(message_id)
-		Ideamessage.joins(:user).where("ideamessages.id = ?",message_id).select("users.username as sender","idea_id","ideamessages.created_at").first
+		Ideamessage.joins(:user,:idea).where("ideamessages.id = ?",message_id).select("users.username as sender","idea_id","ideas.name","ideamessages.message","ideamessages.created_at").first
 	end
 
 	def self.return_messages(idea_id)

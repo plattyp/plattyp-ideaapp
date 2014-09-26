@@ -5,8 +5,12 @@
   </head>
   <body>
     <p>
-      You have received a notification on a particular idea. Please take a look at the body below<br>
+      You have received a message from <%= @messageinfo.sender %> within your <%= link_to "#{@messageinfo.name}", edit_idea_url(@messageinfo.idea_id) %> idea.
+      <br /><br />
+      "<%= @messageinfo.message %>"
     </p>
+      <br />
+      Reply back by <%= link_to "clicking here", idea_ideamessages_url(@messageinfo.idea_id) %>!
     <p>
     </p>
     <p>Thanks,</p>

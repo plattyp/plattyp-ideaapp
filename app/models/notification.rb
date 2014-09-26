@@ -11,6 +11,7 @@ class Notification < ActiveRecord::Base
 		end
 	end
 
+	# Mark a notification read
 	def self.markread(idea_id,user_id,type)
 		case type
 		when "Ideamessage"
