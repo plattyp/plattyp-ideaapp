@@ -87,3 +87,6 @@ gem "figaro"
 
 #To support notifications
 gem 'rails-observers'
+
+#To convert regular text with hyperlinks to hyperlinks
+gem 'rails_autolink'

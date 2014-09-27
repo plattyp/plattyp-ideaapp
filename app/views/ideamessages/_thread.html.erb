@@ -7,7 +7,7 @@
 		<div>
 			<strong><%=m.username %></strong>
 			<br />
-			<%=m.message %>
+			<%= auto_link(m.message, :html => {:target => '_blank'}) %>
 		</div>
 		<div class="date"><%= m.created_at.to_formatted_s(:long) unless m.created_at.nil? %></div>
 	</li>
