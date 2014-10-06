@@ -74,7 +74,9 @@ class User < ActiveRecord::Base
   end
 
   #Ensures the signupcode is entered correctly (this will need to be looked at after deployment)
-  validates :signupcode, :inclusion => { :in => signupcodes, :message => "Not a valid sign up code"}
+  if ActiveRecord::Base.connection.table_exists? 'settings'
+    validates :signupcode, :inclusion => { :in => signupcodes, :message => "Not a valid sign up code"}
+  end
 
   def group_usernames
   	users = User.all.map {|i| [i.username, i.id]}
