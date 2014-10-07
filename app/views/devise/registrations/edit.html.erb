@@ -18,7 +18,7 @@
           <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
         <% end %>
         <%= f.input :username %>
-        <%= f.input :signupcode, :as => :hidden, :input_html => { :value => "joinme" } %>
+        <%= f.input :signupcode, :as => :hidden, :input_html => { :value => @signupcode } %>
       </div>
 
       <div class="form-actions">
