@@ -16,44 +16,6 @@ class User < ActiveRecord::Base
   has_many :sent_notifications, class_name: "Notification", foreign_key: "sender_id"
   has_many :received_notifications, class_name: "Notification", foreign_key: "receiver_id"
 
-  #Google Authentication
-  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
-      data = access_token.info
-      user = User.where(:provider => access_token.provider, :uid => access_token.uid ).first
-      if user
-        return user
-      else
-        registered_user = User.where(:email => access_token.info.email).first
-        if registered_user
-          return registered_user
-        else
-          #Retrieve the signupcode from Admin
-          returnedsignups = Setting.retrieve_adminvalues("Join Secret")
-
-          #The @signupcode is used to Create the user below (Otherwise it would not validate on create)
-          returnedsignups.each do |i|
-            @signupcode = i.value
-          end
-
-          @user = User.create(username: data["name"],
-            provider:access_token.provider,
-            email: data["email"],
-            uid: access_token.uid ,
-            password: Devise.friendly_token[0,20] ,
-            #Need to figure out how to prompt for this
-            signupcode: @signupcode,
-            #Setting status to 1 means the user has been created, but has not given a signupcode to continue
-            status: 1,
-            imageurl: data["image"]
-          )
-
-          #Calls onboarding method
-          onboarduser(@user)
-          return @user
-        end
-     end
-  end
-
   #Create a virtual attribute to accept as a parameter for users
   attr_accessor :signupcode
 
@@ -76,6 +38,39 @@ class User < ActiveRecord::Base
   #Ensures the signupcode is entered correctly (this will need to be looked at after deployment)
   if ActiveRecord::Base.connection.table_exists? 'settings'
     validates :signupcode, :inclusion => { :in => signupcodes, :message => "Not a valid sign up code"}
+  end
+
+  #Google Authentication
+  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+      data = access_token.info
+      user = User.where(:provider => access_token.provider, :uid => access_token.uid ).first
+      if user
+        return user
+      else
+        registered_user = User.where(:email => access_token.info.email).first
+        if registered_user
+          return registered_user
+        else
+          #Retrieve the signupcode from Admin
+          returnedsignups = signupcodes
+
+          @user = User.create!(username: data["email"],
+            provider:access_token.provider,
+            email: data["email"],
+            uid: access_token.uid ,
+            password: Devise.friendly_token[0,20] ,
+            #Need to figure out how to prompt for this
+            signupcode: returnedsignups[0],
+            #Setting status to 1 means the user has been created, but has not given a signupcode to continue
+            status: 1,
+            imageurl: data["image"]
+          )
+          
+          #Calls onboarding method
+          onboarduser(@user)
+          return @user
+        end
+     end
   end
 
   def group_usernames

@@ -42,6 +42,5 @@ production:
   pool: 5
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
-  host: <%= ENV['DB_HOST'] %>
-  port: <%= ENV['DB_PORT'] %>
+  url: <%= ENV['DATABASE_URL'] %>
   schema_search_path: public
