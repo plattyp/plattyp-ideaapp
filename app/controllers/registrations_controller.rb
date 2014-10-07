@@ -26,9 +26,6 @@ class RegistrationsController < Devise::RegistrationsController
 
 		#The @signupcode is passed in the form back to the update method
 		@signupcode = returnedsignups[0]
-		# returnedsignups.each do |i|
-		# 	@signupcode = i.value
-		# end
 	end
 
 	def update
