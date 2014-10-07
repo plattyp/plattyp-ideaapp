@@ -22,11 +22,32 @@ class RegistrationsController < Devise::RegistrationsController
 
 	def edit
 		#Used to fill hidden value on edit form for the joinsecret
-		returnedsignups = Setting.retrieve_adminvalues("Join Secret")
+		returnedsignups = User.signupcodes
 
 		#The @signupcode is passed in the form back to the update method
-		returnedsignups.each do |i|
-			@signupcode = i.value
+		@signupcode = returnedsignups[0]
+		# returnedsignups.each do |i|
+		# 	@signupcode = i.value
+		# end
+	end
+
+	def update
+		# For Rails 4
+		account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
+
+		# required for settings form to submit when password is left blank
+		if account_update_params[:password].blank?
+			account_update_params.delete("password")
+			account_update_params.delete("password_confirmation")
+		end
+
+		@user = User.find(current_user.id)
+
+		if @user.update_attributes(account_update_params)
+			set_flash_message :notice, :updated
+			redirect_to edit_user_registration_path(@user)
+		else
+			redirect_to edit_user_registration_path(@user), :notice =>"Updated could not be made"
 		end
 	end
 	
