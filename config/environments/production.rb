@@ -82,7 +82,7 @@ Ideaapp::Application.configure do
   config.action_mailer.delivery_method = :smtp
 
   # Authentication
-  OmniAuth.config.full_host = "http://ideabin.co"
+  OmniAuth.config.full_host = "http://www.ideabin.co"
 
   # Settings for delivery
   config.action_mailer.smtp_settings = {
