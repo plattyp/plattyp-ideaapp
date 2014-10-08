@@ -20,7 +20,7 @@ class DomainsController < IdeasController
 			#If the search brings back no results, use the API to get the information otherwise return the info from our database
 			if @domainsearch.count === 0	
 				#Establish a call to the API to search
-				client = RoboWhois.new(:api_key => '5c058dc8594cce541b386c16412279f3')
+				client = RoboWhois.new(:api_key => ENV["ROBOWHOIS_API_KEY"])
 
 				#Pass the search URL with error handling
 				begin
