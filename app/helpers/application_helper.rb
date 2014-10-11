@@ -8,4 +8,12 @@ module ApplicationHelper
 			imageurl[0,imageurl.length - 2] + size.to_s
 		end
 	end
+
+	def title(title = nil)
+		if title.present?
+			content_for :title, title
+		else
+			content_for?(:title) ? Setting.retrieve_metatags("metatitle").value + ' | ' + content_for(:title) : Setting.retrieve_metatags("metatitle").value
+		end
+	end
 end
