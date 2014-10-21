@@ -1,28 +1,24 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an app to track and collaborate on ideas. I am actively enhancing this app with additional features and bug fixes as necessary.
 
-Things you may want to cover:
+Also, an iOS app that will integrate with this is in the works.
 
-* Ruby version
+Some key pieces of functionality
 
-* System dependencies
+* Login with Google
 
-* Configuration
+* Create ideas with features
 
-* Database creation
+* Add subfeatures with categories within Features
 
-* Database initialization
+* Invite other people to collaborate
 
-* How to run the test suite
+* Internal message for an idea
 
-* Services (job queues, cache servers, search engines, etc.)
+* Simple alerts and notifications
 
-* Deployment instructions
-
-* ...
+* Domain search within an idea
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Please feel free to use this and let me know if you think of any features that would be useful!
