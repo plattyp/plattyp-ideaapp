@@ -11,11 +11,6 @@ class Idea < ActiveRecord::Base
 	validates :description, :presence => true
 	validates :ideatype_id, :presence => true
 
-	#Going to be used to capitalize the idea before saving
-	def name=(s)
-		write_attribute(:name, s.to_s.titleize)
-	end
-
 	belongs_to :ideatype
 	has_many :features, dependent: :destroy
 	has_many :subfeatures, :through => :features
