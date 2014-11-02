@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   respond_to :html, :xml, :json
-  before_action :get_user, :get_group, :group_users, :check_user_status, :get_idea
+  before_action :get_user, :get_group, :group_users, :check_user_status
   before_action :check_user_access, :if => @idea, :only => [:show, :edit, :update]
 
   def index
@@ -88,8 +88,11 @@ class IdeasController < ApplicationController
 
   def update
     #Security is handled using before_action and check_user_access controller
+    
+    @idea = @user.ideas.find(params[:id])
+
   	if @idea.update_attributes(idea_params)
-  		  redirect_to edit_idea_path(@idea, :anchor => 'idea'), :notice =>"The idea is updated!"
+  		  redirect_to edit_idea_path(@idea), :notice =>"The idea is updated!"
   	else
       render :action => "edit"
   	end
