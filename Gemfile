@@ -67,6 +67,9 @@ gem 'bootstrap-x-editable-rails'
 #For whois searching
 gem 'robowhois'
 
+#Forces certificate bundle (SSL Fix)
+gem 'certified'
+
 #Adding activeadmin so that it can be used as a backend
 gem 'activeadmin', github: 'gregbell/active_admin'
 
