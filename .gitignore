@@ -19,6 +19,7 @@
 /config/deploy/*
 /config/deploy.rb
 /config/environment_variables.yml
+/config/newrelic.yml
 # Ignore application configuration
 /config/application.yml
 

@@ -145,6 +145,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
+    newrelic_rpm (3.9.8.273)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -277,6 +278,7 @@ DEPENDENCIES
   formtastic
   jbuilder (~> 1.2)
   jquery-rails
+  newrelic_rpm
   omniauth-google-oauth2
   pg
   rails (= 4.0.4)

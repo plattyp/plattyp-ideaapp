@@ -88,6 +88,10 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 #For Heroku Deployment
 gem 'rails_12factor', group: :production
 
+#For monitoring
+gem 'newrelic_rpm'
+
+
 #For storing sensitive keys
 gem "figaro"
 
@@ -96,4 +100,3 @@ gem 'rails-observers'
 
 #To convert regular text with hyperlinks to hyperlinks
 gem 'rails_autolink'
-
