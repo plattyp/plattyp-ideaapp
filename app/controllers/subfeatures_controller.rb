@@ -1,6 +1,6 @@
 class SubfeaturesController < FeaturesController
   respond_to :html, :xml, :json
-  before_action :get_idea, :get_user, :get_feature, :check_user_access
+  before_action :get_idea, :get_user, :get_group, :get_feature, :check_user_access
 
   def index
     @subfeatures = @feature.subfeatures.all
