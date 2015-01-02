@@ -1,15 +1,12 @@
 class InvitedusersController < IdeasController
 	respond_to :html, :xml, :json
-	before_action :get_idea, :get_user, :get_group, :check_user_access
+	before_action :get_idea, :get_user, :get_group, :check_user_access, :get_notification_counts
 
 	def index
 		@users = InvitedusersHelper.return_alluserslist(@idea.id)
 
 		#Create an instance variable to use to create new invitations on the index
 		@inviteduser = @idea.invitedusers.build
-
-   		#Return unread messages count
-    	@unread_message_count = notification_count("Ideamessage")
 	end
 
 	def new
@@ -47,5 +44,9 @@ class InvitedusersController < IdeasController
 		unless @user.ideas.find_by_id(params[:idea_id])
 			redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
 		end
+	end
+
+	def get_notification_counts
+		@unread_message_count = notification_count(@user.id,@idea.id,"Ideamessage")
 	end
 end

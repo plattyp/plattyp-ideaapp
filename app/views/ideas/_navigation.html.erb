@@ -2,7 +2,7 @@
 	<li class="<%= 'active' if params[:controller] == 'ideas' %>">
 		<%= link_to "Overview", edit_idea_path(@idea), :date => {:toggle => "pill"} %>
 	</li>
-	<li class="<%= 'active' if params[:controller] == 'features' || params[:controller] == 'subfeaturecategories' %>">
+	<li class="<%= 'active' if params[:controller] == 'features' || params[:controller] == 'subfeaturecategories' || params[:controller] == 'subfeatures' %>">
 		<%= link_to "Features", idea_features_path(@idea), :date => {:toggle => "pill"} %>
 	</li>
 	<li class="<%= 'active' if params[:controller] == 'ideamessages' %>">

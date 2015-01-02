@@ -1,22 +1,16 @@
 class FeaturesController < IdeasController
 	respond_to :html, :xml, :json
-	before_action :get_idea, :get_user, :get_group, :check_user_access
+	before_action :get_idea, :get_user, :get_group, :check_user_access, :get_notification_counts
 
 	def index
 		featurenav
-
-   		#Return unread messages count
-    	@unread_message_count = notification_count("Ideamessage")
 	end
 
 	def show
 		@feature = @idea.features.find(params[:id])
 	end
 
-	def new
-   		#Return unread messages count
-    	@unread_message_count = notification_count("Ideamessage")
-    	
+	def new    	
 		@feature = @idea.features.build
 		respond_with(@feature)
 	end
@@ -34,7 +28,7 @@ class FeaturesController < IdeasController
 	def edit
 		featurenav
    		#Return unread messages count
-    	@unread_message_count = notification_count("Ideamessage")
+    	#@unread_message_count = notification_count("Ideamessage")
 
 		@feature = @idea.features.find(params[:id])
 		@subfeatures = Subfeature.select_where(params[:id],params[:subfeaturecategory_id])
@@ -113,4 +107,7 @@ class FeaturesController < IdeasController
 		end
 	end
 
+	def get_notification_counts
+		@unread_message_count = notification_count(@user.id,@idea.id,"Ideamessage")
+	end
 end

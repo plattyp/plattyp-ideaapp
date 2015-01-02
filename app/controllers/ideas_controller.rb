@@ -2,6 +2,8 @@ class IdeasController < ApplicationController
   respond_to :html, :xml, :json
   before_action :get_user, :get_group, :group_users, :check_user_status
   before_action :check_user_access, :if => @idea, :only => [:show, :edit, :update]
+  before_action :get_idea, except: :index
+  before_action :get_notification_counts, except: :index
 
   def index
     # Looks at the user's id and shows all ideas that belong to that user
@@ -81,9 +83,6 @@ class IdeasController < ApplicationController
     #Security is handled using before_action and check_user_access controller
     @idea = @user.ideas.find(params[:id])
     @ideatype_options = Ideatype.returnideatypes(@group.id)
-
-    #Return unread messages count
-    @unread_message_count = notification_count("Ideamessage")
   end
 
   def update
@@ -207,8 +206,12 @@ class IdeasController < ApplicationController
     end
   end
 
-  def notification_count(type)
-    Notification.return_notificationcount(@user.id,type,@idea.id)
+  def notification_count(user_id,idea_id,type)
+    Notification.return_notificationcount(user_id,type,idea_id)
+  end
+
+  def get_notification_counts
+    @unread_message_count = notification_count(@user.id,@idea.id,"Ideamessage")
   end
 
 end

@@ -1,6 +1,6 @@
 class DomainsController < IdeasController
 	respond_to :html, :xml, :json
-	before_action :get_idea, :get_user, :get_group, :check_user_access
+	before_action :get_idea, :get_user, :get_group, :check_user_access, :get_notification_counts
 	require 'robowhois'
 
 	def index
@@ -60,9 +60,6 @@ class DomainsController < IdeasController
 				@domainwatchlist << [i.url, i.domainstatus_id, i.expirationdate, x.id]
 			end
 		end
-
-   		#Return unread messages count
-    	@unread_message_count = notification_count("Ideamessage")
 	end
 
 	def create
@@ -115,5 +112,9 @@ class DomainsController < IdeasController
 		unless @user.ideas.find_by_id(params[:idea_id])
 			redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
 		end
+	end
+
+	def get_notification_counts
+		@unread_message_count = notification_count(@user.id,@idea.id,"Ideamessage")
 	end
 end

@@ -1,6 +1,6 @@
 class SubfeaturecategoriesController < IdeasController
   respond_to :html, :xml, :json
-  before_action :get_idea, :get_user, :get_group, :check_user_access
+  before_action :get_idea, :get_user, :get_group, :check_user_access, :get_notification_counts
 
   def index
     @subfeaturecategories = Subfeaturecategory.returnideacategories(@idea.id)
@@ -14,9 +14,6 @@ class SubfeaturecategoriesController < IdeasController
 
     #Create an instance variable to create new subfeature categories from the index
     @subfeaturecategory = @idea.subfeaturecategories.build
-
-    #Return unread messages count
-    @unread_message_count = notification_count("Ideamessage")
   end
 
   def edit
@@ -76,5 +73,9 @@ class SubfeaturecategoriesController < IdeasController
     unless @user.ideas.find_by_id(params[:idea_id])
       redirect_to ideas_path, :notice => "You do not have access to edit this idea!"
     end
+  end
+
+  def get_notification_counts
+    @unread_message_count = notification_count(@user.id,@idea.id,"Ideamessage")
   end
 end
