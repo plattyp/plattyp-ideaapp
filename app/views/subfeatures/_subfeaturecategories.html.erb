@@ -2,7 +2,7 @@
 	<% @subfeaturesdistinct.each do |c| %>
 		<li class="list-group-item">
 			<span class="badge"><%= c[2] %></span>
-			<%= link_to "#{c[1]}", edit_idea_feature_path(:subfeaturecategory_id => c[0]) %>
+			<%= link_to "#{c[1]}", edit_idea_feature_path(@idea,@feature,:subfeaturecategory_id => c[0]) %>
 		</li>
 	<% end %>
 </ul>

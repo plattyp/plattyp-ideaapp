@@ -27,8 +27,6 @@ class FeaturesController < IdeasController
 
 	def edit
 		featurenav
-   		#Return unread messages count
-    	#@unread_message_count = notification_count("Ideamessage")
 
 		@feature = @idea.features.find(params[:id])
 		@subfeatures = Subfeature.select_where(params[:id],params[:subfeaturecategory_id])

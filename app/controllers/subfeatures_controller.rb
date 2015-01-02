@@ -44,7 +44,7 @@ class SubfeaturesController < FeaturesController
     #Iterates through the list of subfeature categories and hashes the name and the count of subfeatures within each category
     @uniquecategories.each do |category|
       #Calls the model method to get a count of subfeatures in that category
-      subfeaturecount = Subfeature.subfeature_count(params[:id],category.id)
+      subfeaturecount = Subfeature.subfeature_count(params[:feature_id],category.id)
 
       #Creates an array of the id, name and count
       subfeaturecategories = [category.id, category.categoryname, subfeaturecount]
