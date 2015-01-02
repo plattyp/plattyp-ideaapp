@@ -1,7 +1,7 @@
 class DomainsController < IdeasController
 	respond_to :html, :xml, :json
 	before_action :get_idea, :get_user, :get_group, :check_user_access, :get_notification_counts
-	require 'robowhois'
+	require 'httparty'
 
 	def index
 		unless params[:domain].blank?
@@ -19,12 +19,11 @@ class DomainsController < IdeasController
 
 			#If the search brings back no results, use the API to get the information otherwise return the info from our database
 			if @domainsearch.count === 0	
-				#Establish a call to the API to search
-				client = RoboWhois.new(:api_key => ENV["ROBOWHOIS_API_KEY"])
+				#Construct authorization token
+				authorization = 'Token token=' + ENV["JSONWHOIS_API_KEY"]
 
-				#Pass the search URL with error handling
 				begin
-					@domainsearch = client.whois_properties(@search)
+					@domainsearch = HTTParty.get('http://jsonwhois.com/api/v1/whois', :body => {:domain => @search }.to_json, :headers => {'Content-Type' => 'application/json', 'Authorization' => authorization } )
 				rescue => @error
 					@domainsearch = nil
 				end
@@ -33,8 +32,8 @@ class DomainsController < IdeasController
 					#Set the object with the properties from the API Search
 					@domainresults.name = @search
 					@domainresults.url = @search
-					@domainresults.domainstatus_id = @domainsearch['properties']['available?'] ? "available" : "registered"
-					@domainresults.expirationdate = @domainsearch['properties']['expires_on']
+					@domainresults.domainstatus_id = @domainsearch['available?'] ? "available" : "registered"
+					@domainresults.expirationdate = @domainsearch['expires_on']
 
 					#Store the results in our database so that they can be used in the future
 					Domain.create(:name => @domainresults.name, :url => @domainresults.url, :domainstatus_id => @domainresults.domainstatus_id, :expirationdate => @domainresults.expirationdate)

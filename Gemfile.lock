@@ -276,6 +276,7 @@ DEPENDENCIES
   devise
   figaro
   formtastic
+  httparty
   jbuilder (~> 1.2)
   jquery-rails
   newrelic_rpm
