@@ -3,7 +3,7 @@ class IdeasController < ApplicationController
   before_action :get_user, :get_group, :group_users, :check_user_status
   before_action :check_user_access, :if => @idea, :only => [:show, :edit, :update]
   before_action :get_idea, except: :index
-  before_action :get_notification_counts, except: [:index,:new]
+  before_action :get_notification_counts, except: [:index,:new,:next_step,:create]
 
   def index
     # Looks at the user's id and shows all ideas that belong to that user

@@ -13,7 +13,13 @@ module ApplicationHelper
 		if title.present?
 			content_for :title, title
 		else
-			content_for?(:title) ? Setting.retrieve_metatags("metatitle").value + ' | ' + content_for(:title) : Setting.retrieve_metatags("metatitle").value
+			if content_for?(:title) && Setting.retrieve_metatags("metatitle")
+				Setting.retrieve_metatags("metatitle").value + ' | ' + content_for(:title)
+			elsif Setting.retrieve_metatags("metatitle")
+				Setting.retrieve_metatags("metatitle").value
+			else
+				nil
+			end
 		end
 	end
 end
